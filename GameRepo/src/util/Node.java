@@ -1,6 +1,7 @@
 package util;
 
 public class Node {
+	
 	private NodeInfo info;
 	public Node(int x, int y, boolean activated) {
 		info = new NodeInfo(x, y, activated);
