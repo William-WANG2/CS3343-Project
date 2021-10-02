@@ -34,6 +34,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void initialize() {
+		
 		//initialize window context
 		canvas = new Canvas();
 		canvas.setBackground(backgroundColor);
@@ -42,9 +43,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		setLocationByPlatform(true);
 		setSize(clientWidth, clientHeight);
 		setTitle(winTitle);
-		
 		//setupInput(canvas); Input registers, later implement
-		
 		setVisible(true);
 		canvas.createBufferStrategy(2);
 		bs = canvas.getBufferStrategy();
@@ -67,6 +66,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void render(){
+		
 		do {
 			do {
 				Graphics g = null;
@@ -85,7 +85,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void calculateFrameRate(Graphics g) {
-		//This is for calculating frame rate per second. 
+		
 		frameCount++;
 		timeElapsed += timer.DeltaTime();
 		
@@ -102,6 +102,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void run() {
+		
 		running = true;
 		timer.Reset();
 		while (running) {
@@ -109,6 +110,5 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		}
 		terminate();
 	}
-	
 	
 }
