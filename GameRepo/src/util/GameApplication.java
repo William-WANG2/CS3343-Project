@@ -18,7 +18,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	int clientRatio = 800/600;
 	String winTitle = "JiJiCat";
 	BufferStrategy bs;
-	Graphics graph;
+	Graphics g;
 	
 	//Game context
 	private volatile boolean running;
@@ -63,7 +63,21 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void render(){
-		calculateFramerate(g);
+		do {
+			do {
+				Graphics g = null;
+				try {
+					g = bs.getDrawGraphics();
+					calculateFrameRate(g);
+					//renderFrame(g);
+				} finally {
+					if (g != null) {
+						g.dispose();
+					}
+				}
+			} while (bs.contentsRestored());
+			bs.show();
+		} while (bs.contentsLost());
 	}
 	
 	public void calculateFrameRate(Graphics g) {
