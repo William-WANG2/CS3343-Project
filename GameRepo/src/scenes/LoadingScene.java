@@ -1,5 +1,6 @@
 package scenes;
 
+import util.*;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -32,8 +33,8 @@ public class LoadingScene extends Scene{
 		loadTasks.add( new Callable<Boolean>() {
 			@Override
 			public Boolean call() throws Exception {
-				InputStream stream = ResourceLoader.load( GameLoading.class,
-						"res/assets/images/space_background_600x600.png",
+				InputStream stream = ResourceLoader.load( LoadingScene.class,
+						"res/textures/bricks.png",
 						"/images/space_background_600x600.png" );
 				BufferedImage image = ImageIO.read( stream );
 				Vector2f worldTopLeft = new Vector2f(
@@ -44,6 +45,7 @@ public class LoadingScene extends Scene{
 					GameConstants.WORLD_WIDTH / 2.0f,
 					-GameConstants.WORLD_HEIGHT / 2.0f 
 				);
+				
 				Sprite sprite =
 						new Sprite( image, worldTopLeft, worldBottomRight );
 				Matrix3x3f viewport =
