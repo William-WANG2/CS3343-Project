@@ -4,6 +4,4 @@ import util.*;
 
 public class GREGame extends GameApplication{
 	//Nothing
-zyydsb
-	
 }
