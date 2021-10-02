@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import util.Node;
 import util.NodeInfo;
 
+
 public class TestUtilNode {
 	private Node node;
 	private NodeInfo info;
