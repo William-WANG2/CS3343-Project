@@ -11,13 +11,30 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	private volatile boolean running;
 	private Thread gameThread;
 	
+	GameTimer timer = GameTimer.getInstance();
+	
 	public GameApplication() {
-		
 	}
+	
+	public void initialize() {
+	}
+	
+	public void gameloop() {
+	}
+	
+	public void terminate(){
+	}
+	
+	private void update(){
+	}
+	
+	public void render(){
+	}
+	
 	
 	public void run() {
 		running = true;
-		//initialize();
+		initialize();
 		long curTime = System.nanoTime();
 		long lastTime = curTime;
 		double nsPerFrame;
@@ -27,7 +44,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 			//gameLoop((float) (nsPerFrame / 1.0E9));
 			lastTime = curTime;
 		}
-		//terminate();
+		terminate();
 	}
 	
 	
