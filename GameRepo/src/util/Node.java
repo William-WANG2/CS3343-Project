@@ -7,7 +7,7 @@ public class Node {
 		info = new NodeInfo(x, y, activated);
 		info.blocked = false;
 	}
-	//If the sprite is on the node, it can not be blocked
+	//If the sprite is on the node, it can not be blocked.
 	public boolean block() {
 		if(info.activated) {
 			return false;
