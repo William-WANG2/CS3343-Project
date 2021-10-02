@@ -1,48 +1,94 @@
 package util;
 
+import scenes.*;
+
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.image.BufferStrategy;
 import javax.swing.*;
 
-
 public abstract class GameApplication extends JFrame implements Runnable{
 	
-	private BufferStrategy bs;
+	//Window context
+	Canvas canvas;
+	Color backgroundColor = Color.BLACK;
+	int clientWidth = 800;
+	int clientHeight = 600;
+	int clientRatio = 800/600;
+	String winTitle = "JiJiCat";
+	BufferStrategy bs;
+	Graphics graph;
+	
+	//Game context
 	private volatile boolean running;
 	private Thread gameThread;
+	public Scene currScene;
 	
+	//Time context
+	private int frameCount = 0;
+	private float timeElapsed = 0;
 	GameTimer timer = GameTimer.getInstance();
 	
 	public GameApplication() {
 	}
 	
 	public void initialize() {
+		//initialize window context
+		canvas = new Canvas();
+		canvas.setBackground(backgroundColor);
+		canvas.setIgnoreRepaint(true);
+		getContentPane().add(canvas);
+		setLocationByPlatform(true);
+		canvas.setSize(clientWidth, clientHeight);
+		setTitle(winTitle);
+		
+		//setupInput(canvas); Input registers, later implement
+		
+		setVisible(true);
+		canvas.createBufferStrategy(2);
+		bs = canvas.getBufferStrategy();
+		canvas.requestFocus();
 	}
 	
-	public void gameloop() {
+	public void gameloop(GameTimer timer) {
+		update();
+		render();
 	}
 	
 	public void terminate(){
 	}
 	
-	private void update(){
+	public void update(){
 	}
 	
 	public void render(){
+		calculateFramerate(g);
 	}
 	
+	public void calculateFrameRate(Graphics g) {
+		//This is for calculating frame rate per second. 
+		frameCount++;
+		timeElapsed += timer.DeltaTime();
+		
+		if((timeElapsed) >= 1000)
+		{			
+			String frameRate = String.format("FPS %s", frameCount);
+			
+			g.setColor(Color.GREEN);
+			g.drawString(frameRate, 30, 30);
+			
+			frameCount = 0;
+			timeElapsed -= 1000;
+		}	
+	}
 	
 	public void run() {
 		running = true;
 		initialize();
-		long curTime = System.nanoTime();
-		long lastTime = curTime;
-		double nsPerFrame;
 		while (running) {
-			curTime = System.nanoTime();
-			nsPerFrame = curTime - lastTime;
-			//gameLoop((float) (nsPerFrame / 1.0E9));
-			lastTime = curTime;
+			timer.Tick();
+			gameloop(timer);
 		}
 		terminate();
 	}
