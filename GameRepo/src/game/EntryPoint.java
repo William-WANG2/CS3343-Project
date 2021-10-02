@@ -3,17 +3,15 @@ package game;
 import util.*;
 import testCase.*;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class EntryPoint{
 	public static void main(String args[])
 	{
-		try 
-		{
-			Test00 test = new Test00();
-			
-		}catch(Exception e)
-		{
-			e.printStackTrace();
-			System.out.println("I don't know the error yet");
-		}
+		Test00 test = new Test00();
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {test.initialize();}
+		});	
 	}
 }

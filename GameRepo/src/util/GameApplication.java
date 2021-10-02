@@ -40,7 +40,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		canvas.setIgnoreRepaint(true);
 		getContentPane().add(canvas);
 		setLocationByPlatform(true);
-		canvas.setSize(clientWidth, clientHeight);
+		setSize(clientWidth, clientHeight);
 		setTitle(winTitle);
 		
 		//setupInput(canvas); Input registers, later implement
@@ -49,9 +49,13 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		canvas.createBufferStrategy(2);
 		bs = canvas.getBufferStrategy();
 		canvas.requestFocus();
+		
+		gameThread = new Thread(this);
+		gameThread.start();
 	}
 	
 	public void gameloop(GameTimer timer) {
+		timer.Tick();
 		update();
 		render();
 	}
@@ -88,7 +92,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		if((timeElapsed) >= 1000)
 		{			
 			String frameRate = String.format("FPS %s", frameCount);
-			
+			g.clearRect( 0, 0, clientWidth, clientHeight);
 			g.setColor(Color.GREEN);
 			g.drawString(frameRate, 30, 30);
 			
@@ -99,15 +103,12 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	
 	public void run() {
 		running = true;
-		initialize();
+		timer.Reset();
 		while (running) {
-			timer.Tick();
 			gameloop(timer);
 		}
 		terminate();
 	}
-	
-	
 	
 	
 }
