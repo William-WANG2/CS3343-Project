@@ -3,10 +3,8 @@ package util;
 public class Node {
 	private NodeInfo info;
 	public Node(int x, int y, boolean activated) {
-		info.x = x;
-		info.y = y;
+		info = new NodeInfo(x, y, activated);
 		info.blocked = false;
-		info.activated = activated;
 	}
 	//If the sprite is on the node, it can not be blocked
 	public boolean block() {
