@@ -48,7 +48,6 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		canvas.createBufferStrategy(2);
 		bs = canvas.getBufferStrategy();
 		canvas.requestFocus();
-		
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
@@ -65,6 +64,10 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	public void update(){
 	}
 	
+	public void renderFrame(Graphics g){
+		currScene.render((Graphics2D)g);
+	}
+	
 	public void render(){
 		
 		do {
@@ -73,7 +76,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 				try {
 					g = bs.getDrawGraphics();
 					calculateFrameRate(g);
-					//renderFrame(g);
+					renderFrame(g);
 				} finally {
 					if (g != null) {
 						g.dispose();
