@@ -1,5 +1,7 @@
 package gameObject;
 
+import util.*;
+
 public class Map {
 	//singleton pattern to use the map across the game
 	private static Map instance = new Map();
@@ -10,10 +12,11 @@ public class Map {
 	static final double scale = 3/4;
 	private MapNode[][] map;
 	private MapNode dummyNode; //used to represent the abstract destination in the shortest path algorithm
-	private int m, n;
+	private Vector2d size;
 	public void initialize(int m, int n, int width, int height) {
 		map = new MapNode[m][n];
 		dummyNode = new MapNode(0, 0, 0, 0);
+		size = new Vector2d(m, n);
 		int displayW = (int)(scale * width); //valid region to display the map
 		int radius = (int)(2 * displayW / (2.2 * n)); //radius for node
 		int interval = (int)(0.1 * displayW / 2.2 * n); //interval between node

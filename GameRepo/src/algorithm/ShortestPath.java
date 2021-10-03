@@ -5,4 +5,8 @@ import gameObject.*;
 
 public class ShortestPath {
 	private Map map = Map.getInstance();
+	public int computeDecision(int posX, int posY) {
+		int dir = 0;
+		return dir;
+	}
 }
