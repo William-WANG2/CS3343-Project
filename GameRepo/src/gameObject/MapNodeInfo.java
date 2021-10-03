@@ -1,19 +1,17 @@
 package gameObject;
 
+import util.*;
+
 public class MapNodeInfo {
 	//position displayed
-	public int x;
-	public int y;
+	public Vector2d displayPos;
 	//abstract position
-	public int m;
-	public int n;
+	public Vector2d abstractPos;
 	public boolean blocked; //the node can not be accessed since it is blocked by the user
 	public boolean activated; //the node is currently occupied by the sprite
 	public MapNodeInfo(int x, int y, int m, int n) {
-		this.x = x;
-		this.y = y;
-		this.m = m;
-		this.n = n;
+		this.displayPos = new Vector2d(x, y);
+		this.abstractPos = new Vector2d(m, n);
 		this.activated = false;
 		this.blocked = false;
 	}

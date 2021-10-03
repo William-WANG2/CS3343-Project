@@ -10,14 +10,15 @@ public class TestUtilNode {
 	private MapNode node;
 	private MapNodeInfo info;
 	//Test creating the node
+	
 	@Test
 	public void testCreation() {
 		node = new MapNode(10, 20, 2, 3);
 		info = node.getState();
-		assertEquals(10, info.x);
-		assertEquals(20, info.y);
-		assertEquals(2, info.m);
-		assertEquals(3, info.n);
+		assertEquals(10, info.displayPos.x);
+		assertEquals(20, info.displayPos.y);
+		assertEquals(2, info.abstractPos.x);
+		assertEquals(3, info.abstractPos.y);
 		assertEquals(false, info.activated);
 		assertEquals(false, info.blocked);
 	}

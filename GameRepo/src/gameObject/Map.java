@@ -1,12 +1,16 @@
 package gameObject;
 
 public class Map {
-	//singleton pattern to use the map accross the game
+	//singleton pattern to use the map across the game
 	private static Map instance = new Map();
+	public static Map getInstance() {
+		return instance;
+	}
 	//scale factor of the main game area
 	static final double scale = 3/4;
 	private MapNode[][] map;
 	private MapNode dummyNode; //used to represent the abstract destination in the shortest path algorithm
+	private int m, n;
 	public void initialize(int m, int n, int width, int height) {
 		map = new MapNode[m][n];
 		dummyNode = new MapNode(0, 0, 0, 0);
@@ -69,8 +73,5 @@ public class Map {
 				}
 			}
 		}
-	}
-	public Map getInstance() {
-		return instance;
 	}
 }
