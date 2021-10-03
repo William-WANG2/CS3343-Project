@@ -15,11 +15,53 @@ public class Map {
 		//initialize the map
 		for(int i=0; i<m; i++) {
 			for(int j=0; j<n; j++) {
+				//set x, y coordinates
 				if(i%2 == 0) {
-					map[i][j] = new MapNode(sX+interval+2*j*(radius+interval), sY+interval+2*j*(radius+interval), false);
+					map[i][j] = new MapNode(sX+interval+2*j*(radius+interval), sY+interval+2*j*(radius+interval));
 				}
 				else {
-					map[i][j] = new MapNode(sX+interval+2*j*(radius+interval)+offset, sY+interval+2*j*(radius+interval), false);
+					map[i][j] = new MapNode(sX+interval+2*j*(radius+interval)+offset, sY+interval+2*j*(radius+interval)); //with offset to the right
+				}
+				//set adjacent nodes
+				if(i%2 == 0) {
+					if(i-1>=0) {
+						if(j-1>=0) {
+							map[i][j].addAdj(map[i-1][j-1]);
+						}
+						map[i][j].addAdj(map[i-1][j]);
+					}
+					if(i+1<m) {
+						if(j-1>=0) {
+							map[i][j].addAdj(map[i+1][j-1]);
+						}
+						map[i][j].addAdj(map[i+1][j]);
+					}
+					if(j-1>=0) {
+						map[i][j].addAdj(map[i][j-1]);
+					}
+					if(j+1<n) {
+						map[i][j].addAdj(map[i][j+1]);
+					}
+				}
+				else {
+					if(i-1>=0) {
+						if(j+1>=0) {
+							map[i][j].addAdj(map[i-1][j+1]);
+						}
+						map[i][j].addAdj(map[i-1][j]);
+					}
+					if(i+1<m) {
+						if(j+1>=0) {
+							map[i][j].addAdj(map[i+1][j+1]);
+						}
+						map[i][j].addAdj(map[i+1][j]);
+					}
+					if(j-1>=0) {
+						map[i][j].addAdj(map[i][j-1]);
+					}
+					if(j+1<n) {
+						map[i][j].addAdj(map[i][j+1]);
+					}
 				}
 			}
 		}
