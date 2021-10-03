@@ -7,8 +7,8 @@ public class MapNode{
 	private MapNodeInfo info;
 	private ArrayList<MapNode> adjacency;
 	
-	public MapNode(int x, int y) {
-		info = new MapNodeInfo(x, y);
+	public MapNode(int x, int y, int m, int n) {
+		info = new MapNodeInfo(x, y, m, n);
 	}
 	//If the sprite is on the node, it can not be blocked.
 	public boolean block() {

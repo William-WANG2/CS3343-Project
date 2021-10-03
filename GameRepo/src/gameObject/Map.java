@@ -4,8 +4,10 @@ public class Map {
 	//scale factor of the main game area
 	static final double scale = 3/4;
 	private MapNode[][] map;
+	private MapNode dummyNode; //used to represent the abstract destination in the shortest path algorithm
 	public Map(int m, int n, int width, int height) {
 		map = new MapNode[m][n];
+		dummyNode = new MapNode(0, 0, 0, 0);
 		int displayW = (int)(scale * width); //valid region to display the map
 		int radius = (int)(2 * displayW / (2.2 * n)); //radius for node
 		int interval = (int)(0.1 * displayW / 2.2 * n); //interval between node
@@ -17,10 +19,10 @@ public class Map {
 			for(int j=0; j<n; j++) {
 				//set x, y coordinates
 				if(i%2 == 0) {
-					map[i][j] = new MapNode(sX+interval+2*j*(radius+interval), sY+interval+2*j*(radius+interval));
+					map[i][j] = new MapNode(sX+interval+2*j*(radius+interval), sY+interval+2*j*(radius+interval), i, j);
 				}
 				else {
-					map[i][j] = new MapNode(sX+interval+2*j*(radius+interval)+offset, sY+interval+2*j*(radius+interval)); //with offset to the right
+					map[i][j] = new MapNode(sX+interval+2*j*(radius+interval)+offset, sY+interval+2*j*(radius+interval), i, j); //with offset to the right
 				}
 				//set adjacent nodes
 				if(i%2 == 0) {
