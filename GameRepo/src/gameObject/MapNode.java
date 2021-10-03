@@ -1,11 +1,14 @@
 package gameObject;
 
+import java.util.ArrayList;
+
 public class MapNode{
 	
 	private MapNodeInfo info;
-	public MapNode(int x, int y, boolean activated) {
-		info = new MapNodeInfo(x, y, activated);
-		info.blocked = false;
+	private ArrayList<MapNode> adjacency;
+	
+	public MapNode(int x, int y, int m, int n) {
+		info = new MapNodeInfo(x, y, m, n);
 	}
 	//If the sprite is on the node, it can not be blocked.
 	public boolean block() {
@@ -26,6 +29,9 @@ public class MapNode{
 			info.activated = true;
 			return true;
 		}
+	}
+	public void addAdj(MapNode n) {
+		adjacency.add(n);
 	}
 	public MapNodeInfo getState() {
 		return info;
