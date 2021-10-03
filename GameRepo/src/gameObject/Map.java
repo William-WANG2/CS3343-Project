@@ -1,11 +1,13 @@
 package gameObject;
 
 public class Map {
+	//singleton pattern to use the map accross the game
+	private static Map instance = new Map();
 	//scale factor of the main game area
 	static final double scale = 3/4;
 	private MapNode[][] map;
 	private MapNode dummyNode; //used to represent the abstract destination in the shortest path algorithm
-	public Map(int m, int n, int width, int height) {
+	public void initialize(int m, int n, int width, int height) {
 		map = new MapNode[m][n];
 		dummyNode = new MapNode(0, 0, 0, 0);
 		int displayW = (int)(scale * width); //valid region to display the map
@@ -67,5 +69,8 @@ public class Map {
 				}
 			}
 		}
+	}
+	public Map getInstance() {
+		return instance;
 	}
 }
