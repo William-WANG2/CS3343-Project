@@ -23,7 +23,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	//Game context
 	private volatile boolean running;
 	private Thread gameThread;
-	public Scene currScene;
+	private static Scene currScene;
 	
 	//Time context
 	private int frameCount = 0;
@@ -62,6 +62,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void update(){
+		currScene.update();
 	}
 	
 	public void renderFrame(Graphics g){
@@ -114,4 +115,9 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		terminate();
 	}
 	
+	static final void loadScene(Scene next) {
+		currScene.exit();
+		currScene = next;
+		next.enter();
+	}
 }

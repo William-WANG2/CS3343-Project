@@ -2,8 +2,7 @@ package testCase;
 import scenes.LoadingScene;
 import util.*;
 
-public class Test00 extends GameApplication{
-<<<<<<< HEAD
+public class TestDrawingApp extends GameApplication{
 	
 	@Override
 	public void initialize() {
@@ -11,7 +10,4 @@ public class Test00 extends GameApplication{
 		currScene.enter();
 		super.initialize();
 	}
-=======
-
->>>>>>> 16b368df92d2a7aae4f681dc42759d29cc894891
 }
