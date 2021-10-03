@@ -1,10 +1,10 @@
-package util;
+package gameObject;
 
-public class Node {
+public class MapNode{
 	
-	private NodeInfo info;
-	public Node(int x, int y, boolean activated) {
-		info = new NodeInfo(x, y, activated);
+	private MapNodeInfo info;
+	public MapNode(int x, int y, boolean activated) {
+		info = new MapNodeInfo(x, y, activated);
 		info.blocked = false;
 	}
 	//If the sprite is on the node, it can not be blocked.
@@ -27,7 +27,7 @@ public class Node {
 			return true;
 		}
 	}
-	public NodeInfo getState() {
+	public MapNodeInfo getState() {
 		return info;
 	}
 }

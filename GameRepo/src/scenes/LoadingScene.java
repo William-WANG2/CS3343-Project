@@ -12,12 +12,6 @@ import java.util.concurrent.Future;
 
 import javax.imageio.ImageIO;
 
-import javagames.completegame.admin.GameConstants;
-import javagames.completegame.state.GameLoading;
-import javagames.util.Matrix3x3f;
-import javagames.util.ResourceLoader;
-import javagames.util.Sprite;
-import javagames.util.Vector2f;
 
 public class LoadingScene extends Scene{
 	
@@ -35,23 +29,22 @@ public class LoadingScene extends Scene{
 			public Boolean call() throws Exception {
 				InputStream stream = ResourceLoader.load( LoadingScene.class,
 						"res/textures/bricks.png",
-						"/images/space_background_600x600.png" );
+						"/textures/bricks.png" );
 				BufferedImage image = ImageIO.read( stream );
-				Vector2f worldTopLeft = new Vector2f(
-					-GameConstants.WORLD_WIDTH / 2.0f,
-					GameConstants.WORLD_HEIGHT / 2.0f 
-				);
-				Vector2f worldBottomRight = new Vector2f(
-					GameConstants.WORLD_WIDTH / 2.0f,
-					-GameConstants.WORLD_HEIGHT / 2.0f 
-				);
+//				Vector2f worldTopLeft = new Vector2f(
+//					-GameConstants.WORLD_WIDTH / 2.0f,
+//					GameConstants.WORLD_HEIGHT / 2.0f 
+//				);
+//				Vector2f worldBottomRight = new Vector2f(
+//					GameConstants.WORLD_WIDTH / 2.0f,
+//					-GameConstants.WORLD_HEIGHT / 2.0f 
+//				);
 				
-				Sprite sprite =
-						new Sprite( image, worldTopLeft, worldBottomRight );
-				Matrix3x3f viewport =
-						(Matrix3x3f)controller.getAttribute( "viewport" );
-				sprite.scaleImage( viewport );
-				controller.setAttribute( "background", sprite );
+//				Sprite sprite = new Sprite( image, worldTopLeft, worldBottomRight );
+//				Matrix3x3f viewport =
+//						(Matrix3x3f)controller.getAttribute( "viewport" );
+//				sprite.scaleImage( viewport );
+//				controller.setAttribute( "background", sprite );
 				return Boolean.TRUE;
 			}
 		});
