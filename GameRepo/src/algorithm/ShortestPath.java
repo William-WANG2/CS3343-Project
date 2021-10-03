@@ -2,10 +2,11 @@
 package algorithm;
 
 import gameObject.*;
+import util.*;
 
 public class ShortestPath {
 	private Map map = Map.getInstance();
-	public int computeDecision(int posX, int posY) {
+	public int computeDecision(Vector2d vec) {
 		int dir = 0;
 		return dir;
 	}
