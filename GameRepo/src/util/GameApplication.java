@@ -115,7 +115,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		terminate();
 	}
 	
-	static final void loadScene(Scene next) {
+	private static final void loadScene(Scene next) {
 		currScene.exit();
 		currScene = next;
 		next.enter();
