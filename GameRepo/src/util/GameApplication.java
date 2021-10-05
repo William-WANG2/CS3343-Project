@@ -11,7 +11,7 @@ import javax.swing.*;
 public abstract class GameApplication extends JFrame implements Runnable{
 	
 	//Window context
-	Canvas canvas;
+	public Canvas canvas;
 	Color backgroundColor = Color.BLACK;
 	int clientWidth = 800;
 	int clientHeight = 600;
@@ -22,7 +22,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	
 	//Game context
 	private volatile boolean running;
-	private Thread gameThread;
+	protected Thread gameThread;
 	public static Scene currScene;
 	
 	//Time context
@@ -43,13 +43,12 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		setLocationByPlatform(true);
 		setSize(clientWidth, clientHeight);
 		setTitle(winTitle);
-		//setupInput(canvas); Input registers, later implement
+		//setupInput(canvas); //Input registers, later implement
 		setVisible(true);
 		canvas.createBufferStrategy(2);
 		bs = canvas.getBufferStrategy();
 		canvas.requestFocus();
-		gameThread = new Thread(this);
-		gameThread.start();
+		
 	}
 	
 	public void gameloop(GameTimer timer) {
@@ -115,7 +114,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		terminate();
 	}
 	
-	private static final void loadScene(Scene next) {
+	public static final void loadScene(Scene next) {
 		currScene.exit();
 		currScene = next;
 		next.enter();

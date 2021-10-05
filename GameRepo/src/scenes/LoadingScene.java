@@ -2,6 +2,7 @@ package scenes;
 
 import util.*;
 
+import java.awt.Canvas;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -92,6 +93,12 @@ public class LoadingScene extends Scene{
 
 	@Override
 	public void exit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setupInput(Canvas canvas) {
 		// TODO Auto-generated method stub
 		
 	}
