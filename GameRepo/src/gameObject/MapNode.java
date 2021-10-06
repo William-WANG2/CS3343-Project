@@ -36,4 +36,7 @@ public class MapNode{
 	public MapNodeInfo getState() {
 		return info;
 	}
+	public ArrayList<MapNode> getAdj() {
+		return adjacency;
+	}
 }

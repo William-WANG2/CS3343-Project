@@ -76,5 +76,28 @@ public class Map {
 				}
 			}
 		}
+		//link border nodes to dummy destination
+		for(int i=0; i<m; i++) {
+			map[i][0].addAdj(dummyNode);
+			map[i][n-1].addAdj(dummyNode);
+			dummyNode.addAdj(map[i][0]);
+			dummyNode.addAdj(map[i][n-1]);
+		}
+		for(int i=1; i<n-1; i++) {
+			map[0][i].addAdj(dummyNode);
+			map[m-1][i].addAdj(dummyNode);
+			dummyNode.addAdj(map[0][i]);
+			dummyNode.addAdj(map[m-1][i]);
+		}
+	}
+	
+	public Vector2d getSize() {
+		return size;
+	}
+	public MapNode[][] getMap() {
+		return map;
+	}
+	public MapNode getDummy() {
+		return dummyNode;
 	}
 }
