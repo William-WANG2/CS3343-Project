@@ -13,5 +13,11 @@ public class EntryPoint{
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {test.initialize();}
 		});	
+		
+		
+		String filepath = "res/textures/CXKisBeautiful.wav";
+		Music musicObject = new Music();
+		musicObject.playMusic(filepath);
+		
 	}
 }
