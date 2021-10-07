@@ -1,5 +1,6 @@
 package game;
 
+import gameObject.*;
 import util.*;
 import testCase.*;
 

@@ -1,26 +1,51 @@
-package game;
-import gameObject.MapNode;
+package gameObject;
 
-public class BoxController {
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import keyValue.*;
+
+public class BoxController implements KeyListener{
 	
 	private static BoxController controller = new BoxController();
+	private BoxMessage currMessage = new BoxMessage();
+	private BoxField currField = new BoxField(0,0,10,10);
 	public static BoxController getInstance() {
 		return controller;
 	}
-
-	//hover over the MapNode, show the MessageBox containing definition
-	public void showDefine(MapNode n) {
-		MessageBox.showDef(n);
-		
+	
+	public void updateMessage(BoxMessage m) {
+		this.currMessage = m;
 	}
 	
-	// remove mouse, remove MessageBox
-	public void removeDefine() {
-		
-	}	
+	public void setField(int x, int y, int w, int h) {
+		this.currField=new BoxField(x,y,w,h);
+	}
+	
+	//if currMessage change, change the field
+	public void render() {
+		currField.render(currMessage);
+	}
 
-	//click show the input window, if timeout or invalid input, spirit move
-	public void allowInput() {
+	//click show the input window, if timeout or invalid input, the spirit move
+	public void userInput() {
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }
