@@ -15,4 +15,17 @@ public class MapNodeInfo {
 		this.activated = false;
 		this.blocked = false;
 	}
+	
+	public Vector2d getDisplaypos() {
+		
+		return displayPos;
+	}
+	
+	public boolean whetherBlocked() {
+		return this.blocked;
+	}
+	
+	public boolean whetherActivated() {
+		return this.activated;
+	}
 }
