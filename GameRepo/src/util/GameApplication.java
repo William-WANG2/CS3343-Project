@@ -105,7 +105,6 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void run() {
-		
 		running = true;
 		timer.Reset();
 		while (running) {
