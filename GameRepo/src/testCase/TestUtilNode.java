@@ -13,19 +13,20 @@ public class TestUtilNode {
 	
 	@Test
 	public void testCreation() {
-		node = new MapNode(10, 20, 2, 3);
+		node = new MapNode(10, 20, 1, 2, 3);
 		info = node.getState();
 		assertEquals(10, info.displayPos.x);
 		assertEquals(20, info.displayPos.y);
 		assertEquals(2, info.abstractPos.x);
 		assertEquals(3, info.abstractPos.y);
+		assertEquals(1, info.radius);
 		assertEquals(false, info.activated);
 		assertEquals(false, info.blocked);
 	}
 	//Test blocking when the node is activated
 	@Test
 	public void testBlock01() {
-		node = new MapNode(20, 40, 2, 3);	
+		node = new MapNode(20, 40, 1, 2, 3);	
 		node.activate();
 		info = node.getState();
 		assertEquals(true, info.activated);
@@ -36,7 +37,7 @@ public class TestUtilNode {
 	//Test blocking when the node is not activated
 	@Test
 	public void testBlock02() {
-		node = new MapNode(20, 40, 2, 3);	
+		node = new MapNode(20, 40, 1, 2, 3);	
 		info = node.getState();
 		assertEquals(false, info.activated);
 		boolean res = node.block();
@@ -46,7 +47,7 @@ public class TestUtilNode {
 	//Test activating when the node is blocked
 	@Test
 	public void testActivate01() {
-		node = new MapNode(20, 40, 2, 3);	
+		node = new MapNode(20, 40, 1, 2, 3);	
 		info = node.getState();
 		node.block();
 		node.activate();
@@ -55,7 +56,7 @@ public class TestUtilNode {
 	//Test activating when the node is not blocked
 	@Test
 	public void testActivate02() {
-		node = new MapNode(20, 40, 2, 3);	
+		node = new MapNode(20, 40, 1, 2, 3);	
 		info = node.getState();
 		node.activate();
 		assertEquals(true, info.activated);

@@ -73,19 +73,6 @@ public class TestClickingButton extends Scene {
 		
 	}
 
-	@Override
-	public void setupInput(Canvas canvas) {
-		
-		canvas.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				isClicked = true;
-				mousePos.x = e.getX();
-				mousePos.y = e.getY();
-			}
-			
-		});
-	}
 		
 }
 	
