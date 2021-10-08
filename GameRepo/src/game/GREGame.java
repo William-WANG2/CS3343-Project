@@ -1,15 +1,12 @@
 package game;
 
 import util.*;
+import gameObject.BoxField;
+import gameObject.BoxMessage;
 
 public class GREGame extends GameApplication{
 	
-	
-	//Keep running during the game
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -4668101755853509839L;
+	BoxField bField;
 	public GREGame() {
 		
 	}
