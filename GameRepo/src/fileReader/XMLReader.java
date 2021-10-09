@@ -16,10 +16,12 @@ import keyValue.*;
 
 public class XMLReader {
 	/**
-	read the XML file and store the information in an ArrayList, m and n are the row number and column number of the map.
-	The function will randomly select m*n words and store them in the ArrayList
-	 * @throws ExMapExceedWordSize 
-	**/
+	 * read the XML file and store the information in an ArrayList, m and n are the
+	 * row number and column number of the map. The function will randomly select
+	 * m*n words and store them in the ArrayList
+	 * 
+	 * @throws ExMapExceedWordSize
+	 **/
 	public static ArrayList<Info> convert(String path, int m, int n) throws ExMapExceedWordSize {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		ArrayList<Info> wordlist = new ArrayList<Info>();
@@ -27,26 +29,25 @@ public class XMLReader {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document document = db.parse(path);
 			NodeList wl = document.getElementsByTagName("word");
-			if(m*n > wl.getLength()+1) {
+			if (m * n > wl.getLength() + 1) {
 				throw new ExMapExceedWordSize();
 			}
-			int startPosInList = new Random().nextInt(wl.getLength()+1- m*n);
-			for(int i = startPosInList; i<startPosInList+m*n;i++) {
-				Node w= wl.item(i);
+			int startPosInList = new Random().nextInt(wl.getLength() + 1 - m * n);
+			for (int i = startPosInList; i < startPosInList + m * n; i++) {
+				Node w = wl.item(i);
 				String d = "";
 				String a = "";
-				NodeList dl=w.getChildNodes();
-				for(int j=0;j<dl.getLength();j++) {
-					if(dl.item(j).getNodeName()=="define") {
+				NodeList dl = w.getChildNodes();
+				for (int j = 0; j < dl.getLength(); j++) {
+					if (dl.item(j).getNodeName() == "define") {
 						d = dl.item(j).getNodeValue();
-					}
-					else if(dl.item(j).getNodeName()=="answer") {
+					} else if (dl.item(j).getNodeName() == "answer") {
 						a = dl.item(j).getNodeValue();
 					}
 				}
-				WordInfo word = new WordInfo(d,a);
+				WordInfo word = new WordInfo(d, a);
 				wordlist.add(word);
-			}		
+			}
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
