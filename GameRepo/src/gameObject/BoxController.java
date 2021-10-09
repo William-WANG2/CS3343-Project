@@ -1,5 +1,6 @@
 package gameObject;
 
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import keyValue.*;
@@ -21,9 +22,14 @@ public class BoxController implements KeyListener{
 		this.currField=new BoxField(x,y,w,h);
 	}
 	
-	//if currMessage change, change the field
-	public void render() {
-		currField.render(currMessage);
+	//show box
+	public void render(Graphics2D g) {
+		//add the boxfield panel to frame
+		
+	}
+	//if currMessage change, update the field
+	public void update() {
+		currField.update(currMessage);
 	}
 
 	//click show the input window, if timeout or invalid input, the spirit move

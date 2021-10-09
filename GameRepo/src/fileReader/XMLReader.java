@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 import keyValue.*;
 
 public class XMLReader {
-	public static ArrayList<Info> convert(String path) {
+	public static ArrayList<Info> convert(String path, int m, int n) {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		ArrayList<Info> wordlist = new ArrayList<Info>();
 		try {
