@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import keyValue.Info;
 import testCase.TestDrawingScene;
 import util.FrameUpdate;
 import util.Mouse;
@@ -21,8 +22,8 @@ public class MapNode implements FrameUpdate{
 	private static BufferedImage grey = null;
 	private static BufferedImage orange = null;
 	
-	public MapNode(float x, float y, float r, int m, int n) {
-		info = new MapNodeInfo(x, y, r, m, n);
+	public MapNode(float x, float y, float r, int m, int n, Info gre) {
+		info = new MapNodeInfo(x, y, r, m, n, gre);
 		adjacency = new ArrayList<MapNode>();
 	}
 	//If the sprite is on the node, it can not be blocked.

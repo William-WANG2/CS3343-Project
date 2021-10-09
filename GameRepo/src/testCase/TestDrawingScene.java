@@ -44,7 +44,7 @@ public class TestDrawingScene extends Scene{
 		testTexture = texture;
 		
 		m = new Map();
-		m.initialize(5, 4, 100, 100);
+		m.initialize(5, 4, 100, 100, ""); 
 		m.enter();
 		
 		mouse = mApp.mouse;
