@@ -23,8 +23,7 @@ public class ShortestPath {
 			return getNext(path[end.x][end.y], start);
 		}
 	}
-	
-	public void initialize() {
+	public ShortestPath() {
 		map = Map.getInstance();
 		path = new Vector2d[map.getSize().x][map.getSize().y];
 	}

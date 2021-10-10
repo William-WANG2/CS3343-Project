@@ -32,7 +32,6 @@ public class Dio implements FrameUpdate {
 		alive=true;
 		surround=false;
 		s = new ShortestPath();
-		s.initialize();
 	}
 	
 	public void setNode(MapNode node) {

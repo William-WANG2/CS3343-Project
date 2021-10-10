@@ -39,7 +39,7 @@ public class TestDrawingScene extends Scene{
 		Texture texture = new Texture(image, transform);
 		testTexture = texture;
 		
-		m = new Map();
+		m = Map.getInstance();
 		m.initialize(5, 4, 100, 100, "res/word.xml"); 
 		m.enter();
 		dio = Dio.getInstance();

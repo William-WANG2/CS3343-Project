@@ -19,6 +19,7 @@ public class Map implements FrameUpdate{
 	private MapNode[][] map;
 	private MapNode dummyNode; //used to represent the abstract destination in the shortest path algorithm
 	private Vector2d size;
+	private Map() {}
 	public void initialize(int m, int n, int width, int height, String path) {
 		map = new MapNode[m][n];
 		dummyNode = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
