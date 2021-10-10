@@ -9,6 +9,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import gameObject.Dio;
 import gameObject.Map;
 import scenes.Scene;
 import util.*;
@@ -19,6 +20,7 @@ public class TestDrawingScene extends Scene{
 	Texture testTexture;
 	BufferedImage x;
 	Map m;
+	Dio dio;
 	@Override
 	public void enter() {
 		
@@ -49,7 +51,9 @@ public class TestDrawingScene extends Scene{
 		m = new Map();
 		m.initialize(5, 4, 100, 100, "res/word.xml"); 
 		m.enter();
-		
+		dio = Dio.getInstance();
+		dio.initialize(m.getMap()[2][2]);
+		dio.enter();
 		mouse = mApp.mouse;
 	}
 
@@ -63,6 +67,7 @@ public class TestDrawingScene extends Scene{
 		AffineTransform transform = AffineTransform.getTranslateInstance(400, 300);
 		g.drawImage(testTexture.getImage(), transform, null);
 		m.render(g);
+		dio.render(g);
 	}
 
 	@Override
