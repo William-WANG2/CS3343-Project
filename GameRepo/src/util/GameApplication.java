@@ -38,12 +38,11 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		//initialize window context
 		canvas = new Canvas();
 		canvas.setBackground(backgroundColor);
-		canvas.setIgnoreRepaint(true);
+		canvas.setIgnoreRepaint(true); 
 		getContentPane().add(canvas);
 		setLocationByPlatform(true);
 		setSize(clientWidth, clientHeight);
 		setTitle(winTitle);
-		//setupInput(canvas); //Input registers, later implement
 		setVisible(true);
 		canvas.createBufferStrategy(2);
 		bs = canvas.getBufferStrategy();

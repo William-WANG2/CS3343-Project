@@ -24,8 +24,7 @@ import javax.swing.JPanel;
 import scenes.Scene;
 
 /*
- * Create by gsp
- * Modified by zyy
+ * by zyy
  */
 public class TestClickingButton extends Scene {
 	
@@ -37,7 +36,7 @@ public class TestClickingButton extends Scene {
 	@Override
 	public void enter() {
 		
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
+		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.gif", "/textures/bricks.gif" );
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(stream);

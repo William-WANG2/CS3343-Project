@@ -1,4 +1,4 @@
-package game;
+package gameObject;
 import gameObject.MapNode;
 
 public class BoxController {
