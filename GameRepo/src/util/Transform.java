@@ -2,8 +2,8 @@ package util;
 
 public class Transform {
 	
-	private Vector2f position;
-	private Vector2f scale;
+	public Vector2f position;
+	public Vector2f scale;
 	
 	public Transform() {
 		this.position = new Vector2f(0.0f, 0.0f);

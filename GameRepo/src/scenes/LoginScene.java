@@ -1,4 +1,5 @@
-package testCase;
+package scenes;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -6,68 +7,61 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import gameObject.Map;
-import scenes.Scene;
+import testCase.TestClickingButton;
+import testCase.TestDrawingScene;
 import util.*;
 
-public class TestDrawingScene extends Scene{
+public class LoginScene extends Scene {
 
 	Mouse mouse;
-	Texture testTexture;
-	BufferedImage x;
-	Map m;
+	Texture texture;
+	ArrayList<Button> buttons = new ArrayList<Button>();
 	@Override
 	public void enter() {
-		
+		// add pic
 		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
-
-
-		InputStream streamx = ResourceLoader.load(TestDrawingScene.class, "res/circle/orange.png", "/circle/orange.png" );
-		try {
-			x = ImageIO.read(streamx);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(stream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		// set pic params
 		Vector2f position = new Vector2f(GlobalConstants.WORLD_WIDTH / 2.0f, GlobalConstants.WORLD_HEIGHT / 2.0f);
 		Vector2f scale = new Vector2f(1.0f, 1.0f);
 		Transform transform = new Transform(position, scale);
 		Texture texture = new Texture(image, transform);
-		testTexture = texture;
+		texture = texture;
 		
-		m = new Map();
-		m.initialize(5, 4, 100, 100, ""); 
-		m.enter();
+		
+		// add button
+		Button btStart = new Button();
+		buttons.add(btStart);
+		
 		
 		mouse = mApp.mouse;
 	}
 
 	@Override
 	public void update() {
-		m.update(mouse);
+		
 	}
 
 	@Override
 	public void render(Graphics2D g) {
 		AffineTransform transform = AffineTransform.getTranslateInstance(400, 300);
-		g.drawImage(testTexture.getImage(), transform, null);
-		m.render(g);
+		g.drawImage(texture.getImage(), transform, null);
+		for (Button e: buttons) {
+			e.render(g);
+		}
 	}
 
 	@Override
 	public void exit() {
 	}
-
-
 }

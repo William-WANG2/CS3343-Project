@@ -1,10 +1,8 @@
 package gameObject;
 
-import javax.swing.JPanel;
+import java.awt.Graphics2D;
 
-import keyValue.Info;
-
-public class BoxField extends JPanel {
+public class BoxField {
 	
 	private int x,y;
 	private int height,width;
@@ -16,7 +14,12 @@ public class BoxField extends JPanel {
 	}
 	
 	//hover over the MapNode, show the MessageBox containing definition
-	public void render(BoxMessage m) {
+	public void update(BoxMessage m) {
+		
+	}
+
+	public void render(Graphics2D g) {
+		
 		
 	}
 }

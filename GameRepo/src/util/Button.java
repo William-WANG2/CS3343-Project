@@ -1,43 +1,29 @@
-package testCase;
-import util.*;
+package util;
 
-import java.awt.Canvas;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import scenes.Scene;
 
-/*
- * Create by gsp
- * Modified by zyy
- */
-public class TestClickingButton extends Scene {
-	
+
+
+public class Button extends Scene {
 	Texture testTexture;
 	BoundingBox btnRegion;
 	Boolean isClicked = false;
 	Vector2f mousePos = new Vector2f(-1.0f, -1.0f);
 	
-	@Override
-	public void enter() {
-		
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
+	private Transform transform;
+	private Texture texture;
+	
+	// default button constructor
+	public Button() {
+		InputStream stream = ResourceLoader.load(Button.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(stream);
@@ -47,12 +33,13 @@ public class TestClickingButton extends Scene {
 		
 		Vector2f position = new Vector2f(GlobalConstants.WORLD_WIDTH / 2.0f, GlobalConstants.WORLD_HEIGHT / 2.0f);
 		Vector2f scale = new Vector2f(1.0f, 1.0f);
-		Transform transform = new Transform(position, scale);
-		Texture texture = new Texture(image, transform);
-		testTexture = texture;
-		
+		transform = new Transform(position, scale);
+		texture = new Texture(image, transform);
 		btnRegion = new BoundingBox(100, 100, 400, 400);
-		
+	}
+	
+	@Override
+	public void enter() {
 	}
 
 	@Override
@@ -73,7 +60,7 @@ public class TestClickingButton extends Scene {
 		
 	}
 
-		
+	public Transform getTransform() {
+		return transform;
+	}
 }
-	
-	

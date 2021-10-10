@@ -15,6 +15,7 @@ public class EntryPoint{
 		TestDrawingApp test = new TestDrawingApp();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {test.initialize();}
+
 		});	
 		
 		
@@ -24,5 +25,7 @@ public class EntryPoint{
 		
 		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+
+	};
+
 	}
-}

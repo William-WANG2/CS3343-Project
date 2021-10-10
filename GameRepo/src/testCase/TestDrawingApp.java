@@ -16,9 +16,8 @@ public class TestDrawingApp extends GameApplication{
 	public void initialize() {
 		
 		super.initialize();
-		currScene = new TestClickingButton();
+		currScene = new TestDrawingScene();
 		currScene.mApp = this;
-		currScene.setupInput(this.canvas);
 		currScene.enter();
 		
 		gameThread = new Thread(this);
