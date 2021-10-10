@@ -5,6 +5,8 @@ import scenes.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import javax.swing.*;
 
@@ -30,6 +32,9 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	private float timeElapsed = 0;
 	GameTimer timer = GameTimer.getInstance();
 	
+	//Event context
+	public Mouse mouse = new Mouse();
+	
 	public GameApplication() {
 	}
 	
@@ -38,7 +43,12 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		//initialize window context
 		canvas = new Canvas();
 		canvas.setBackground(backgroundColor);
+
 		canvas.setIgnoreRepaint(true); 
+
+		canvas.setIgnoreRepaint(true);
+		
+
 		getContentPane().add(canvas);
 		setLocationByPlatform(true);
 		setSize(clientWidth, clientHeight);
@@ -47,7 +57,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		canvas.createBufferStrategy(2);
 		bs = canvas.getBufferStrategy();
 		canvas.requestFocus();
-		
+		setupInput();
 	}
 	
 	public void gameloop(GameTimer timer) {
@@ -104,7 +114,6 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void run() {
-		
 		running = true;
 		timer.Reset();
 		while (running) {
@@ -117,5 +126,16 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		currScene.exit();
 		currScene = next;
 		next.enter();
+	}
+	
+	private void setupInput() {
+		canvas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouse.mouseClicked = true;
+				mouse.mousePos.x = e.getX();
+				mouse.mousePos.y = e.getY();
+			}
+		});
 	}
 }

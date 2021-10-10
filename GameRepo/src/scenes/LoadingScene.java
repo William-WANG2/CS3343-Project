@@ -96,12 +96,6 @@ public class LoadingScene extends Scene{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void setupInput(Canvas canvas) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 	
