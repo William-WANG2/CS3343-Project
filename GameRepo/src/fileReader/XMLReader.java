@@ -1,5 +1,6 @@
 package fileReader;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -27,7 +28,8 @@ public class XMLReader {
 		ArrayList<Info> wordlist = new ArrayList<Info>();
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document document = db.parse(path);
+			File dataFile = new File(path);
+			Document document = db.parse(dataFile);
 			NodeList wl = document.getElementsByTagName("word");
 			if (m * n > wl.getLength() + 1) {
 				throw new ExMapExceedWordSize();
