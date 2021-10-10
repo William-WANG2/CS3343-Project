@@ -1,0 +1,15 @@
+<? xml version="1.0" encoding="UTF-8"?>
+<dictionary>
+    <word>
+        <define>a</define>
+        <answer>a</answer>
+    </word>
+        <word>
+        <define>b</define>
+        <answer>b</answer>
+    </word>
+        <word>
+        <define>c</define>
+        <answer>c</answer>
+    </word>
+</dictionary>
