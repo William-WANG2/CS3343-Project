@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class ShortestPath {
-	private Map map = Map.getInstance();
+	
+	private Map map;
 	//according to BFS, computer the next position to move
-	private Vector2d[][] path = new Vector2d[map.getSize().x][map.getSize().y];
+	private Vector2d[][] path;
 	private Vector2d res;
 	//print the next node the sprite should go according "path"
 	private Vector2d getNext(Vector2d end, Vector2d start) {
@@ -22,6 +23,12 @@ public class ShortestPath {
 			return getNext(path[end.x][end.y], start);
 		}
 	}
+	
+	public void initialize() {
+		map = Map.getInstance();
+		path = new Vector2d[map.getSize().x][map.getSize().y];
+	}
+	
 	//return last node in the computed shortest path
 	private Vector2d BFS(Vector2d s) throws NoSuchElementException {
 		//initialize the variables

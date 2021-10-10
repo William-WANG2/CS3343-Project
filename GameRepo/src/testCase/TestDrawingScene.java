@@ -25,15 +25,6 @@ public class TestDrawingScene extends Scene{
 	public void enter() {
 		
 		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
-
-
-		InputStream streamx = ResourceLoader.load(TestDrawingScene.class, "res/circle/orange.png", "/circle/orange.png" );
-		try {
-			x = ImageIO.read(streamx);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		
 		
 		BufferedImage image = null;
