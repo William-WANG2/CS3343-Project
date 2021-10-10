@@ -20,7 +20,7 @@ public class TestDrawingScene extends Scene{
 	@Override
 	public void enter() {
 		
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
+		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/brick.jpg", "/textures/brick.jpg" );
 		BufferedImage image = null;
 		try {
 			image = ImageIO.read(stream);
