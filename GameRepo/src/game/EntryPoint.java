@@ -15,4 +15,5 @@ public class EntryPoint{
 			public void run() {test.initialize();}
 	});	
 	}
+	
 }
