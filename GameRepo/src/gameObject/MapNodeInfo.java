@@ -21,4 +21,17 @@ public class MapNodeInfo {
 		this.radius = r;
 		this.greInfo = gre;
 	}
+	
+	public Vector2d getDisplaypos() {
+		
+		return displayPos;
+	}
+	
+	public boolean whetherBlocked() {
+		return this.blocked;
+	}
+	
+	public boolean whetherActivated() {
+		return this.activated;
+	}
 }

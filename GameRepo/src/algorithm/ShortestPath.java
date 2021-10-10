@@ -32,7 +32,7 @@ public class ShortestPath {
 		Q.add(map.getMap()[s.x][s.y]);
 		while(!Q.isEmpty()) {
 			MapNode temp = Q.remove();
-			ArrayList<MapNode> adj = temp.getAdj();
+			ArrayList<MapNode> adj = temp.getAdjacency();
 			for(MapNode n: adj) {
 				if(n.getState().blocked || visited[n.getState().abstractPos.x][n.getState().abstractPos.y]) {
 					break;

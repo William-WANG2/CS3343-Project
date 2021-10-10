@@ -52,10 +52,13 @@ public class MapNode implements FrameUpdate{
 	public MapNodeInfo getState() {
 		return info;
 	}
-	public ArrayList<MapNode> getAdj() {
+	
+	public ArrayList<MapNode> getAdjacency(){
 		return adjacency;
+		
 	}
 	
+
 	@Override
 	public void enter() {
 		if(grey == null && orange == null) {
@@ -101,4 +104,5 @@ public class MapNode implements FrameUpdate{
 		// TODO Auto-generated method stub
 		
 	}
+
 }
