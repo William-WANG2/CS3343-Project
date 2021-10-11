@@ -55,17 +55,29 @@ public class Dio implements FrameUpdate {
 	
 	public void moveNormal(Vector2d dir) {
 		
-		setNode(Map.getInstance().getMap()[dir.x][dir.y]);
+		if(Map.getInstance().getMap()[dir.x][dir.y]==Map.getInstance().getDummy()) {
+			setAlive(false);
+		}
+		else {
+			
+			setNode(Map.getInstance().getMap()[dir.x][dir.y]);
+		}
 	
 	}
 	
 	public void moveSurround() {
 		ArrayList<MapNode> adjacency=node.getAdjacency();
-		if(!adjacency.isEmpty()) {
-			setNode(adjacency.get(0));
-		}
-		else {
-			setAlive(false);
+		int n=0;
+		while(adjacency.get(n)!=null) {
+			if(!adjacency.get(n).block()) {
+				setNode(adjacency.get(n));
+				break;
+			}
+			else {
+				n++;
+			}
+			
+			
 		}
 		
 	}
