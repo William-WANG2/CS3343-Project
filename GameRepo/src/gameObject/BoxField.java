@@ -14,7 +14,7 @@ public class BoxField {
 	
 	private int x,y;
 	private int height,width;
-	private String message = "";
+	private String message = "s";
 	private static BufferedImage box = null;
 	public BoxField(int x, int y, int h, int w) {
 		this.x=x;

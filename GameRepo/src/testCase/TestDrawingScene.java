@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -41,7 +42,7 @@ public class TestDrawingScene extends Scene{
 		testTexture = texture;
 		
 		m = Map.getInstance();
-		m.initialize(10, 10, 200, 200, "./res/word.xml"); 
+		m.initialize(10, 10, 200, 200, "./res/word.txt"); 
 		m.enter();
 		box = BoxController.getInstance();
 		box.enter();

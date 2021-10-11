@@ -1,10 +1,11 @@
 package gameObject;
 
 import java.awt.Graphics2D;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import exception.ExMapExceedWordSize;
-import fileReader.XMLReader;
+import fileReader.*;
 import keyValue.*;
 import util.*;
 
@@ -25,12 +26,15 @@ public class Map implements FrameUpdate{
 		dummyNode = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
 		size = new Vector2d(m, n);
 		ArrayList<Info> wordList = new ArrayList<Info>(m*n);
+		ReaderApp rdapp = new ReaderFactory();
 //		for(int i=0; i<m*n; i++) {
 //			wordList.add(new WordInfo("a", "a"));
 //		}
 		try {
-			wordList = XMLReader.convert(path, m, n);
+			wordList = rdapp.getList(path, m, n);
 		} catch (ExMapExceedWordSize e) {
+			e.printStackTrace();
+		}catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		float displayW = scale * width; //valid region to display the map
