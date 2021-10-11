@@ -31,7 +31,6 @@ public class Dio implements FrameUpdate {
 		this.node=node;
 		alive=true;
 		surround=false;
-		s = new ShortestPath();
 	}
 	
 	public void setNode(MapNode node) {
@@ -113,6 +112,7 @@ public class Dio implements FrameUpdate {
 
 	@Override
 	public void update(Mouse mouse) {
+		s = new ShortestPath();
 		MapNodeInfo info = node.getState();	
 		Vector2d dir = s.computeDecision(info.abstractPos);
 		if (isAlive()) {
@@ -123,7 +123,6 @@ public class Dio implements FrameUpdate {
 			else {
 				moveNormal(dir);
 			}
-			
 		}
 	}
 	

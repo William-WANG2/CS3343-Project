@@ -50,6 +50,11 @@ public class Map implements FrameUpdate{
 				else {
 					map[i][j] = new MapNode(sY+interval+2*i*(radius+interval), sX+interval+2*j*(radius+interval)+offset, radius, i, j, wordList.get(cntWord)); //with offset to the right
 				}
+				cntWord++;
+			}
+		}
+		for(int i=0; i<m; i++) {
+			for(int j=0; j<n; j++) {
 				//set adjacent nodes
 				if(i%2 == 0) {
 					if(i-1>=0) {
@@ -91,7 +96,6 @@ public class Map implements FrameUpdate{
 						map[i][j].addAdj(map[i][j+1]);
 					}
 				}
-				cntWord++;
 			}
 		}
 		//link border nodes to dummy destination

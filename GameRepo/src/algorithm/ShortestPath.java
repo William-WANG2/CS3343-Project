@@ -16,7 +16,7 @@ public class ShortestPath {
 	private Vector2d res;
 	//print the next node the sprite should go according "path"
 	private Vector2d getNext(Vector2d end, Vector2d start) {
-		if(path[end.x][end.y] == path[start.x][start.y]) {
+		if(path[end.x][end.y] == start) {
 			return end;
 		}
 		else {
@@ -34,14 +34,15 @@ public class ShortestPath {
 		res = null;
 		boolean visited[][] = new boolean[map.getSize().x][map.getSize().y];
 		Queue<MapNode> Q = new LinkedList<MapNode>();
-		visited[s.x][s.y] = true;
 		Q.add(map.getMap()[s.x][s.y]);
+		visited[s.x][s.y] = true;
 		while(!Q.isEmpty()) {
 			MapNode temp = Q.remove();
+			visited[temp.getState().abstractPos.x][temp.getState().abstractPos.y] = true;
 			ArrayList<MapNode> adj = temp.getAdjacency();
 			for(MapNode n: adj) {
-				if(n.getState().blocked || visited[n.getState().abstractPos.x][n.getState().abstractPos.y]) {
-					break;
+				if(visited[n.getState().abstractPos.x][n.getState().abstractPos.y] || n.getState().blocked) {
+					continue;
 				}
 				else {
 					if(n == map.getDummy()) {
@@ -54,7 +55,7 @@ public class ShortestPath {
 						path[n.getState().abstractPos.x][n.getState().abstractPos.y] = temp.getState().abstractPos;
 					}
 				}
-			}
+			}	
 		}
 		return res;
 	}
@@ -65,7 +66,7 @@ public class ShortestPath {
 			return lastNode; //The sprite is trapped
 		}
 		else {
-			return getNext(vec, lastNode);
+			return getNext(lastNode, vec);
 		}
 	}
 }
