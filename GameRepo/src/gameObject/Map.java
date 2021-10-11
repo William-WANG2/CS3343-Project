@@ -25,14 +25,14 @@ public class Map implements FrameUpdate{
 		dummyNode = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
 		size = new Vector2d(m, n);
 		ArrayList<Info> wordList = new ArrayList<Info>(m*n);
-		for(int i=0; i<m*n; i++) {
-			wordList.add(new WordInfo("a", "a"));
-		}
-//		try {
-//			wordList = XMLReader.convert(path, m, n);
-//		} catch (ExMapExceedWordSize e) {
-//			e.printStackTrace();
+//		for(int i=0; i<m*n; i++) {
+//			wordList.add(new WordInfo("a", "a"));
 //		}
+		try {
+			wordList = XMLReader.convert(path, m, n);
+		} catch (ExMapExceedWordSize e) {
+			e.printStackTrace();
+		}
 		float displayW = scale * width; //valid region to display the map
 		float radius = (2 * displayW / (2.02f * n)); //radius for node
 		float interval = (0.002f * displayW / 2.2f * n); //interval between node
