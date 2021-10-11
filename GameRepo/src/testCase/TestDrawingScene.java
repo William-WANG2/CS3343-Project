@@ -1,5 +1,4 @@
 package testCase;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -9,6 +8,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import gameObject.BoxController;
 import gameObject.Dio;
 import gameObject.Map;
 import scenes.Scene;
@@ -20,6 +20,7 @@ public class TestDrawingScene extends Scene{
 	Texture testTexture;
 	BufferedImage x;
 	Map m;
+	BoxController box;
 	Dio dio;
 	@Override
 	public void enter() {
@@ -42,6 +43,8 @@ public class TestDrawingScene extends Scene{
 		m = Map.getInstance();
 		m.initialize(10, 10, 200, 200, "./res/word.xml"); 
 		m.enter();
+		box = BoxController.getInstance();
+		box.enter();
 		dio = Dio.getInstance();
 		dio.initialize(m.getMap()[4][5]);
 		dio.enter();
@@ -58,6 +61,7 @@ public class TestDrawingScene extends Scene{
 		AffineTransform transform = AffineTransform.getTranslateInstance(400, 300);
 		g.drawImage(testTexture.getImage(), transform, null);
 		m.render(g);
+		box.render(g);
 		dio.render(g);
 	}
 

@@ -79,15 +79,15 @@ public class MapNode implements FrameUpdate{
 
 	@Override
 	public void update(Mouse mouse) {
-		boolean isInGeo;
-		if(mouse.mouseClicked) {
-			isInGeo = Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
-			if(isInGeo) {
-				if(info.blocked) {
-					return;
-				}
+		boolean isInGeo= Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
+		if(isInGeo && info.blocked==false) {
+			if(mouse.mouseClicked) {
 				info.blocked = true;
+				BoxController.getInstance().update(info.greInfo.getAns());
 				mouse.mouseClicked = false;
+			}
+			else {
+				BoxController.getInstance().update(info.greInfo.getDefin());
 			}
 		}
 	}
