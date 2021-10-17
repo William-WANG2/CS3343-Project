@@ -12,7 +12,7 @@ public class BoxController implements KeyListener{
 	private static int fieldY = 200;
 	private static int fieldH = 100;
 	private static int fieldW = 100;
-	private static String currMessage = "";
+	private static BoxMessage currMessage = null;
 	private static BoxField currField = new BoxField(fieldX,fieldY,fieldH,fieldW);
 	public static BoxController getInstance() {
 		return controller;
@@ -28,23 +28,24 @@ public class BoxController implements KeyListener{
 	
 	//show box
 	public void render(Graphics2D g) {
+		currField.update(currMessage.getMessage());
 		currField.render(g);
-		currField.update(currMessage);
 		
 	}
 	//if currMessage change, update the field
-	public void update(String m) {
-		currMessage = m;		
+	public void update(String m, int i) {//the integer is to indicate whether it is answer or define
+		currMessage = new BoxMessage(m, i);		
 	}
 
 	//click show the input window, if timeout or invalid input, the spirit move
-	public void userInput() {
-		
+	public String userInput() {
+		String in = "";
+		return in;
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+		char value = e.getKeyChar();
 		
 	}
 

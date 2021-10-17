@@ -83,11 +83,11 @@ public class MapNode implements FrameUpdate{
 		if(isInGeo && info.blocked==false) {
 			if(mouse.mouseClicked) {
 				info.blocked = true;
-				BoxController.getInstance().update(info.greInfo.getAns());
+				BoxController.getInstance().update(info.greInfo.getAns(), 1);
 				mouse.mouseClicked = false;
 			}
 			else {
-				BoxController.getInstance().update(info.greInfo.getDefin());
+				BoxController.getInstance().update(info.greInfo.getDefin(), 0);
 			}
 		}
 	}
