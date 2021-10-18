@@ -74,14 +74,16 @@ public class Dio implements FrameUpdate {
 
 	@Override
 	public void enter() {
-		InputStream stream1 = ResourceLoader.load(TestDrawingScene.class, "res/textures/dio.jpg", "/textures/dio.jpg" );
+		
+		InputStream stream1 = ResourceLoader.load(TestDrawingScene.class, "res/textures/dio.png", "/textures/dio.png" );
 		try {
 			normaldio = ImageIO.read(stream1);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		InputStream stream2 = ResourceLoader.load(TestDrawingScene.class, "res/textures/jojo.jpg", "/textures/jojo.jpg" );
-		BufferedImage angrydio = null;
+		InputStream stream2 = ResourceLoader.load(TestDrawingScene.class, "res/textures/jojo.png", "/textures/jojo.png" );
+		
 		try {
 			angrydio = ImageIO.read(stream2);
 		} catch (IOException e) {
@@ -94,6 +96,7 @@ public class Dio implements FrameUpdate {
 
 	@Override
 	public void render(Graphics2D g) {
+		
 		if(surround) {
 			g.drawImage(angrydio, (int)(node.getState().displayPos.y + node.getState().radius),  (int)(node.getState().displayPos.x + node.getState().radius), 50, 50, null);
 		}

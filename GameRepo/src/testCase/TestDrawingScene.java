@@ -61,7 +61,6 @@ public class TestDrawingScene extends Scene{
 	public void update() {
 
 			
-
 		m.update(mouse);
 	}
 
