@@ -3,6 +3,7 @@ package gameObject;
 
 public class BoxMessage{
 	private String message;
+	private char blank;
 	private int i;//i=0 means define, i=1 means answer
 	
 	public BoxMessage() {
@@ -27,8 +28,13 @@ public class BoxMessage{
 		}
 	}
 	private String genAns() {
-		String res="";
+		String res="Please input your answer for the blank: ";
+		blank = message.charAt(message.length()-1);
+		res=res+message.substring(0, message.length()-1)+"_";
 		//generate the input request
 		return res;
+	}
+	public char getBlank() {
+		return blank;
 	}
 }

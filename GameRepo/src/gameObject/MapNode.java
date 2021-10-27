@@ -18,6 +18,7 @@ import util.Vector2d;
 public class MapNode implements FrameUpdate{
 	
 	private MapNodeInfo info;
+	private int clickedTime=0;
 	private ArrayList<MapNode> adjacency;
 	private static BufferedImage grey = null;
 	private static BufferedImage orange = null;
@@ -80,13 +81,16 @@ public class MapNode implements FrameUpdate{
 	@Override
 	public void update(Mouse mouse) {
 		boolean isInGeo= Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
-		if(isInGeo && info.blocked==false) {
-			if(mouse.mouseClicked) {
-				info.blocked = true;
+		if(isInGeo && info.blocked==false) {//add restore the click if click another one
+			if(clickedTime==1) {
 				BoxController.getInstance().update(info.greInfo.getAns(), 1);
+				if(BoxController.getInstance().checkInput()) {
+					info.blocked = true;
+				}
 				mouse.mouseClicked = false;
 			}
 			else {
+				clickedTime=1;
 				BoxController.getInstance().update(info.greInfo.getDefin(), 0);
 			}
 		}

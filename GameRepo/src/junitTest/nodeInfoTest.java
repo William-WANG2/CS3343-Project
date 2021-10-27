@@ -11,6 +11,8 @@ import exception.ExMapExceedWordSize;
 import fileReader.ReaderFactory;
 import fileReader.TxtReader;
 import fileReader.XMLReader;
+import gameObject.BoxController;
+import gameObject.BoxMessage;
 import keyValue.Info;
 
 public class nodeInfoTest {
@@ -36,6 +38,21 @@ public class nodeInfoTest {
 	}
 	@Test
 	public void test4() {
-		
+		BoxMessage bm = new BoxMessage("aaaaaaa",1);
+		String res=bm.getMessage();
+		assertEquals("Please input your answer for the blank: aaaaaa_",res);
+	}
+	@Test
+	public void test5() {
+		BoxController bc = BoxController.getInstance();
+		bc.update("aaaaaaa",1);
+		boolean res = bc.checkInput();
+		assertEquals(true,res);
+	}
+	@Test
+	public void test6() {
+		BoxController bc = BoxController.getInstance();
+		char res = bc.getUsrIn();
+		assertEquals('a',res);
 	}
 }
