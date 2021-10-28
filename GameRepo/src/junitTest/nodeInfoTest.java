@@ -14,6 +14,7 @@ import fileReader.XMLReader;
 import gameObject.BoxController;
 import gameObject.BoxMessage;
 import gameObject.MapNode;
+import gameObject.MapNodeInfo;
 import keyValue.Info;
 import util.Mouse;
 
@@ -60,10 +61,36 @@ public class nodeInfoTest {
 	}
 	@Test
 	public void test7() {
-		MapNode mn = new MapNode(0, 0, 0, 0, 0, null);
+		class stub extends MapNode{
+			private int clickedTime = 0;
+			private MapNodeInfo info;
+			public stub(float x, float y, float r, int m, int n, Info gre) {
+				super(x, y, r, m, n, gre);
+			}
+			@Override
+			public void update(Mouse mouse) {
+				boolean isInGeo= Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
+				if(isInGeo && info.blocked==false) {//add restore the click if click another one
+					if(clickedTime==1) {
+						if(BoxController.getInstance().checkInput()) {
+							info.blocked = true;
+						}
+						else {
+							mouse.mouseClicked = false;
+						}
+					}
+					else {
+						clickedTime=1;
+						BoxController.getInstance().update(info.greInfo.getDefin(), 0);
+					}
+				}
+			}
+		}
+		MapNode mn = new stub(0, 0, 0, 0, 0, null);
 		Mouse ms = new Mouse();
 		BoxController bc = BoxController.getInstance();
 		bc.update("aaaaaaa",1);
+		mn.update(ms);
 		boolean res = bc.checkInput();
 		assertEquals(false,res);
 	}
