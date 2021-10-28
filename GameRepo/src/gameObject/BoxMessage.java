@@ -1,7 +1,7 @@
 package gameObject;
 //what to be shown in the field
 
-public abstract class BoxMessage{
+public abstract class BoxMessage {
 	protected String message;
 	
 	public BoxMessage() {

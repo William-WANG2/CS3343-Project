@@ -1,11 +1,11 @@
 package util;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Key {
 	public boolean keyPressed;
-	public ArrayList<Character> queuingChars;
+	public LinkedList<Character> queuingChars;
 	public Key() {
-		queuingChars = new ArrayList<Character>();
+		queuingChars = new LinkedList<Character>();
 	}
 }
