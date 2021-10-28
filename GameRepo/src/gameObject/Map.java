@@ -1,10 +1,11 @@
 package gameObject;
 
 import java.awt.Graphics2D;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import exception.ExMapExceedWordSize;
-import fileReader.XMLReader;
+import fileReader.*;
 import keyValue.*;
 import util.*;
 
@@ -19,19 +20,23 @@ public class Map implements FrameUpdate{
 	private MapNode[][] map;
 	private MapNode dummyNode; //used to represent the abstract destination in the shortest path algorithm
 	private Vector2d size;
+	private Map() {}
 	public void initialize(int m, int n, int width, int height, String path) {
 		map = new MapNode[m][n];
 		dummyNode = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
 		size = new Vector2d(m, n);
 		ArrayList<Info> wordList = new ArrayList<Info>(m*n);
-		for(int i=0; i<m*n; i++) {
-			wordList.add(new WordInfo("a", "a"));
-		}
-//		try {
-//			wordList = XMLReader.convert(path, m, n);
-//		} catch (ExMapExceedWordSize e) {
-//			e.printStackTrace();
+		ReaderApp rdapp = new ReaderFactory();
+//		for(int i=0; i<m*n; i++) {
+//			wordList.add(new WordInfo("a", "a"));
 //		}
+		try {
+			wordList = rdapp.getList(path, m, n);
+		} catch (ExMapExceedWordSize e) {
+			e.printStackTrace();
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		float displayW = scale * width; //valid region to display the map
 		float radius = (2 * displayW / (2.02f * n)); //radius for node
 		float interval = (0.002f * displayW / 2.2f * n); //interval between node
@@ -49,6 +54,11 @@ public class Map implements FrameUpdate{
 				else {
 					map[i][j] = new MapNode(sY+interval+2*i*(radius+interval), sX+interval+2*j*(radius+interval)+offset, radius, i, j, wordList.get(cntWord)); //with offset to the right
 				}
+				cntWord++;
+			}
+		}
+		for(int i=0; i<m; i++) {
+			for(int j=0; j<n; j++) {
 				//set adjacent nodes
 				if(i%2 == 0) {
 					if(i-1>=0) {
@@ -90,7 +100,6 @@ public class Map implements FrameUpdate{
 						map[i][j].addAdj(map[i][j+1]);
 					}
 				}
-				cntWord++;
 			}
 		}
 		//link border nodes to dummy destination

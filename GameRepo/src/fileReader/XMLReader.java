@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 import exception.ExMapExceedWordSize;
 import keyValue.*;
 
-public class XMLReader {
+public class XMLReader{
 	/**
 	 * read the XML file and store the information in an ArrayList, m and n are the
 	 * row number and column number of the map. The function will randomly select
@@ -24,14 +24,13 @@ public class XMLReader {
 	 * @throws ExMapExceedWordSize
 	 **/
 	public static ArrayList<Info> convert(String path, int m, int n) throws ExMapExceedWordSize {
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		ArrayList<Info> wordlist = new ArrayList<Info>();
 		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			File dataFile = new File(path);
-			Document document = db.parse(dataFile);
-			NodeList wl = document.getElementsByTagName("word");
-			if (m * n > wl.getLength() + 1) {
+			Document document = db.parse(path);
+			NodeList wl = document.getChildNodes();//getElementsByTagName("word");
+/*			if (m * n > wl.getLength() + 1) {
 				throw new ExMapExceedWordSize();
 			}
 			int startPosInList = new Random().nextInt(wl.getLength() + 1 - m * n);
@@ -50,6 +49,7 @@ public class XMLReader {
 				WordInfo word = new WordInfo(d, a);
 				wordlist.add(word);
 			}
+			*/
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

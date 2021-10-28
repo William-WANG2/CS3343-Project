@@ -1,14 +1,15 @@
 package testCase;
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+import gameObject.BoxController;
 import gameObject.Dio;
 import gameObject.Map;
 import scenes.Scene;
@@ -20,20 +21,12 @@ public class TestDrawingScene extends Scene{
 	Texture testTexture;
 	BufferedImage x;
 	Map m;
+	BoxController box;
 	Dio dio;
 	@Override
 	public void enter() {
 		
 		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
-
-
-		InputStream streamx = ResourceLoader.load(TestDrawingScene.class, "res/circle/orange.png", "/circle/orange.png" );
-		try {
-			x = ImageIO.read(streamx);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		
 		
 		BufferedImage image = null;
@@ -48,11 +41,13 @@ public class TestDrawingScene extends Scene{
 		Texture texture = new Texture(image, transform);
 		testTexture = texture;
 		
-		m = new Map();
-		m.initialize(5, 4, 100, 100, "res/word.xml"); 
+		m = Map.getInstance();
+		m.initialize(10, 10, 200, 200, "./res/word.txt"); 
 		m.enter();
+		box = BoxController.getInstance();
+		box.enter();
 		dio = Dio.getInstance();
-		dio.initialize(m.getMap()[2][2]);
+		dio.initialize(m.getMap()[4][5]);
 		dio.enter();
 		mouse = mApp.mouse;
 	}
@@ -69,6 +64,7 @@ public class TestDrawingScene extends Scene{
 		AffineTransform transform = AffineTransform.getTranslateInstance(400, 300);
 		g.drawImage(testTexture.getImage(), transform, null);
 		m.render(g);
+		box.render(g);
 		dio.render(g);
 	}
 

@@ -55,17 +55,29 @@ public class Dio implements FrameUpdate {
 	
 	public void moveNormal(Vector2d dir) {
 		
-		setNode(Map.getInstance().getMap()[dir.x][dir.y]);
+		if(Map.getInstance().getMap()[dir.x][dir.y]==Map.getInstance().getDummy()) {
+			setAlive(false);
+		}
+		else {
+			
+			setNode(Map.getInstance().getMap()[dir.x][dir.y]);
+		}
 	
 	}
 	
 	public void moveSurround() {
 		ArrayList<MapNode> adjacency=node.getAdjacency();
-		if(!adjacency.isEmpty()) {
-			setNode(adjacency.get(0));
-		}
-		else {
-			setAlive(false);
+		int n=0;
+		while(adjacency.get(n)!=null) {
+			if(!adjacency.get(n).block()) {
+				setNode(adjacency.get(n));
+				break;
+			}
+			else {
+				n++;
+			}
+			
+			
 		}
 		
 	}
@@ -74,6 +86,7 @@ public class Dio implements FrameUpdate {
 
 	@Override
 	public void enter() {
+
 		
 		InputStream stream1 = ResourceLoader.load(TestDrawingScene.class, "res/textures/dio.png", "/textures/dio.png" );
 		try {
@@ -84,12 +97,20 @@ public class Dio implements FrameUpdate {
 		}
 		InputStream stream2 = ResourceLoader.load(TestDrawingScene.class, "res/textures/jojo.png", "/textures/jojo.png" );
 		
+
+		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/blue.png", "/circle/blue.png" );
 		try {
-			angrydio = ImageIO.read(stream2);
+			normaldio = ImageIO.read(stream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/black.png", "/circle/black.png" );
+
+		try {
+			angrydio = ImageIO.read(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -98,10 +119,10 @@ public class Dio implements FrameUpdate {
 	public void render(Graphics2D g) {
 		
 		if(surround) {
-			g.drawImage(angrydio, (int)(node.getState().displayPos.y + node.getState().radius),  (int)(node.getState().displayPos.x + node.getState().radius), 50, 50, null);
+			g.drawImage(angrydio, (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
 		}
 		else {
-			g.drawImage(normaldio, (int)(node.getState().displayPos.y + node.getState().radius),  (int)(node.getState().displayPos.x + node.getState().radius), 50, 50, null);
+			g.drawImage(normaldio, (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
 		}
 	}
 
@@ -117,6 +138,7 @@ public class Dio implements FrameUpdate {
 
 	@Override
 	public void update(Mouse mouse) {
+		s = new ShortestPath();
 		MapNodeInfo info = node.getState();	
 		Vector2d dir = s.computeDecision(info.abstractPos);
 		if (isAlive()) {
@@ -127,7 +149,6 @@ public class Dio implements FrameUpdate {
 			else {
 				moveNormal(dir);
 			}
-			
 		}
 	}
 	
