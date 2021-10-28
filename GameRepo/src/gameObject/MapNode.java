@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import keyValue.Info;
 import testCase.TestDrawingScene;
 import util.FrameUpdate;
+import util.Key;
 import util.Mouse;
 import util.ResourceLoader;
 import util.Vector2d;
@@ -22,6 +23,8 @@ public class MapNode implements FrameUpdate{
 	private ArrayList<MapNode> adjacency;
 	private static BufferedImage grey = null;
 	private static BufferedImage orange = null;
+	private static MapNode updateNode = null; //the node user is currently typing the answer for 
+	private static MapNode viewNode = null; //the node user is currently viewing the definition 
 	
 	public MapNode(float x, float y, float r, int m, int n, Info gre) {
 		info = new MapNodeInfo(x, y, r, m, n, gre);
@@ -79,21 +82,45 @@ public class MapNode implements FrameUpdate{
 	}
 
 	@Override
-	public void update(Mouse mouse) {
+	public void update(Mouse mouse, Key key) {
 		boolean isInGeo= Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
 		if(isInGeo && info.blocked==false) {//add restore the click if click another one
-			if(clickedTime==1) {
-				BoxController.getInstance().update(info.greInfo.getAns(), 1);
-				if(BoxController.getInstance().checkInput()) {
-					info.blocked = true;
+			//display the input region
+			if(updateNode == null || updateNode == this) {
+				if(viewNode==null) {
+					viewNode = this;
+					BoxController.getInstance().update(info.greInfo.getDefin(), 0);
 				}
 				else {
-					mouse.mouseClicked = false;
+					if(updateNode == null) {
+						BoxController.getInstance().update(info.greInfo.getAns(), 1);
+						updateNode = this;
+					}
+					else {
+						if(BoxController.getInstance().checkInput()) {
+							info.blocked = true;
+						}
+					}
 				}
-			}
-			else {
-				clickedTime=1;
-				BoxController.getInstance().update(info.greInfo.getDefin(), 0);
+				if(clickedTime==1) {
+					BoxController.getInstance().update(info.greInfo.getAns(), 1);
+					if(BoxController.getInstance().checkInput()) {
+						info.blocked = true;
+					}
+					else {
+						mouse.mouseClicked = false;
+					}
+					clickedTime = 2;
+				}
+				//During inputing
+				else if(clickedTime==2) {
+					
+				}
+				//display the definition
+				else {
+					clickedTime=1;
+					BoxController.getInstance().update(info.greInfo.getDefin(), 0);
+				}
 			}
 		}
 	}

@@ -123,7 +123,7 @@ public class Dio implements FrameUpdate {
 
 
 	@Override
-	public void update(Mouse mouse) {
+	public void update(Mouse mouse, Key key) {
 		s = new ShortestPath();
 		MapNodeInfo info = node.getState();	
 		Vector2d dir = s.computeDecision(info.abstractPos);
