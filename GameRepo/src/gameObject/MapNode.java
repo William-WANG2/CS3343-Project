@@ -87,7 +87,9 @@ public class MapNode implements FrameUpdate{
 				if(BoxController.getInstance().checkInput()) {
 					info.blocked = true;
 				}
-				mouse.mouseClicked = false;
+				else {
+					mouse.mouseClicked = false;
+				}
 			}
 			else {
 				clickedTime=1;

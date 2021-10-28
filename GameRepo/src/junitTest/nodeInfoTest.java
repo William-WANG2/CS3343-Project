@@ -13,7 +13,9 @@ import fileReader.TxtReader;
 import fileReader.XMLReader;
 import gameObject.BoxController;
 import gameObject.BoxMessage;
+import gameObject.MapNode;
 import keyValue.Info;
+import util.Mouse;
 
 public class nodeInfoTest {
 	@Test
@@ -45,14 +47,30 @@ public class nodeInfoTest {
 	@Test
 	public void test5() {
 		BoxController bc = BoxController.getInstance();
-		bc.update("aaaaaaa",1);
+		bc.update("d",1);
 		boolean res = bc.checkInput();
 		assertEquals(true,res);
 	}
 	@Test
 	public void test6() {
 		BoxController bc = BoxController.getInstance();
+		bc.update("aaaaaaa",1);
+		boolean res = bc.checkInput();
+		assertEquals(false,res);
+	}
+	@Test
+	public void test7() {
+		MapNode mn = new MapNode(0, 0, 0, 0, 0, null);
+		Mouse ms = new Mouse();
+		BoxController bc = BoxController.getInstance();
+		bc.update("aaaaaaa",1);
+		boolean res = bc.checkInput();
+		assertEquals(false,res);
+	}
+	@Test
+	public void test100() {
+		BoxController bc = BoxController.getInstance();
 		char res = bc.getUsrIn();
-		assertEquals('a',res);
+		assertEquals('d',res);
 	}
 }

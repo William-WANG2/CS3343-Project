@@ -42,18 +42,18 @@ public class BoxController{
 	//click show the input window, if timeout or invalid input, the spirit move
 	public boolean checkInput(){
 		boolean match=false;
-		//char usrInput =  getUsrIn();
-		//match = (currMessage.getBlank() == usrInput);
-		return true;
+		char usrInput =  getUsrIn();
+		match = (currMessage.getBlank() == usrInput);
+		return match;
 	}
 
 	public char getUsrIn() {
-		char res = ' ';
-		try {
-			res=(char) System.in.read();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		char res = 'a';
+		//try {
+		//	res=(char) System.in.read();
+		//} catch (IOException e) {
+		//	e.printStackTrace();
+		//}
 		return res;
 	}
 
