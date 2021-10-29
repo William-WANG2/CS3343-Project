@@ -1,5 +1,8 @@
 package gameObject;
 
+import gameObject.MapNode;
+
+
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,9 +19,12 @@ public class BoxController implements FrameUpdate{
 	private static int fieldX = 400;
 	private static int fieldY = 200;
 	private static int fieldH = 100;
+
+
 	private static int fieldW = 200;
 	private static BoxMessage currMessage = new BoxMessageDef();
 	private static BoxField currField = new BoxField(fieldX,fieldY,fieldW,fieldH);
+
 	public static BoxController getInstance() {
 		return controller;
 	}
@@ -58,10 +64,10 @@ public class BoxController implements FrameUpdate{
 	}
 	@Override
 	public void update(Mouse mouse, Key key) {
+
 		if(currMessage instanceof BoxMessageAns) {
 			((BoxMessageAns)currMessage).updateInput(key);
 		}
-		currField.update(currMessage.getMessage());
 	}
 	public boolean isInputValid() {
 		if(currMessage instanceof BoxMessageAns) {

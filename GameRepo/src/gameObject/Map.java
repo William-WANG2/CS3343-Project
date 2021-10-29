@@ -21,7 +21,7 @@ public class Map implements FrameUpdate{
 	private MapNode dummyNode; //used to represent the abstract destination in the shortest path algorithm
 	private Vector2d size;
 	private Map() {}
-	public void initialize(int m, int n, int width, int height, String path) {
+	public void initialize(int m, int n, int width, int height, String vocabularyPath) {
 		map = new MapNode[m][n];
 		dummyNode = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
 		size = new Vector2d(m, n);
@@ -31,7 +31,7 @@ public class Map implements FrameUpdate{
 //			wordList.add(new WordInfo("a", "a"));
 //		}
 		try {
-			wordList = rdapp.getList(path, m, n);
+			wordList = rdapp.getList(vocabularyPath, m, n);
 		} catch (ExMapExceedWordSize e) {
 			e.printStackTrace();
 		}catch (FileNotFoundException e) {

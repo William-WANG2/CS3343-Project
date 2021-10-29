@@ -20,7 +20,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	private static final long serialVersionUID = 1L;
 	//Window context
 	public Canvas canvas;
-	Color backgroundColor = Color.BLACK;
+	Color backgroundColor = Color.WHITE;
 	int clientWidth = 800;
 	int clientHeight = 600;
 	int clientRatio = 800/600;
@@ -50,13 +50,11 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		//initialize window context
 		canvas = new Canvas();
 		canvas.setBackground(backgroundColor);
-		canvas.setIgnoreRepaint(true);
-		
+		canvas.setIgnoreRepaint(true); 
 		getContentPane().add(canvas);
 		setLocationByPlatform(true);
 		setSize(clientWidth, clientHeight);
 		setTitle(winTitle);
-		//setupInput(canvas); //Input registers, later implement
 		setVisible(true);
 		canvas.createBufferStrategy(2);
 		bs = canvas.getBufferStrategy();
@@ -88,10 +86,10 @@ public abstract class GameApplication extends JFrame implements Runnable{
 				Graphics g = null;
 				try {
 					g = bs.getDrawGraphics();
-					calculateFrameRate(g);
 					renderFrame(g);
-					Thread.sleep(10);
-				} catch (InterruptedException e) {
+					calculateFrameRate(g);
+				
+				} catch (Exception e) {
 					e.printStackTrace();
 				} finally {
 					if (g != null) {
@@ -112,7 +110,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		{			
 			String frameRate = String.format("FPS %s", frameCount);
 			g.clearRect( 0, 0, clientWidth, clientHeight);
-			g.setColor(Color.GREEN);
+			g.setColor(Color.RED);
 			g.drawString(frameRate, 30, 30);
 			
 			frameCount = 0;
@@ -123,16 +121,21 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	public void run() {
 		running = true;
 		timer.Reset();
+		currScene.enter();
 		while (running) {
 			gameloop(timer);
 		}
 		terminate();
 	}
 	
-	public static final void loadScene(Scene next) {
-		currScene.exit();
+	public final void loadScene(Scene next) {
+		
+		if(null != currScene) {
+			currScene.exit();
+		}
 		currScene = next;
-		next.enter();
+		currScene.mApp = this;
+		currScene.enter();
 	}
 	
 	private void setupInput() {

@@ -13,13 +13,18 @@ import algorithm.*;
 import testCase.TestDrawingScene;
 
 public class Dio implements FrameUpdate {
+GameTimer timer = GameTimer.getInstance();
+	long timeElapsed; 
+
+	
+
 	private MapNode node;
 	private boolean alive;
 	private boolean surround;
-	private BufferedImage normaldio;
+	private BufferedImage[] normaldio=new BufferedImage[5];
 	private BufferedImage angrydio;
 	private ShortestPath s;
-	
+	int n=0;
 	private static Dio dio = new Dio();
 	public static Dio getInstance() {
 		return dio;
@@ -83,16 +88,51 @@ public class Dio implements FrameUpdate {
 
 	@Override
 	public void enter() {
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/blue.png", "/circle/blue.png" );
+
+
+
+		
+		
+
+		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk0.png", "/circle/WALK0.png" );
+
 		try {
-			normaldio = ImageIO.read(stream);
+			normaldio[0] = ImageIO.read(stream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk1.png", "/circle/walk1.png" );
+		try {
+			normaldio[1] = ImageIO.read(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		 stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk2.png", "/circle/walk2.png" );
+		try {
+			normaldio[2] = ImageIO.read(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk3.png", "/circle/walk3.png" );
+		try {
+			normaldio[3] = ImageIO.read(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk4.png", "/circle/walk4.png" );
+		try {
+			normaldio[4] = ImageIO.read(stream);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/black.png", "/circle/black.png" );
+
 		try {
 			angrydio = ImageIO.read(stream);
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			e.printStackTrace();
 		}
 	}
@@ -101,11 +141,23 @@ public class Dio implements FrameUpdate {
 
 	@Override
 	public void render(Graphics2D g) {
+		
+
 		if(surround) {
 			g.drawImage(angrydio, (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
 		}
 		else {
-			g.drawImage(normaldio, (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
+			timeElapsed += timer.DeltaTime();
+			int n=(int) (timeElapsed/280);
+			g.drawImage(normaldio[n], (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
+			if(n==4) {
+				timeElapsed=0;
+			}
+			
+			
+			
+			
+			
 		}
 	}
 
