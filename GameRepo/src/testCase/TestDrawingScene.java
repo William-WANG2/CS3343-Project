@@ -18,6 +18,7 @@ import util.*;
 public class TestDrawingScene extends Scene{
 
 	Mouse mouse;
+	Key key;
 	Texture testTexture;
 	BufferedImage x;
 	Map m;
@@ -27,7 +28,6 @@ public class TestDrawingScene extends Scene{
 	public void enter() {
 		
 		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
-		
 		
 		BufferedImage image = null;
 		try {
@@ -50,13 +50,15 @@ public class TestDrawingScene extends Scene{
 		dio.initialize(m.getMap()[4][5]);
 		dio.enter();
 		mouse = mApp.mouse;
+		key = mApp.key;
 	}
 
 	@Override
 	public void update() {
 
-			
-		m.update(mouse);
+
+		m.update(mouse, key);
+
 	}
 
 	@Override

@@ -17,6 +17,8 @@ import util.*;
 
 public class LoginScene extends Scene {
 
+	Button StartButton;
+	
 	Mouse mouse;
 	Texture texture;
 	ArrayList<Button> buttons = new ArrayList<Button>();
@@ -36,13 +38,11 @@ public class LoginScene extends Scene {
 		Vector2f scale = new Vector2f(1.0f, 1.0f);
 		Transform transform = new Transform(position, scale);
 		Texture texture = new Texture(image, transform);
-		texture = texture;
-		
+		this.texture = texture;
 		
 		// add button
 		Button btStart = new Button();
 		buttons.add(btStart);
-		
 		
 		mouse = mApp.mouse;
 	}

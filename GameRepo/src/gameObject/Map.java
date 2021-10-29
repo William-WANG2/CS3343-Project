@@ -152,18 +152,18 @@ public class Map implements FrameUpdate{
 	}
 
 	@Override
-	public void update(Mouse mouse) {
+	public void update(Mouse mouse, Key key) {
 		if(mouse.mouseClicked) {
 			for(int i=0; i<size.x; i++) {
 				for(int j=0; j<size.y; j++) {
-					map[i][j].update(mouse);
+					map[i][j].update(mouse, key);
 				}
 			}
 			if(mouse.mouseClicked) {
 				mouse.mouseClicked = false;
 			}
 			else {
-				Dio.getInstance().update(mouse);
+				Dio.getInstance().update(mouse, key);
 			}
 		}
 	}

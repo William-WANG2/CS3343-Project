@@ -5,6 +5,8 @@ import scenes.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
@@ -34,6 +36,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	
 	//Event context
 	public Mouse mouse = new Mouse();
+	public Key key = new Key();
 	
 	public GameApplication() {
 	}
@@ -43,12 +46,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		//initialize window context
 		canvas = new Canvas();
 		canvas.setBackground(backgroundColor);
-
 		canvas.setIgnoreRepaint(true); 
-
-		canvas.setIgnoreRepaint(true);
-		
-
 		getContentPane().add(canvas);
 		setLocationByPlatform(true);
 		setSize(clientWidth, clientHeight);
@@ -86,6 +84,9 @@ public abstract class GameApplication extends JFrame implements Runnable{
 					g = bs.getDrawGraphics();
 					calculateFrameRate(g);
 					renderFrame(g);
+					Thread.sleep(10); //Low down frame rate manually
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				} finally {
 					if (g != null) {
 						g.dispose();
@@ -136,6 +137,20 @@ public abstract class GameApplication extends JFrame implements Runnable{
 				mouse.mousePos.x = e.getX();
 				mouse.mousePos.y = e.getY();
 			}
+		});
+		canvas.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				key.queuingChars.add(e.getKeyChar());
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {}
+
+			@Override
+			public void keyReleased(KeyEvent e) {}
+			
 		});
 	}
 }

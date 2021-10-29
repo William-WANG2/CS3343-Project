@@ -14,9 +14,9 @@ public class BoxField {
 	
 	private int x,y;
 	private int height,width;
-	private String message = null;
+	private String message = "";
 	private static BufferedImage box = null;
-	public BoxField(int x, int y, int h, int w) {
+	public BoxField(int x, int y, int w, int h) {
 		this.x=x;
 		this.y=y;
 		this.height=h;
@@ -39,8 +39,8 @@ public class BoxField {
 	}
 	//
 	public void render(Graphics2D g) {
-		g.drawImage(box, x, y, height, width, null);
-		g.drawString(message, x+10, y+10);
+		g.drawImage(box, x, y, width, height, null);
+		g.drawString(message, x+30, y+30);
 	}
 
 }
