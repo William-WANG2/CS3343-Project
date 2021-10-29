@@ -11,12 +11,9 @@ public class GREGame extends GameApplication{
 	public void initialize() {
 		
 		super.initialize();
-		currScene = new LoginScene();
-		currScene.mApp = this;
 		
+		loadScene(new LoginScene());
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
-	
-	
-}//
+}

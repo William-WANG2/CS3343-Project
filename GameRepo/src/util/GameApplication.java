@@ -16,7 +16,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	
 	//Window context
 	public Canvas canvas;
-	Color backgroundColor = Color.BLACK;
+	Color backgroundColor = Color.BLUE;
 	int clientWidth = 800;
 	int clientHeight = 600;
 	int clientRatio = 800/600;
@@ -84,8 +84,8 @@ public abstract class GameApplication extends JFrame implements Runnable{
 					g = bs.getDrawGraphics();
 					calculateFrameRate(g);
 					renderFrame(g);
-					Thread.sleep(10); //Low down frame rate manually
-				} catch (InterruptedException e) {
+				
+				} catch (Exception e) {
 					e.printStackTrace();
 				} finally {
 					if (g != null) {
@@ -117,15 +117,20 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	public void run() {
 		running = true;
 		timer.Reset();
+		currScene.enter();
 		while (running) {
 			gameloop(timer);
 		}
 		terminate();
 	}
 	
-	public static final void loadScene(Scene next) {
-		currScene.exit();
+	public final void loadScene(Scene next) {
+		if(null != currScene) {
+			currScene.exit();
+		}
+		
 		currScene = next;
+		currScene.mApp = this;
 		next.enter();
 	}
 	

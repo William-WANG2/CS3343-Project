@@ -17,51 +17,43 @@ import util.*;
 
 public class LoginScene extends Scene {
 
-	Button StartButton;
+	private Boolean toNextScene;
+	private Mouse mouse;
+	private Button startButton;
 	
-	Mouse mouse;
-	Texture texture;
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	private void handleEvent(Mouse muouse) {
+		startButton.handleEvent(muouse);
+		if(startButton.isClicked())
+		{
+			toNextScene = true;
+		}
+	}
+	
 	@Override
 	public void enter() {
-		// add pic
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// set pic params
-		Vector2f position = new Vector2f(GlobalConstants.WORLD_WIDTH / 2.0f, GlobalConstants.WORLD_HEIGHT / 2.0f);
-		Vector2f scale = new Vector2f(1.0f, 1.0f);
-		Transform transform = new Transform(position, scale);
-		Texture texture = new Texture(image, transform);
-		this.texture = texture;
 		
-		// add button
-		Button btStart = new Button();
-		buttons.add(btStart);
-		
+		toNextScene = false;
 		mouse = mApp.mouse;
+		startButton = new Button("res/textures/UIStartButton.png", "res/textures/UIStartButtonClicked.png", GlobalConstants.APP_WIDTH/2 - 130, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
 	}
 
 	@Override
 	public void update() {
-		
+		if(toNextScene) {
+			mApp.loadScene(new PlayingScene());
+		}
+		handleEvent(mouse);
+		startButton.update();
 	}
 
 	@Override
 	public void render(Graphics2D g) {
-		AffineTransform transform = AffineTransform.getTranslateInstance(400, 300);
-		g.drawImage(texture.getImage(), transform, null);
-		for (Button e: buttons) {
-			e.render(g);
-		}
+		startButton.render(g);
+		
 	}
 
 	@Override
 	public void exit() {
+		//do nothing
 	}
 }

@@ -95,7 +95,7 @@ public class Dio implements FrameUpdate {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		InputStream stream2 = ResourceLoader.load(TestDrawingScene.class, "res/textures/jojo.png", "/textures/jojo.png" );
+		InputStream stream2 = ResourceLoader.load(TestDrawingScene.class, "res/textures/jojo_NoUse.png", "/textures/jojo_NoUse.png" );
 		
 
 		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/blue.png", "/circle/blue.png" );

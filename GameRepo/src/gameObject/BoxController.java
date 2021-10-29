@@ -9,8 +9,11 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 import keyValue.*;
+import util.FrameUpdate;
+import util.Key;
+import util.Mouse;
 
-public class BoxController{
+public class BoxController implements FrameUpdate{
 	
 	private static BoxController controller = new BoxController();
 	private static int fieldX = 400;
@@ -40,7 +43,7 @@ public class BoxController{
 		
 	}
 	//if currMessage change, update the field
-	public void update(String m, int i) {//the integer is to indicate whether it is answer or define
+	public void updateState(String m, int i) { //the integer is to indicate whether it is answer or define
 		if(i==0) {
 			currMessage = new BoxMessageDef(m);
 		}
@@ -51,12 +54,14 @@ public class BoxController{
 	}
 
 	//click show the input window, if timeout or invalid input, the spirit move
+
 	public boolean checkInput(){
 //		boolean match=false;
 //		char usrInput =  getUsrIn();
 //		match = (currMessage.getBlank() == usrInput);
 //		return match;
 		return false;
+
 	}
 
 	public char getUsrIn() {
@@ -67,6 +72,17 @@ public class BoxController{
 		//	e.printStackTrace();
 		//}
 		return res;
+	}
+
+	@Override
+	public void exit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Mouse mouse, Key key) {
+		
 	}
 
 }

@@ -10,57 +10,47 @@ import javax.imageio.ImageIO;
 
 import scenes.Scene;
 
-
-
-public class Button extends Scene {
-	Texture testTexture;
-	BoundingBox btnRegion;
-	Boolean isClicked = false;
-	Vector2f mousePos = new Vector2f(-1.0f, -1.0f);
+public class Button{
 	
-	private Transform transform;
-	private Texture texture;
-	
-	// default button constructor
+	private Texture currTexture;
+	private Texture unclickTexture;
+	private Texture clickedTexture;
+	private BoundingBox btnRegion;
+	private Boolean isClicked;
+
 	public Button() {
-		InputStream stream = ResourceLoader.load(Button.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		Vector2f position = new Vector2f(GlobalConstants.WORLD_WIDTH / 2.0f, GlobalConstants.WORLD_HEIGHT / 2.0f);
-		Vector2f scale = new Vector2f(1.0f, 1.0f);
-		transform = new Transform(position, scale);
-		texture = new Texture(image, transform);
-		btnRegion = new BoundingBox(100, 100, 400, 400);
 	}
 	
-	@Override
-	public void enter() {
-	}
-
-	@Override
-	public void update() {
-		if(isClicked && btnRegion.isInGeo(mousePos))
-			System.out.print("Proceed to next scene");
+	public Button(String texturePath1, String texturePath2, int left, int top, int width, int height) { //One is origin image, one is clicked image
+		
+		unclickTexture = Texture.loadImage(texturePath1, left, top, width, height);
+		clickedTexture = Texture.loadImage(texturePath2, left, top, width, height);
+		btnRegion = new BoundingBox(left, top, width, height);
 		isClicked = false;
 	}
-
-	@Override
-	public void render(Graphics2D g) {
-		AffineTransform transform = AffineTransform.getTranslateInstance(100, 100);
-		g.drawImage(testTexture.getImage(), transform, null);
-	}
-
-	@Override
-	public void exit() {
+	
+	public void handleEvent(Mouse mouse) {
 		
+		if(mouse.mouseClicked && btnRegion.isInGeo(mouse.mousePos)) {
+			isClicked = true;
+			mouse.mouseClicked = false;
+		}
+	}
+	
+	public Boolean isClicked() {
+		return isClicked;
+	}
+	
+	public void update() {
+		if(isClicked) {
+			currTexture = clickedTexture;
+		}else {
+			currTexture = unclickTexture;
+		}
 	}
 
-	public Transform getTransform() {
-		return transform;
+	public void render(Graphics2D g) {
+		AffineTransform transform = new AffineTransform(currTexture.getScaleX(), 0.0, 0.0, currTexture.getScaleY(), currTexture.getPosX(), currTexture.getPosY());
+		g.drawImage(currTexture.getImage(), transform, null);
 	}
 }

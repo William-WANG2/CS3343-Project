@@ -87,41 +87,25 @@ public class MapNode implements FrameUpdate{
 		if(isInGeo && info.blocked==false) {//add restore the click if click another one
 			//display the input region
 			if(updateNode == null || updateNode == this) {
-				if(viewNode==null) {
+				if(viewNode==null || viewNode!=this) {
 					viewNode = this;
-					BoxController.getInstance().update(info.greInfo.getDefin(), 0);
+					BoxController.getInstance().updateState(info.greInfo.getDefin(), 0);
 				}
 				else {
 					if(updateNode == null) {
-						BoxController.getInstance().update(info.greInfo.getAns(), 1);
+						BoxController.getInstance().updateState(info.greInfo.getAns(), 1);
 						updateNode = this;
 					}
-					else {
-						if(BoxController.getInstance().checkInput()) {
-							info.blocked = true;
-						}
-					}
-				}
-				if(clickedTime==1) {
-					BoxController.getInstance().update(info.greInfo.getAns(), 1);
-					if(BoxController.getInstance().checkInput()) {
-						info.blocked = true;
-					}
-					else {
-						mouse.mouseClicked = false;
-					}
-					clickedTime = 2;
-				}
-				//During inputing
-				else if(clickedTime==2) {
-					
-				}
-				//display the definition
-				else {
-					clickedTime=1;
-					BoxController.getInstance().update(info.greInfo.getDefin(), 0);
+//					else {
+//						if(BoxController.getInstance().checkInput()) {
+//							info.blocked = true;
+//							viewNode = null;
+//							updateNode = null;
+//						}
+//					}
 				}
 			}
+			mouse.mouseClicked = false;
 		}
 	}
 
