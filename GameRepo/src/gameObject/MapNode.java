@@ -24,6 +24,10 @@ public class MapNode implements FrameUpdate{
 	private static BufferedImage grey = null;
 	private static BufferedImage orange = null;
 	private static MapNode updateNode = null; //the node user is currently typing the answer for 
+	public static MapNode getUpdateNode() {
+		return updateNode;
+	}
+
 	private static MapNode viewNode = null; //the node user is currently viewing the definition 
 	
 	public MapNode(float x, float y, float r, int m, int n, Info gre) {

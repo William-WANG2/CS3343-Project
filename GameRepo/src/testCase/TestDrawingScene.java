@@ -57,6 +57,7 @@ public class TestDrawingScene extends Scene{
 	@Override
 	public void update() {
 		m.update(mouse, key);
+		BoxController.getInstance()
 	}
 
 	@Override

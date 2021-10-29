@@ -3,8 +3,6 @@ package util;
 import scenes.*;
 
 import java.awt.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -12,8 +10,14 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import javax.swing.*;
 
+import gameObject.MapNode;
+
 public abstract class GameApplication extends JFrame implements Runnable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//Window context
 	public Canvas canvas;
 	Color backgroundColor = Color.BLACK;
@@ -144,7 +148,18 @@ public abstract class GameApplication extends JFrame implements Runnable{
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				key.queuingChars.add(e.getKeyChar());
+				if(MapNode.getUpdateNode()!=null) { 
+					//Only if the game enter the input answer mode, we process the keyboard signal
+					if(e.getKeyCode()==KeyEvent.VK_DELETE) {
+						key.deletePressed = true;
+					}
+					else if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+						key.enterPressed = true;
+					}
+					else {
+						key.queuingChars.add(e.getKeyChar());
+					}	
+				}
 			}
 
 			@Override

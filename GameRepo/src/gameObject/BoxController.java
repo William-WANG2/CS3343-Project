@@ -47,20 +47,6 @@ public class BoxController implements FrameUpdate{
 		currField.update(currMessage.getMessage());
 	}
 
-	//click show the input window, if timeout or invalid input, the spirit move
-	public boolean checkInput(Key key) {
-	}
-
-	public char getUsrIn() {
-		char res = 'a';
-		//try {
-		//	res=(char) System.in.read();
-		//} catch (IOException e) {
-		//	e.printStackTrace();
-		//}
-		return res;
-	}
-
 	@Override
 	public void exit() {
 		// TODO Auto-generated method stub
@@ -69,7 +55,9 @@ public class BoxController implements FrameUpdate{
 
 	@Override
 	public void update(Mouse mouse, Key key) {
-		currMessage.
+		if(currMessage instanceof BoxMessageAns) {
+			
+		}
 	}
 
 }
