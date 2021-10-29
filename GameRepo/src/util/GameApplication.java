@@ -150,7 +150,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 			public void keyTyped(KeyEvent e) {
 				if(MapNode.getUpdateNode()!=null) { 
 					//Only if the game enter the input answer mode, we process the keyboard signal
-					if(e.getExtendedKeyCode()==KeyEvent.VK_DELETE) {
+					if(e.getExtendedKeyCode()==KeyEvent.VK_BACK_SPACE) {
 						key.deletePressed = true;
 					}
 					//Process only the valid keyboard input

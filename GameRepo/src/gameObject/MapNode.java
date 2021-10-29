@@ -105,11 +105,11 @@ public class MapNode implements FrameUpdate{
 					updateNode = null;
 					viewNode = null;
 				}
-				if(viewNode==null || viewNode!=this) {
+				else if(viewNode==null || viewNode!=this) {
 					viewNode = this;
 					BoxController.getInstance().updateState(info.greInfo.getDefin(), 0);
 				}
-				else if(updateNode == null){
+				else {
 					BoxController.getInstance().updateState(info.greInfo.getAns(), 1);
 					updateNode = this;
 				}

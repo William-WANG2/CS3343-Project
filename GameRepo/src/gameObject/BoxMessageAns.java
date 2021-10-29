@@ -35,7 +35,7 @@ public class BoxMessageAns extends BoxMessage {
 					input = "";
 				}
 			}
-			key.deletePressed = true;
+			key.deletePressed = false;
 		}
 		else {
 			while(!key.queuingChars.isEmpty()) {
