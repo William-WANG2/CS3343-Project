@@ -20,8 +20,10 @@ public class BoxMessageAns extends BoxMessage {
 		//generate the input request
 		return res;
 	}
-	public void updateInput(Key key) {
+	public void updateInput(Key key) { 
+		//if delete key is pressed
 		if(key.deletePressed) {
+			//there are some buffered keys in user defined Key object
 			if(!key.queuingChars.isEmpty()) {
 				key.queuingChars.removeLast();
 			}
@@ -33,9 +35,15 @@ public class BoxMessageAns extends BoxMessage {
 					input = "";
 				}
 			}
+			key.deletePressed = true;
 		}
-		while(!key.queuingChars.isEmpty()) {
-			input = input + key.queuingChars.removeFirst();
+		else {
+			while(!key.queuingChars.isEmpty()) {
+				input = input + key.queuingChars.removeFirst();
+			}
 		}
+	}
+	public boolean isInputValid() {
+		return input.equals(message);
 	}
 }

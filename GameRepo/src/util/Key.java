@@ -9,6 +9,5 @@ public class Key {
 	public Key() {
 		queuingChars = new LinkedList<Character>();
 		deletePressed = false;
-		enterPressed = false;
 	}
 }

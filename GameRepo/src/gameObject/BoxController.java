@@ -37,12 +37,16 @@ public class BoxController implements FrameUpdate{
 		
 	}
 	//if currMessage change, update the field
-	public void updateState(String m, int i) { //the integer is to indicate whether it is answer or define
+	public void updateState(String m, int i) { 
+		//the integer is to indicate whether it is answer, definition or prompt
 		if(i==0) {
 			currMessage = new BoxMessageDef(m);
 		}
-		else {
+		else if(i==1) {
 			currMessage = new BoxMessageAns(m);
+		}
+		else {
+			currMessage = new BoxMessagePrompt(m);
 		}
 		currField.update(currMessage.getMessage());
 	}
@@ -52,12 +56,17 @@ public class BoxController implements FrameUpdate{
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
 	public void update(Mouse mouse, Key key) {
 		if(currMessage instanceof BoxMessageAns) {
-			
+			((BoxMessageAns)currMessage).updateInput(key);
 		}
+		currField.update(currMessage.getMessage());
 	}
-
+	public boolean isInputValid() {
+		if(currMessage instanceof BoxMessageAns) {
+			return ((BoxMessageAns)currMessage).isInputValid();
+		}
+		return false;
+	}
 }

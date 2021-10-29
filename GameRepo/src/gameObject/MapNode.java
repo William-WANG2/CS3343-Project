@@ -91,22 +91,27 @@ public class MapNode implements FrameUpdate{
 		if(isInGeo && info.blocked==false) {//add restore the click if click another one
 			//display the input region
 			if(updateNode == null || updateNode == this) {
+				//check if the answer is correct or not
+				if(updateNode == this) {
+					if(BoxController.getInstance().isInputValid()) {
+						info.blocked = true;
+						BoxController.getInstance().updateState("Well down!", 2);
+					}
+					else {
+						BoxController.getInstance().updateState("Oh no!", 2);
+					}
+					Dio.getInstance().update(mouse, key); //either wrong or right, Dio will move
+					//reset updateNode and viewNode
+					updateNode = null;
+					viewNode = null;
+				}
 				if(viewNode==null || viewNode!=this) {
 					viewNode = this;
 					BoxController.getInstance().updateState(info.greInfo.getDefin(), 0);
 				}
-				else {
-					if(updateNode == null) {
-						BoxController.getInstance().updateState(info.greInfo.getAns(), 1);
-						updateNode = this;
-					}
-//					else {
-//						if(BoxController.getInstance().checkInput()) {
-//							info.blocked = true;
-//							viewNode = null;
-//							updateNode = null;
-//						}
-//					}
+				else if(updateNode == null){
+					BoxController.getInstance().updateState(info.greInfo.getAns(), 1);
+					updateNode = this;
 				}
 			}
 			mouse.mouseClicked = false;

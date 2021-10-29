@@ -162,9 +162,6 @@ public class Map implements FrameUpdate{
 			if(mouse.mouseClicked) {
 				mouse.mouseClicked = false;
 			}
-			else {
-				Dio.getInstance().update(mouse, key);
-			}
 		}
 	}
 }

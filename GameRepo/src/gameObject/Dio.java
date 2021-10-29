@@ -76,10 +76,7 @@ public class Dio implements FrameUpdate {
 			else {
 				n++;
 			}
-			
-			
 		}
-		
 	}
 
 
