@@ -148,7 +148,6 @@ public abstract class GameApplication extends JFrame implements Runnable{
 			}
 		});
 		canvas.addKeyListener(new KeyListener() {
-
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if(MapNode.getUpdateNode()!=null) { 

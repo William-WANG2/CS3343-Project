@@ -64,9 +64,9 @@ public class BoxController implements FrameUpdate{
 	}
 	@Override
 	public void update(Mouse mouse, Key key) {
-
 		if(currMessage instanceof BoxMessageAns) {
 			((BoxMessageAns)currMessage).updateInput(key);
+			currField.update(currMessage.getMessage());
 		}
 	}
 	public boolean isInputValid() {

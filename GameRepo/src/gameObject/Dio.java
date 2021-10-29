@@ -88,12 +88,6 @@ GameTimer timer = GameTimer.getInstance();
 
 	@Override
 	public void enter() {
-
-
-
-		
-		
-
 		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk0.png", "/circle/WALK0.png" );
 
 		try {
@@ -141,8 +135,6 @@ GameTimer timer = GameTimer.getInstance();
 
 	@Override
 	public void render(Graphics2D g) {
-		
-
 		if(surround) {
 			g.drawImage(angrydio, (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
 		}
@@ -153,11 +145,6 @@ GameTimer timer = GameTimer.getInstance();
 			if(n==4) {
 				timeElapsed=0;
 			}
-			
-			
-			
-			
-			
 		}
 	}
 

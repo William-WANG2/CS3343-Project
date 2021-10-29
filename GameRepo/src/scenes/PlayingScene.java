@@ -41,9 +41,8 @@ public class PlayingScene extends Scene{
 
 	@Override
 	public void update() {
-
 		m.update(mouse, key);
-
+		BoxController.getInstance().update(mouse, key);
 	}
 
 	@Override

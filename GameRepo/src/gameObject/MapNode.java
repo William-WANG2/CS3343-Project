@@ -19,7 +19,6 @@ import util.Vector2d;
 public class MapNode implements FrameUpdate{
 	
 	private MapNodeInfo info;
-	private int clickedTime=0;
 	private ArrayList<MapNode> adjacency;
 	private static BufferedImage grey = null;
 	private static BufferedImage orange = null;
