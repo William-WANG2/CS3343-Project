@@ -13,8 +13,11 @@ import algorithm.*;
 import testCase.TestDrawingScene;
 
 public class Dio implements FrameUpdate {
-	GameTimer timer = GameTimer.getInstance();
+GameTimer timer = GameTimer.getInstance();
 	long timeElapsed; 
+
+	
+
 	private MapNode node;
 	private boolean alive;
 	private boolean surround;
@@ -88,7 +91,14 @@ public class Dio implements FrameUpdate {
 
 	@Override
 	public void enter() {
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk0.png", "/circle/walk0.png" );
+
+
+
+		
+		
+
+		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk0.png", "/circle/WALK0.png" );
+
 		try {
 			normaldio[0] = ImageIO.read(stream);
 		} catch (IOException e) {
@@ -122,6 +132,7 @@ public class Dio implements FrameUpdate {
 		}
 		
 		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/black.png", "/circle/black.png" );
+
 		try {
 			angrydio = ImageIO.read(stream);
 		} catch (IOException e) { 
@@ -134,7 +145,7 @@ public class Dio implements FrameUpdate {
 	@Override
 	public void render(Graphics2D g) {
 		
-		
+
 		if(surround) {
 			g.drawImage(angrydio, (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
 		}
@@ -164,7 +175,7 @@ public class Dio implements FrameUpdate {
 
 
 	@Override
-	public void update(Mouse mouse) {
+	public void update(Mouse mouse, Key key) {
 		s = new ShortestPath();
 		MapNodeInfo info = node.getState();	
 		Vector2d dir = s.computeDecision(info.abstractPos);

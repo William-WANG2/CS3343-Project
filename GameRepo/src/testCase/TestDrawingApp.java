@@ -6,6 +6,8 @@ import java.awt.event.MouseEvent;
 import scenes.LoadingScene;
 import util.*;
 
+
+import scenes.LoginScene;
 /*
  * by zyy
  */
@@ -16,7 +18,7 @@ public class TestDrawingApp extends GameApplication{
 	public void initialize() {
 		
 		super.initialize();
-		currScene = new TestDrawingScene();
+		currScene = new LoginScene();
 		currScene.mApp = this;
 		currScene.enter();
 		

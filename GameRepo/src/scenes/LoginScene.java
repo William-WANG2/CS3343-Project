@@ -14,54 +14,73 @@ import javax.imageio.ImageIO;
 import testCase.TestClickingButton;
 import testCase.TestDrawingScene;
 import util.*;
-
+import util.Texture;
 public class LoginScene extends Scene {
 
-	Mouse mouse;
-	Texture texture;
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	private Boolean toNextScene;
+	private Mouse mouse;
+	private Button startButton;
+	private Texture[] cxk;
+	private int sequenceIndex;
+	private long timeElapsed;
+	private GameTimer timer = GameTimer.getInstance();;
+	
+	private void handleEvent(Mouse muouse) {
+		startButton.handleEvent(muouse);
+		if(startButton.isClicked())
+		{
+			toNextScene = true;
+		}
+	}
+	
 	@Override
 	public void enter() {
-		// add pic
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/textures/bricks.jpg", "/textures/bricks.jpg" );
-		BufferedImage image = null;
-		try {
-			image = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// set pic params
-		Vector2f position = new Vector2f(GlobalConstants.WORLD_WIDTH / 2.0f, GlobalConstants.WORLD_HEIGHT / 2.0f);
-		Vector2f scale = new Vector2f(1.0f, 1.0f);
-		Transform transform = new Transform(position, scale);
-		Texture texture = new Texture(image, transform);
-		texture = texture;
 		
-		
-		// add button
-		Button btStart = new Button();
-		buttons.add(btStart);
-		
-		
+		toNextScene = false;
 		mouse = mApp.mouse;
+		startButton = new Button("res/textures/UIStartButton.png", "res/textures/UIStartButtonClicked.png", GlobalConstants.APP_WIDTH/2 - 130, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
+		cxk = new Texture[98];
+		String path;
+		for(int i = 0; i < 9; i++) {
+			path = String.format("res/animation/caixukun 00%d.jpg", i + 1);
+			cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+		}
+		for(int i = 9; i < 98; i++) {
+			path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+			cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+		}
+		
+		sequenceIndex = -1;
+		timeElapsed = 0;
+		
 	}
 
 	@Override
 	public void update() {
+		if(toNextScene) {
+			mApp.loadScene(new PlayingScene());
+		}
+		handleEvent(mouse);
+		startButton.update();
+		
+		timeElapsed += timer.DeltaTime();
+		if(timeElapsed >= 300) {
+			sequenceIndex++;
+			sequenceIndex %= 98;
+			timeElapsed -= 300;
+		}
 		
 	}
 
 	@Override
 	public void render(Graphics2D g) {
-		AffineTransform transform = AffineTransform.getTranslateInstance(400, 300);
-		g.drawImage(texture.getImage(), transform, null);
-		for (Button e: buttons) {
-			e.render(g);
-		}
+		AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
+		g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
+		//startButton.render(g);
 	}
 
 	@Override
 	public void exit() {
+		//do nothing
 	}
 }

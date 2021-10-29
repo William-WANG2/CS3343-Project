@@ -19,4 +19,11 @@ public class BoundingBox extends Geometry{
 		return true;
 	}
 	
+	public Boolean isInGeo(Vector2d pos) {
+		if(pos.x < leftUp.x || pos.x > leftUp.x + widthHeight.x)
+			return false;
+		if(pos.y < leftUp.y || pos.y > leftUp.y + widthHeight.y)
+			return false;
+		return true;
+	}
 }

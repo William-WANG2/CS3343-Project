@@ -1,20 +1,19 @@
 package game;
 
 import util.*;
-import gameObject.BoxField;
-import gameObject.BoxMessage;
+import scenes.*;
 
 public class GREGame extends GameApplication{
 	
-	BoxField bField;
 	public GREGame() {
+	}
+	
+	public void initialize() {
 		
+		super.initialize();
+		
+		loadScene(new LoginScene());
+		gameThread = new Thread(this);
+		gameThread.start();
 	}
-	
-	public void runGame() {
-			while(true) {
-				break;
-			}
-	}
-	
-}//
+}

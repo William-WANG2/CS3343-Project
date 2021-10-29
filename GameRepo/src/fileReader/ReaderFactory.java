@@ -9,7 +9,7 @@ import keyValue.Info;
 public class ReaderFactory extends ReaderApp{
 
 	@Override
-	public ArrayList<Info> convert(String path, int m, int n) throws ExMapExceedWordSize, FileNotFoundException{
+	public ArrayList<Info> convert(String path, int m, int n) throws ExMapExceedWordSize, FileNotFoundException {
 		String extension = getFileType(path);
 		if(extension.equals("txt")) {
 			return TxtReader.convert(path, m, n);

@@ -1,21 +1,30 @@
 package gameObject;
 
+import gameObject.MapNode;
+
+
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
 import keyValue.*;
+import util.FrameUpdate;
+import util.Key;
+import util.Mouse;
 
-public class BoxController{
+public class BoxController implements FrameUpdate{
 	
 	private static BoxController controller = new BoxController();
 	private static int fieldX = 400;
 	private static int fieldY = 200;
 	private static int fieldH = 100;
-	private static int fieldW = 100;
-	private static BoxMessage currMessage = new BoxMessage();
-	private static BoxField currField = new BoxField(fieldX,fieldY,fieldH,fieldW);
+
+
+	private static int fieldW = 200;
+	private static BoxMessage currMessage = new BoxMessageDef();
+	private static BoxField currField = new BoxField(fieldX,fieldY,fieldW,fieldH);
+
 	public static BoxController getInstance() {
 		return controller;
 	}
@@ -34,17 +43,25 @@ public class BoxController{
 		
 	}
 	//if currMessage change, update the field
-	public void update(String m, int i) {//the integer is to indicate whether it is answer or define
-		currMessage = new BoxMessage(m, i);	
+	public void updateState(String m, int i) { //the integer is to indicate whether it is answer or define
+		if(i==0) {
+			currMessage = new BoxMessageDef(m);
+		}
+		else {
+			currMessage = new BoxMessageAns(m);
+		}
 		currField.update(currMessage.getMessage());
 	}
 
 	//click show the input window, if timeout or invalid input, the spirit move
+
 	public boolean checkInput(){
-		boolean match=false;
-		char usrInput =  getUsrIn();
-		match = (currMessage.getBlank() == usrInput);
-		return match;
+//		boolean match=false;
+//		char usrInput =  getUsrIn();
+//		match = (currMessage.getBlank() == usrInput);
+//		return match;
+		return false;
+
 	}
 
 	public char getUsrIn() {
@@ -55,6 +72,21 @@ public class BoxController{
 		//	e.printStackTrace();
 		//}
 		return res;
+	}
+
+	@Override
+	public void exit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void update(Mouse mouse, Key key) {
+
+		if(currMessage instanceof BoxMessageAns) {
+			
+		}
+
 	}
 
 }
