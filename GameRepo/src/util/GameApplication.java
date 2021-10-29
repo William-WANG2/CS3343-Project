@@ -20,7 +20,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	private static final long serialVersionUID = 1L;
 	//Window context
 	public Canvas canvas;
-	Color backgroundColor = Color.BLUE;
+	Color backgroundColor = Color.WHITE;
 	int clientWidth = 800;
 	int clientHeight = 600;
 	int clientRatio = 800/600;
@@ -86,8 +86,8 @@ public abstract class GameApplication extends JFrame implements Runnable{
 				Graphics g = null;
 				try {
 					g = bs.getDrawGraphics();
-					calculateFrameRate(g);
 					renderFrame(g);
+					calculateFrameRate(g);
 				
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -110,7 +110,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		{			
 			String frameRate = String.format("FPS %s", frameCount);
 			g.clearRect( 0, 0, clientWidth, clientHeight);
-			g.setColor(Color.GREEN);
+			g.setColor(Color.RED);
 			g.drawString(frameRate, 30, 30);
 			
 			frameCount = 0;
@@ -129,13 +129,13 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public final void loadScene(Scene next) {
+		
 		if(null != currScene) {
 			currScene.exit();
 		}
-		
 		currScene = next;
 		currScene.mApp = this;
-		next.enter();
+		currScene.enter();
 	}
 	
 	private void setupInput() {

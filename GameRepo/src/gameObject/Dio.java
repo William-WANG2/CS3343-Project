@@ -13,6 +13,7 @@ import algorithm.*;
 import testCase.TestDrawingScene;
 
 public class Dio implements FrameUpdate {
+	
 	private MapNode node;
 	private boolean alive;
 	private boolean surround;
