@@ -82,7 +82,11 @@ public class BoxController implements FrameUpdate{
 
 	@Override
 	public void update(Mouse mouse, Key key) {
-		
+
+		if(currMessage instanceof BoxMessageAns) {
+			
+		}
+
 	}
 
 }
