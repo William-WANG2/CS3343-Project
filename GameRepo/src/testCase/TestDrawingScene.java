@@ -64,6 +64,7 @@ public class TestDrawingScene extends Scene{
 		m.render(g);
 		box.render(g);
 		dio.render(g);
+		
 	}
 
 	@Override
