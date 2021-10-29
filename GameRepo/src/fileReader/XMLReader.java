@@ -25,39 +25,47 @@ public class XMLReader{
 	 **/
 	public static ArrayList<Info> convert(String path, int m, int n) throws ExMapExceedWordSize {
 		ArrayList<Info> wordlist = new ArrayList<Info>();
-		try {
-			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document document = db.parse(path);
-			NodeList wl = document.getChildNodes();//getElementsByTagName("word");
-/*			if (m * n > wl.getLength() + 1) {
-				throw new ExMapExceedWordSize();
-			}
-			int startPosInList = new Random().nextInt(wl.getLength() + 1 - m * n);
-			for (int i = startPosInList; i < startPosInList + m * n; i++) {
-				Node w = wl.item(i);
-				String d = "";
-				String a = "";
-				NodeList dl = w.getChildNodes();
-				for (int j = 0; j < dl.getLength(); j++) {
-					if (dl.item(j).getNodeName() == "define") {
-						d = dl.item(j).getNodeValue();
-					} else if (dl.item(j).getNodeName() == "answer") {
-						a = dl.item(j).getNodeValue();
-					}
+		NodeList wl = getFile(path);
+		if (m * n > wl.getLength() + 1) {
+			throw new ExMapExceedWordSize();
+		}
+		int startPosInList = new Random().nextInt(wl.getLength() + 1 - m * n);
+		for (int i = startPosInList; i < startPosInList + m * n; i++) {
+			Node w = wl.item(i);
+			String d = "";
+			String a = "";
+			NodeList dl = w.getChildNodes();
+			for (int j = 0; j < dl.getLength(); j++) {
+				if (dl.item(j).getNodeName() == "define") {
+					d = dl.item(j).getNodeValue();
+				} else if (dl.item(j).getNodeName() == "answer") {
+					a = dl.item(j).getNodeValue();
 				}
-				WordInfo word = new WordInfo(d, a);
-				wordlist.add(word);
 			}
-			*/
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
+			WordInfo word = new WordInfo(d, a);
+			wordlist.add(word);
 		}
 		return wordlist;
+	}
+	
+	public static NodeList getFile(String path) {
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		DocumentBuilder db;
+		try {
+			db = dbf.newDocumentBuilder();
+			Document document = db.parse(path);
+			return document.getChildNodes();//getElementsByTagName("word");
+		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
