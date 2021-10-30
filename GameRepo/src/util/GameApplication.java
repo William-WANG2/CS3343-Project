@@ -66,6 +66,11 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		timer.Tick();
 		update();
 		render();
+		try {
+			Thread.sleep(2);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void terminate(){

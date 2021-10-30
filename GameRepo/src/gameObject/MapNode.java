@@ -27,26 +27,7 @@ public class MapNode implements FrameUpdate{
 		info = new MapNodeInfo(x, y, r, m, n, gre);
 		adjacency = new ArrayList<MapNode>();
 	}
-	//If the sprite is on the node, it can not be blocked.
-	public boolean block() {
-		if(info.activated) {
-			return false;
-		}
-		else {
-			info.blocked = true;
-			return true;
-		}
-	}
-	//If the node is currently blocked by the user -> can not occupied by the cat
-	public boolean activate() {
-		if(info.blocked) {
-			return false;
-		}
-		else {
-			info.activated = true;
-			return true;
-		}
-	}
+
 	public void addAdj(MapNode n) {
 		adjacency.add(n);
 	}
@@ -56,7 +37,9 @@ public class MapNode implements FrameUpdate{
 	
 	public ArrayList<MapNode> getAdjacency(){
 		return adjacency;
-		
+	}
+	public boolean isBorder() {
+		return adjacency.contains(Map.getInstance().getDummy());
 	}
 	
 
@@ -82,12 +65,12 @@ public class MapNode implements FrameUpdate{
 					if(BoxController.getInstance().isInputValid()) {
 						info.blocked = true;
 						BoxController.getInstance().updateState("Well down!", 2);
+						Dio.getInstance().update(mouse, key, false); //dio doesn't move if input is correct
 					}
 					else {
 						BoxController.getInstance().updateState("Oh no!", 2);
+						Dio.getInstance().update(mouse, key, true); //dio moves if input is wrong
 					}
-					Dio.getInstance().update(mouse, key); //either wrong or right, Dio will move
-					//reset updateNode and viewNode
 					updateNode = null;
 					viewNode = null;
 				}
