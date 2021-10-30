@@ -48,12 +48,12 @@ public class MapNode implements FrameUpdate{
 	public void enter() {
 		//if the static variable is not loaded yet
 		if(basketball == null && hole == null) {
-			String path = "res/circle/bascketball.png";
+			String path = "res/circle/basketball.png";
 			basketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
 			path = "res/circle/crack.png";
 			hole = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
-			path = "res/circle/selectedbascketball.png";
-			hole = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
+			path = "res/circle/selectedbasketball.png";
+			selectedbasketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
 		}
 	}
 
@@ -92,13 +92,20 @@ public class MapNode implements FrameUpdate{
 
 	@Override
 	public void render(Graphics2D g) {
-		if(!info.blocked) {
-			AffineTransform transform = new AffineTransform(basketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(), info.displayPos.y, info.displayPos.x);
-			g.drawImage(basketball.getImage(), transform, null);
+		AffineTransform transform;
+		if(info.blocked) {
+			transform = new AffineTransform(hole.getScaleX(), 0.0, 0.0, hole.getScaleY(), info.displayPos.y, info.displayPos.x);
+			g.drawImage(hole.getImage(), transform, null);
 		}
 		else {
-			AffineTransform transform = new AffineTransform(hole.getScaleX(), 0.0, 0.0, hole.getScaleY(), info.displayPos.y, info.displayPos.x);
-			g.drawImage(hole.getImage(), transform, null);
+			if(viewNode == this) {
+				transform = new AffineTransform(selectedbasketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(), info.displayPos.y, info.displayPos.x);
+				g.drawImage(selectedbasketball.getImage(), transform, null);
+			}
+			else {
+				transform = new AffineTransform(basketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(), info.displayPos.y, info.displayPos.x);
+				g.drawImage(basketball.getImage(), transform, null);
+			}
 		}
 	}
 

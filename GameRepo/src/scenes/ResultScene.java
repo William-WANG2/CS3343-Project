@@ -68,17 +68,14 @@ public class ResultScene extends Scene{
 			for(String member : groupMembers) {
 				g.drawString(member, 20, height);
 				height += 20;
-				
+			}
 			if(true) {
 				g.drawString("You win!!!", 30, 30);
 			}
 			else {
 				g.drawString("You lose!!!", 30, 30);
-				}
 			}
 		}
-		
-		
 	}
 
 	@Override

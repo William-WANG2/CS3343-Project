@@ -54,7 +54,6 @@ public class PlayingScene extends Scene{
 	@Override
 	public void render(Graphics2D g) {
 		if(toNextScene) {
-			g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
 			mApp.loadScene(new ResultScene());
 		}
 		else {
