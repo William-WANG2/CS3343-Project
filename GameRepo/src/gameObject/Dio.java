@@ -28,6 +28,14 @@ public class Dio implements FrameUpdate {
 		this.node=node;
 		alive=true;
 		surround=false;
+		normalDio = new Texture[5];
+		String path;
+		for(int i = 0; i < 5; i++) {
+			path = String.format("res/circle/walk%d.png", i);
+			normalDio[i] = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
+		}
+		path = "res/circle/black.png";
+		angryDio = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
 	}
 	
 	private void setNode(MapNode node) {
@@ -73,14 +81,7 @@ public class Dio implements FrameUpdate {
 	}
 	@Override
 	public void enter() {
-		normalDio = new Texture[5];
-		String path;
-		for(int i = 0; i < 5; i++) {
-			path = String.format("res/circle/walk%d.png", i);
-			normalDio[i] = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
-		}
-		path = "res/circle/black.png";
-		angryDio = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
+		
 	}
 
 	@Override

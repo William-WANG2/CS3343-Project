@@ -11,7 +11,7 @@ import exception.ExMapExceedWordSize;
 import fileReader.ReaderFactory;
 import fileReader.TxtReader;
 import fileReader.XMLReader;
-import gameObject.BoxController;
+import gameObject.Board;
 import gameObject.BoxMessage;
 import gameObject.MapNode;
 import gameObject.MapNodeInfo;
@@ -48,14 +48,14 @@ public class nodeInfoTest {
 	}
 	@Test
 	public void test5() {
-		BoxController bc = BoxController.getInstance();
+		Board bc = Board.getInstance();
 		//bc.update("d",1);
 		//boolean res = bc.checkInput();
 		//assertEquals(true,res);
 	}
 	@Test
 	public void test6() {
-		BoxController bc = BoxController.getInstance();
+		Board bc = Board.getInstance();
 		//bc.update("aaaaaaa",1);
 		//boolean res = bc.checkInput();
 		//assertEquals(false,res);

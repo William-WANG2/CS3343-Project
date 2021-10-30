@@ -44,7 +44,7 @@ public class TestClickingButton extends Scene {
 			e.printStackTrace();
 		}
 		
-		Vector2f position = new Vector2f(GlobalConstants.WORLD_WIDTH / 2.0f, GlobalConstants.WORLD_HEIGHT / 2.0f);
+		Vector2f position = new Vector2f(GlobalConstants.APP_WIDTH / 2.0f, GlobalConstants.APP_HEIGHT / 2.0f);
 		Vector2f scale = new Vector2f(1.0f, 1.0f);
 		Transform transform = new Transform(position, scale);
 		Texture texture = new Texture(image, transform);

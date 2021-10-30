@@ -3,6 +3,7 @@ import java.awt.Canvas;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import game.GREGame;
 import scenes.LoadingScene;
 import util.*;
 
@@ -11,6 +12,7 @@ import scenes.LoginScene;
 /*
  * by zyy
  */
+import scenes.Scene;
 
 public class TestDrawingApp extends GameApplication{
 	
@@ -25,5 +27,11 @@ public class TestDrawingApp extends GameApplication{
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
+
+	//@Override
+	//public void loadScene(Scene next) {
+		// TODO Auto-generated method stub
+		
+	//}
 		
 }

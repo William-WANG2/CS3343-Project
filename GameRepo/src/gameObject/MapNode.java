@@ -62,13 +62,13 @@ public class MapNode implements FrameUpdate{
 			if(updateNode == null || updateNode == this) {
 				//check if the answer is correct or not
 				if(updateNode == this) {
-					if(BoxController.getInstance().isInputValid()) {
+					if(Board.isInputValid()) {
 						info.blocked = true;
-						BoxController.getInstance().updateState("Well down!", 2);
+						Board.getInstance().updateState("Well down!", 2);
 						Dio.getInstance().update(mouse, key, false); //dio doesn't move if input is correct
 					}
 					else {
-						BoxController.getInstance().updateState("Oh no!", 2);
+						Board.getInstance().updateState("Oh no!", 2);
 						Dio.getInstance().update(mouse, key, true); //dio moves if input is wrong
 					}
 					updateNode = null;
@@ -76,10 +76,10 @@ public class MapNode implements FrameUpdate{
 				}
 				else if(viewNode==null || viewNode!=this) {
 					viewNode = this;
-					BoxController.getInstance().updateState(info.greInfo.getDefin(), 0);
+					Board.getInstance().updateState(info.greInfo.getDefin(), 0);
 				}
 				else {
-					BoxController.getInstance().updateState(info.greInfo.getAns(), 1);
+					Board.getInstance().updateState(info.greInfo.getAns(), 1);
 					updateNode = this;
 				}
 			}

@@ -21,10 +21,10 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	//Window context
 	public Canvas canvas;
 	Color backgroundColor = Color.WHITE;
-	int clientWidth = 800;
-	int clientHeight = 600;
-	int clientRatio = 800/600;
-	String winTitle = "JiJiCat";
+	int clientWidth = GlobalConstants.APP_WIDTH;
+	int clientHeight = GlobalConstants.APP_HEIGHT;
+	
+	String winTitle = GlobalConstants.APP_TITLE;
 	BufferStrategy bs;
 	Graphics g;
 	
@@ -66,11 +66,6 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		timer.Tick();
 		update();
 		render();
-		//try {
-			//Thread.sleep(2);
-		//} catch (InterruptedException e) {
-		//	e.printStackTrace();
-		//}
 	}
 	
 	public void terminate(){
@@ -92,7 +87,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 				try {
 					g = bs.getDrawGraphics();
 					renderFrame(g);
-					calculateFrameRate(g);
+					//calculateFrameRate(g);
 				
 				} catch (Exception e) {
 					e.printStackTrace();

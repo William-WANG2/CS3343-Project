@@ -5,13 +5,12 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 
+import gameObject.Button;
 import util.GlobalConstants;
 import util.Mouse;
-import util.Button;
 
 public class ResultScene extends Scene{
 	
-	boolean isWin;
 	private Boolean toNextScene;
 	private Mouse mouse;
 	Button restartButton;
@@ -34,10 +33,6 @@ public class ResultScene extends Scene{
 		{
 			toNextScene = true;
 		}
-	}
-	
-	ResultScene(boolean isWin) {
-		this.isWin = isWin;
 	}
 	
 	
@@ -64,8 +59,7 @@ public class ResultScene extends Scene{
 		if(toNextScene) {
 			g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
 			mApp.loadScene(new PlayingScene());
-		}else 
-		{
+		}else {
 			g.setFont(new Font("Arial", Font.PLAIN, 30));
 			g.drawString("Restart", GlobalConstants.APP_WIDTH/2 - 60, 220);
 			restartButton.render(g);
@@ -74,16 +68,17 @@ public class ResultScene extends Scene{
 			for(String member : groupMembers) {
 				g.drawString(member, 20, height);
 				height += 20;
+				
+			if(true) {
+				g.drawString("You win!!!", 30, 30);
+			}
+			else {
+				g.drawString("You lose!!!", 30, 30);
+				}
 			}
 		}
 		
-		// TODO Auto-generated method stub
-		if(isWin) {
-			g.drawString("You win!!!", 30, 30);
-		}
-		else {
-			g.drawString("You lose!!!", 30, 30);
-		}
+		
 	}
 
 	@Override
