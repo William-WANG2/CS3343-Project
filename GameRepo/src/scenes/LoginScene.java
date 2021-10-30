@@ -38,7 +38,7 @@ public class LoginScene extends Scene {
 		
 		toNextScene = false;
 		mouse = mApp.mouse;
-		startButton = new Button("res/textures/UIStartButton.png", "res/textures/UIStartButtonClicked.png", GlobalConstants.APP_WIDTH/2 - 130, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
+		startButton = new Button("res/textures/StartButton.png", "res/textures/StartButtonClicked.png", GlobalConstants.APP_WIDTH/2 - 130, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
 		cxk = new Texture[98];
 		String path;
 		for(int i = 0; i < 9; i++) {
@@ -76,7 +76,7 @@ public class LoginScene extends Scene {
 	public void render(Graphics2D g) {
 		AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
 		g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
-		//startButton.render(g);
+		startButton.render(g);
 	}
 
 	@Override
