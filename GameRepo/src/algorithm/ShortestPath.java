@@ -25,14 +25,14 @@ public class ShortestPath {
 	}
 	public ShortestPath() {
 		map = Map.getInstance();
-		path = new Vector2d[map.getSize().x][map.getSize().y];
+		path = new Vector2d[map.getColRowCount().x][map.getColRowCount().y];
 	}
 	
 	//return last node in the computed shortest path
 	private Vector2d BFS(Vector2d s) throws NoSuchElementException {
 		//initialize the variables
 		res = null;
-		boolean visited[][] = new boolean[map.getSize().x][map.getSize().y];
+		boolean visited[][] = new boolean[map.getColRowCount().x][map.getColRowCount().y];
 		Queue<MapNode> Q = new LinkedList<MapNode>();
 		Q.add(map.getMap()[s.x][s.y]);
 		visited[s.x][s.y] = true;

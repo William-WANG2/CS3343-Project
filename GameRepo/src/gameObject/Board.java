@@ -6,42 +6,32 @@ import gameObject.MapNode;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.AffineTransform;
 import java.io.IOException;
 
 import keyValue.*;
 import util.FrameUpdate;
 import util.Key;
 import util.Mouse;
+import util.Texture;
 
-public class BoxController implements FrameUpdate{
+public class Board{
 	
-	private static BoxController controller = new BoxController();
-	private static int fieldX = 400;
-	private static int fieldY = 200;
-	private static int fieldH = 100;
-
-
-	private static int fieldW = 200;
+	private static Texture boardTexture;
 	private static BoxMessage currMessage = new BoxMessageDef();
-	private static BoxField currField = new BoxField(fieldX,fieldY,fieldW,fieldH);
-
-	public static BoxController getInstance() {
-		return controller;
+	
+	static private Board instance = new Board();
+	private Board() {	
 	}
 	
-	public void setField(int x, int y, int w, int h) {
-		currField=new BoxField(x,y,w,h);
+	public void setBoard(String boxTexturePath, int centerX, int centerY, int width, int height){
+		boardTexture = Texture.loadImage(boxTexturePath, centerX - width/2, centerY - height/2, width, height);
 	}
 	
-	public void enter() {
-		currField.enter();
+	public static Board getInstance() {
+		return instance;
 	}
 	
-	//show box
-	public void render(Graphics2D g) {
-		currField.render(g);
-		
-	}
 	//if currMessage change, update the field
 	public void updateState(String m, int i) { 
 		//the integer is to indicate whether it is answer, definition or prompt
@@ -54,25 +44,26 @@ public class BoxController implements FrameUpdate{
 		else {
 			currMessage = new BoxMessagePrompt(m);
 		}
-		currField.update(currMessage.getMessage());
+		//currField.update(currMessage.getMessage()); This is a string
 	}
 
-	@Override
-	public void exit() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void update(Mouse mouse, Key key) {
+	public void update(Key key) {
 		if(currMessage instanceof BoxMessageAns) {
 			((BoxMessageAns)currMessage).updateInput(key);
-			currField.update(currMessage.getMessage());
 		}
 	}
-	public boolean isInputValid() {
+	public static boolean isInputValid() {
 		if(currMessage instanceof BoxMessageAns) {
 			return ((BoxMessageAns)currMessage).isInputValid();
 		}
 		return false;
+	}
+	
+	public void render(Graphics2D g) {
+		
+		AffineTransform transform = new AffineTransform(boardTexture.getScaleX(), 0.0, 0.0, boardTexture.getScaleY(), boardTexture.getPosX(), boardTexture.getPosY());
+		g.drawImage(boardTexture.getImage(), transform, null);
+		g.drawString(currMessage.getMessage(), 400, 100);
+		
 	}
 }

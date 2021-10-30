@@ -14,7 +14,7 @@ import exception.ExMapExceedWordSize;
 import fileReader.ReaderFactory;
 import fileReader.TxtReader;
 import fileReader.XMLReader;
-import gameObject.BoxController;
+import gameObject.Board;
 import gameObject.BoxMessage;
 import gameObject.MapNode;
 import gameObject.MapNodeInfo;

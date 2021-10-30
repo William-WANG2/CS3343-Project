@@ -9,7 +9,7 @@ public class BoxField {
 	private int x,y;
 	private int height,width;
 	private String message = "";
-	private static Texture box = null;
+	private static Texture boxTexture = null;
 	public BoxField(int x, int y, int w, int h) {
 		this.x=x;
 		this.y=y;
@@ -18,9 +18,9 @@ public class BoxField {
 	}
 	
 	public void enter() {
-		if(box == null) {
-			String path = "res/box.png";
-			box = Texture.loadImage(path, x, y, width, height);
+		if(boxTexture == null) {
+			String path = "res/textures/box.png";
+			boxTexture = Texture.loadImage(path, x, y, width, height);
 		}
 	}
 	//hover over the MapNode, show the MessageBox containing definition
@@ -30,8 +30,8 @@ public class BoxField {
 	}
 	//
 	public void render(Graphics2D g) {
-		AffineTransform transform = new AffineTransform(box.getScaleX(), 0.0, 0.0, box.getScaleY(), box.getPosX(), box.getPosY());
-		g.drawImage(box.getImage(), transform, null);
+		AffineTransform transform = new AffineTransform(boxTexture.getScaleX(), 0.0, 0.0, boxTexture.getScaleY(), boxTexture.getPosX(), boxTexture.getPosY());
+		g.drawImage(boxTexture.getImage(), transform, null);
 		g.drawString(message, x+30, y+30);
 	}
 }

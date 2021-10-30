@@ -1,4 +1,4 @@
-package util;
+package gameObject;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -9,6 +9,9 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 
 import scenes.Scene;
+import util.BoundingBox;
+import util.Mouse;
+import util.Texture;
 
 public class Button {
 	

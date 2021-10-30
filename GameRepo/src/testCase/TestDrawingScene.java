@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
-import gameObject.BoxController;
+import gameObject.Board;
 import gameObject.Dio;
 import gameObject.Map;
 import scenes.Scene;
@@ -21,16 +21,16 @@ public class TestDrawingScene extends Scene{
 	Key key;
 	BufferedImage x;
 	Map m;
-	BoxController box;
+	Board box;
 	Dio dio;
 	@Override
 	public void enter() {
 		
 		m = Map.getInstance();
-		m.initialize(10, 10, 200, 200, "./res/word.txt"); 
+		m.initialize(10, 10, 200, 200,1, 1, "./res/word.txt"); 
 		m.enter();
-		box = BoxController.getInstance();
-		box.enter();
+		box = Board.getInstance();
+		//box.enter();
 		dio = Dio.getInstance();
 		dio.initialize(m.getMap()[4][5]);
 		dio.enter();
@@ -41,7 +41,7 @@ public class TestDrawingScene extends Scene{
 	@Override
 	public void update() {
 		m.update(mouse, key);
-		BoxController.getInstance().update(mouse, key);
+		Board.getInstance().update(key);
 	}
 
 	@Override
