@@ -60,13 +60,13 @@ public class ShortestPath {
 		return res;
 	}
 	//Return 0 is the sprite is trapped, otherwise, return 1 - 6 indicating where to move next
-	public Vector2d computeDecision(Vector2d vec) {	
+	public MapNode computeDecision(Vector2d vec) {	
 		Vector2d lastNode = BFS(vec);
 		if(lastNode == null) {
-			return lastNode; //The sprite is trapped
+			return null; //The sprite is trapped
 		}
 		else {
-			return getNext(lastNode, vec);
+			return map.getMap()[getNext(lastNode, vec).x][getNext(lastNode, vec).y];
 		}
 	}
 }

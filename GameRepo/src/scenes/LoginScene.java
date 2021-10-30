@@ -1,18 +1,7 @@
 package scenes;
 
-import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
-import testCase.TestClickingButton;
-import testCase.TestDrawingScene;
 import util.*;
 import util.Texture;
 public class LoginScene extends Scene {
@@ -75,9 +64,9 @@ public class LoginScene extends Scene {
 		
 		if(toNextScene) {
 			g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
-			mApp.loadScene(new ResultScene());
-		}else 
-		{
+			mApp.loadScene(new PlayingScene());
+		}else {
+			
 			AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
 			g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
 			startButton.render(g);

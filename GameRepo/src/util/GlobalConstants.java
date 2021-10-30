@@ -14,5 +14,6 @@ public class GlobalConstants {
 	public static final float BORDER_SCALE = 0.95f;
 	public static final boolean DISABLE_CURSOR = true;
 	public static final boolean MAINTAIN_RATIO = true;
-
+	public static final int MAP_ROW = 15;
+	public static final int MAP_COLUMN = 15;
 }

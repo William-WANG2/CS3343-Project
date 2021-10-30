@@ -11,6 +11,7 @@ import util.Button;
 
 public class ResultScene extends Scene{
 	
+	boolean isWin;
 	private Boolean toNextScene;
 	private Mouse mouse;
 	Button restartButton;
@@ -35,9 +36,10 @@ public class ResultScene extends Scene{
 		}
 	}
 	
-	ResultScene(){
-		
+	ResultScene(boolean isWin) {
+		this.isWin = isWin;
 	}
+	
 	
 	@Override
 	public void enter() {
@@ -75,6 +77,13 @@ public class ResultScene extends Scene{
 			}
 		}
 		
+		// TODO Auto-generated method stub
+		if(isWin) {
+			g.drawString("You win!!!", 30, 30);
+		}
+		else {
+			g.drawString("You lose!!!", 30, 30);
+		}
 	}
 
 	@Override
