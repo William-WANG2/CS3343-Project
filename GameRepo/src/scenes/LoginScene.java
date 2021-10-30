@@ -57,9 +57,7 @@ public class LoginScene extends Scene {
 
 	@Override
 	public void update() {
-		if(toNextScene) {
-			mApp.loadScene(new PlayingScene());
-		}
+		
 		handleEvent(mouse);
 		startButton.update();
 		
@@ -74,13 +72,20 @@ public class LoginScene extends Scene {
 
 	@Override
 	public void render(Graphics2D g) {
-		AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
-		g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
-		startButton.render(g);
+		
+		if(toNextScene) {
+			g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
+			mApp.loadScene(new PlayingScene());
+		}else 
+		{
+			AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
+			g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
+			startButton.render(g);
+		}
 	}
 
 	@Override
 	public void exit() {
-		//do nothing
+		
 	}
 }
