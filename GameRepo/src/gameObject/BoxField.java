@@ -23,7 +23,6 @@ public class BoxField {
 			box = Texture.loadImage(path, x, y, width, height);
 		}
 	}
-	
 	//hover over the MapNode, show the MessageBox containing definition
 	public void update(String m) {
 		this.message=m;
@@ -35,5 +34,4 @@ public class BoxField {
 		g.drawImage(box.getImage(), transform, null);
 		g.drawString(message, x+30, y+30);
 	}
-
 }

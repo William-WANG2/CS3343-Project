@@ -15,7 +15,7 @@ public class BoxMessageAns extends BoxMessage {
 		return genAns();
 	}
 	private String genAns() {
-		String res="Please input your answer for the blank: \n";
+		String res="Your answer for the blank: \n";
 		res=res+input+"_";
 		//generate the input request
 		return res;
