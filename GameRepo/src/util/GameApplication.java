@@ -111,6 +111,8 @@ public abstract class GameApplication extends JFrame implements Runnable{
 			String frameRate = String.format("FPS %s", frameCount);
 			g.clearRect( 0, 0, clientWidth, clientHeight);
 			g.setColor(Color.RED);
+			g.setFont(new Font("TimesRoman", Font.BOLD, 10));
+			
 			g.drawString(frameRate, 30, 30);
 			
 			frameCount = 0;

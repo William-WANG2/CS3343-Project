@@ -75,7 +75,7 @@ public class LoginScene extends Scene {
 		
 		if(toNextScene) {
 			g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
-			mApp.loadScene(new PlayingScene());
+			mApp.loadScene(new ResultScene());
 		}else 
 		{
 			AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
