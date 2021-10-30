@@ -1,21 +1,15 @@
 package gameObject;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
-
-import testCase.TestDrawingScene;
-import util.ResourceLoader;
+import java.awt.geom.AffineTransform;
+import util.Texture;
 
 public class BoxField {
 	
 	private int x,y;
 	private int height,width;
 	private String message = "";
-	private static BufferedImage box = null;
+	private static Texture box = null;
 	public BoxField(int x, int y, int w, int h) {
 		this.x=x;
 		this.y=y;
@@ -24,11 +18,9 @@ public class BoxField {
 	}
 	
 	public void enter() {
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/box.png", "/box.png" );
-		try {
-			box = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if(box == null) {
+			String path = "res/box.png";
+			box = Texture.loadImage(path, x, y, width, height);
 		}
 	}
 	
@@ -39,7 +31,8 @@ public class BoxField {
 	}
 	//
 	public void render(Graphics2D g) {
-		g.drawImage(box, x, y, width, height, null);
+		AffineTransform transform = new AffineTransform(box.getScaleX(), 0.0, 0.0, box.getScaleY(), box.getPosX(), box.getPosY());
+		g.drawImage(box.getImage(), transform, null);
 		g.drawString(message, x+30, y+30);
 	}
 

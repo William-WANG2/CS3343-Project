@@ -1,27 +1,21 @@
 package gameObject;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-
 import keyValue.Info;
-import testCase.TestDrawingScene;
 import util.FrameUpdate;
 import util.Key;
 import util.Mouse;
-import util.ResourceLoader;
-import util.Vector2d;
+import util.Texture;
 
 public class MapNode implements FrameUpdate{
 	
 	private MapNodeInfo info;
 	private ArrayList<MapNode> adjacency;
-	private static BufferedImage grey = null;
-	private static BufferedImage orange = null;
+	private static Texture grey = null;
+	private static Texture orange = null;
 	private static MapNode updateNode = null; //the node user is currently typing the answer for 
 	public static MapNode getUpdateNode() {
 		return updateNode;
@@ -68,19 +62,12 @@ public class MapNode implements FrameUpdate{
 
 	@Override
 	public void enter() {
+		//if the static variable is not loaded yet
 		if(grey == null && orange == null) {
-			InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/grey.png", "/circle/grey.png" );
-			try {
-				grey = ImageIO.read(stream);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/orange.png", "/circle/orange.png" );
-			try {
-				orange = ImageIO.read(stream);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			String path = "res/circle/grey.png";
+			grey = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
+			path = "res/circle/orange.png";
+			orange = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
 		}
 	}
 
@@ -120,10 +107,12 @@ public class MapNode implements FrameUpdate{
 	@Override
 	public void render(Graphics2D g) {
 		if(!info.blocked) {
-			g.drawImage(grey, (int)info.displayPos.y, (int)info.displayPos.x, (int)info.radius*2, (int)info.radius*2, null);
+			AffineTransform transform = new AffineTransform(grey.getScaleX(), 0.0, 0.0, grey.getScaleY(), info.displayPos.y, info.displayPos.x);
+			g.drawImage(grey.getImage(), transform, null);
 		}
 		else {
-			g.drawImage(orange, (int)info.displayPos.y, (int)info.displayPos.x, (int)info.radius*2, (int)info.radius*2, null);
+			AffineTransform transform = new AffineTransform(orange.getScaleX(), 0.0, 0.0, orange.getScaleY(), info.displayPos.y, info.displayPos.x);
+			g.drawImage(orange.getImage(), transform, null);
 		}
 	}
 

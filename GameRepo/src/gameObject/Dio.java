@@ -1,16 +1,11 @@
 package gameObject;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.geom.AffineTransform;
 import java.util.*;
-
-import javax.imageio.ImageIO;
 
 import util.*;
 import algorithm.*;
-import testCase.TestDrawingScene;
 
 public class Dio implements FrameUpdate {
 GameTimer timer = GameTimer.getInstance();
@@ -21,8 +16,8 @@ GameTimer timer = GameTimer.getInstance();
 	private MapNode node;
 	private boolean alive;
 	private boolean surround;
-	private BufferedImage[] normaldio=new BufferedImage[5];
-	private BufferedImage angrydio;
+	private Texture[] normalDio;
+	private Texture angryDio;
 	private ShortestPath s;
 	int n=0;
 	private static Dio dio = new Dio();
@@ -88,47 +83,14 @@ GameTimer timer = GameTimer.getInstance();
 
 	@Override
 	public void enter() {
-		InputStream stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk0.png", "/circle/WALK0.png" );
-
-		try {
-			normaldio[0] = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
+		normalDio = new Texture[5];
+		String path;
+		for(int i = 0; i < 5; i++) {
+			path = String.format("res/circle/walk%d.png", i);
+			normalDio[i] = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
 		}
-		
-		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk1.png", "/circle/walk1.png" );
-		try {
-			normaldio[1] = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		 stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk2.png", "/circle/walk2.png" );
-		try {
-			normaldio[2] = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk3.png", "/circle/walk3.png" );
-		try {
-			normaldio[3] = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/walk4.png", "/circle/walk4.png" );
-		try {
-			normaldio[4] = ImageIO.read(stream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		stream = ResourceLoader.load(TestDrawingScene.class, "res/circle/black.png", "/circle/black.png" );
-
-		try {
-			angrydio = ImageIO.read(stream);
-		} catch (IOException e) { 
-			e.printStackTrace();
-		}
+		path = "res/circle/black.png";
+		angryDio = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
 	}
 
 
@@ -136,12 +98,14 @@ GameTimer timer = GameTimer.getInstance();
 	@Override
 	public void render(Graphics2D g) {
 		if(surround) {
-			g.drawImage(angrydio, (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
+			AffineTransform transform = new AffineTransform(angryDio.getScaleX(), 0.0, 0.0, angryDio.getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
+			g.drawImage(angryDio.getImage(), transform, null);
 		}
 		else {
 			timeElapsed += timer.DeltaTime();
 			int n=(int) (timeElapsed/280);
-			g.drawImage(normaldio[n], (int)node.getState().displayPos.y,  (int)node.getState().displayPos.x, (int)(2*node.getState().radius), (int)(2*node.getState().radius), null);
+			AffineTransform transform = new AffineTransform(normalDio[n].getScaleX(), 0.0, 0.0, normalDio[n].getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
+			g.drawImage(normalDio[n].getImage(), transform, null);
 			if(n==4) {
 				timeElapsed=0;
 			}

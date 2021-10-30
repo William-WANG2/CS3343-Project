@@ -27,9 +27,6 @@ public class Map implements FrameUpdate{
 		size = new Vector2d(m, n);
 		ArrayList<Info> wordList = new ArrayList<Info>(m*n);
 		ReaderApp rdapp = new ReaderFactory();
-//		for(int i=0; i<m*n; i++) {
-//			wordList.add(new WordInfo("a", "a"));
-//		}
 		try {
 			wordList = rdapp.getList(vocabularyPath, m, n);
 		} catch (ExMapExceedWordSize e) {

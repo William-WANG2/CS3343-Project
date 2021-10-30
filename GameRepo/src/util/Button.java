@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 
 import scenes.Scene;
 
-public class Button{
+public class Button {
 	
 	private Texture currTexture;
 	private Texture unclickTexture;
