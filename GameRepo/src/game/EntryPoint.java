@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 public class EntryPoint{
 	public static void main(String args[])
 	{
-		TestDrawingApp test = new TestDrawingApp();
+		GameApplication test = new GREGame();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {test.initialize();}
 

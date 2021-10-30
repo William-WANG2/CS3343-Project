@@ -21,17 +21,17 @@ public class TestDrawingApp extends GameApplication{
 		
 		super.initialize();
 		currScene = new LoginScene();
-		currScene.mApp = this;
+		//currScene.mApp = this;
 		currScene.enter();
 		
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 
-	//@Override
-	//public void loadScene(Scene next) {
-		// TODO Auto-generated method stub
+	@Override
+	public void loadScene(Scene next) {
+		 
 		
-	//}
+	}
 		
 }
