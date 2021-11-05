@@ -42,6 +42,10 @@ public class Dio implements FrameUpdate {
 		this.node=node;
 	}
 	
+	public MapNode getNode() {
+		return this.node;
+	}
+	
 	private void setAlive(boolean alive) {
 		this.alive = alive;
 	}

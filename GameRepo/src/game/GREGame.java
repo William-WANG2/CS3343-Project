@@ -1,6 +1,7 @@
 package game;
 
 import util.*;
+import gameObject.WordType;
 import scenes.*;
 
 public class GREGame extends GameApplication{
@@ -10,6 +11,7 @@ public class GREGame extends GameApplication{
 	private int errorCount;
 	private int stepCount;
 	private boolean isWin;
+	private WordType wordType;
 	
 	public GREGame() {
 	}
@@ -27,7 +29,13 @@ public class GREGame extends GameApplication{
 	public int getErrorCount() {
 		return errorCount;
 	}
-	
+	public WordType getWordType()
+	{
+		return wordType;
+	}
+	public void setWordType(WordType w) {
+		wordType = w;
+	}
 	public Boolean isGameWin() {
 		return isWin;
 	}
@@ -37,7 +45,6 @@ public class GREGame extends GameApplication{
 	public void initialize() {
 		
 		super.initialize();
-		
 		loadScene(new LoginScene());
 		gameThread = new Thread(this);
 		gameThread.start();

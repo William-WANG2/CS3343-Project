@@ -5,6 +5,8 @@ import util.GameApplication;
 import java.awt.Canvas;
 import java.awt.Graphics2D;
 
+import game.GREGame;
+
 public abstract class Scene {
 	
 	public GameApplication mApp;

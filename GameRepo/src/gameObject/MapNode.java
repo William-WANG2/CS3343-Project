@@ -61,31 +61,34 @@ public class MapNode implements FrameUpdate{
 	public void update(Mouse mouse, Key key) {
 		boolean isInGeo= Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
 		if(isInGeo && info.blocked==false) {//add restore the click if click another one
-			//display the input region
-			if(updateNode == null || updateNode == this) {
-				//check if the answer is correct or not
-				if(updateNode == this) {
-					if(Board.isInputValid()) {
-						info.blocked = true;
-						Board.getInstance().updateState("Well down!", 2);
-						Dio.getInstance().update(mouse, key, false); //dio doesn't move if input is correct
+			//If Dio is currently on the node, can not update it
+			if(Dio.getInstance().getNode() != this) {
+				//display the input region
+				if(updateNode == null || updateNode == this) {
+					//check if the answer is correct or not
+					if(updateNode == this) {
+						if(Board.isInputValid()) {
+							info.blocked = true;
+							Board.getInstance().updateState("Well down!", 2);
+							Dio.getInstance().update(mouse, key, false); //dio doesn't move if input is correct
+						}
+						else {
+							Board.getInstance().updateState("Oh no!", 2);
+							Dio.getInstance().update(mouse, key, true); //dio moves if input is wrong
+						}
+						updateNode = null;
+						viewNode = null;
+					}
+					else if(viewNode==null || viewNode!=this) {
+						viewNode = this;
+						Board.getInstance().updateState(info.greInfo.getDefin(), 0);
 					}
 					else {
-						Board.getInstance().updateState("Oh no!", 2);
-						Dio.getInstance().update(mouse, key, true); //dio moves if input is wrong
+						Board.getInstance().updateState(info.greInfo.getAns(), 1);
+						updateNode = this;
 					}
-					updateNode = null;
-					viewNode = null;
 				}
-				else if(viewNode==null || viewNode!=this) {
-					viewNode = this;
-					Board.getInstance().updateState(info.greInfo.getDefin(), 0);
-				}
-				else {
-					Board.getInstance().updateState(info.greInfo.getAns(), 1);
-					updateNode = this;
-				}
-			}
+			}	
 			mouse.mouseClicked = false;
 		}
 	}
