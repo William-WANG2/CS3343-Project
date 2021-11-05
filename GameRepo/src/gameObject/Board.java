@@ -23,7 +23,7 @@ public class Board{
 	private static Info currInfo;
 	private static String currInput;
 	
-	//private static BoxMessage currMessage = new BoxMessageDef();
+	private static BoxMessage currMessage = new BoxMessageDef();
 	
 	static private Board instance = new Board();
 	private Board() {	
@@ -37,7 +37,7 @@ public class Board{
 		return instance;
 	}
 	
-	/*
+	
 	//if currMessage change, update the field
 	public void updateState(String m, int i) { 
 		//the integer is to indicate whether it is answer, definition or prompt
@@ -52,7 +52,7 @@ public class Board{
 		}
 		//currField.update(currMessage.getMessage()); This is a string
 	}
-*/
+
 	public void update(Key key) {
 		if(currMessage instanceof BoxMessageAns) {
 			((BoxMessageAns)currMessage).updateInput(key);

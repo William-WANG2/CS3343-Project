@@ -24,8 +24,6 @@ public class LoginScene extends Scene {
 	
 	private ExecutorService threadPool;
 	private List<Callable<Boolean>> loadTasks;
-	private List<Future<Boolean>> loadResults;
-	private int numberOfTasks;
 	
 	private void handleEvent(Mouse muouse) {
 		startButton.handleEvent(muouse);
@@ -41,11 +39,25 @@ public class LoginScene extends Scene {
 		threadPool = Executors.newCachedThreadPool();
 		loadTasks = new ArrayList<Callable<Boolean>>();
 		
+		cxk = new Texture[98];
+		
 		loadTasks.add(new Callable<Boolean>() {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 9; i < 98; i++) {
+				for(int i = 0; i < 9; i++) {
+					String path = String.format("res/animation/caixukun 00%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 9; i < 20; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
@@ -53,18 +65,62 @@ public class LoginScene extends Scene {
 			}
 		});
 		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 21; i < 40; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 41; i < 60; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 61; i < 80; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 80; i < 98; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		for(Callable<Boolean> task : loadTasks) {
+			threadPool.submit(task);
+		}
+		
 		toNextScene = false;
 		mouse = mApp.mouse;
 		startButton = new Button("res/textures/StartButton.png", "res/textures/StartButtonClicked.png", GlobalConstants.APP_WIDTH/2 - 130, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
-		cxk = new Texture[98];
-		String path;
-		for(int i = 0; i < 9; i++) {
-			path = String.format("res/animation/caixukun 00%d.jpg", i + 1);
-			cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
-		}
 		
-		
-		sequenceIndex = -1;
+		sequenceIndex = 0;
 		timeElapsed = 0;
 		
 	}
@@ -89,9 +145,11 @@ public class LoginScene extends Scene {
 		if(toNextScene) {
 			mApp.loadScene(new PlayingScene());
 		}else {
+			if(null != cxk[sequenceIndex]) {
+				AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
+				g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
+			}
 			
-			AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
-			g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
 			startButton.render(g);
 		}
 	}
