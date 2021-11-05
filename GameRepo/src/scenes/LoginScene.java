@@ -69,7 +69,7 @@ public class LoginScene extends Scene {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 21; i < 40; i++) {
+				for(int i = 20; i < 40; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
@@ -81,7 +81,7 @@ public class LoginScene extends Scene {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 41; i < 60; i++) {
+				for(int i = 40; i < 60; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
@@ -93,7 +93,7 @@ public class LoginScene extends Scene {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 61; i < 80; i++) {
+				for(int i = 60; i < 80; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
@@ -115,6 +115,7 @@ public class LoginScene extends Scene {
 		for(Callable<Boolean> task : loadTasks) {
 			threadPool.submit(task);
 		}
+		threadPool.shutdown();
 		
 		toNextScene = false;
 		mouse = mApp.mouse;
@@ -122,6 +123,10 @@ public class LoginScene extends Scene {
 		
 		sequenceIndex = 0;
 		timeElapsed = 0;
+		while(true) {
+			if(threadPool.isTerminated())
+				break;
+		}
 		
 	}
 
@@ -137,7 +142,6 @@ public class LoginScene extends Scene {
 			sequenceIndex %= 98;
 			timeElapsed -= 300;
 		}
-		
 	}
 
 	@Override
@@ -145,11 +149,9 @@ public class LoginScene extends Scene {
 		if(toNextScene) {
 			mApp.loadScene(new PlayingScene());
 		}else {
-			if(null != cxk[sequenceIndex]) {
-				AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
-				g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
-			}
 			
+			AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
+			g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
 			startButton.render(g);
 		}
 	}
