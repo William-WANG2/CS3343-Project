@@ -76,6 +76,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public void renderFrame(Graphics g){
+		g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
 		currScene.render((Graphics2D)g);
 	}
 	

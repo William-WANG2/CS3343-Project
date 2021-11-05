@@ -160,9 +160,9 @@ public class Map implements FrameUpdate{
 					map[i][j].update(mouse, key);
 				}
 			}
-			if(mouse.mouseClicked) {
+			//if(mouse.mouseClicked) { 
 				mouse.mouseClicked = false;
-			}
+			//}
 		}
 	}
 }

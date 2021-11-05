@@ -2,6 +2,12 @@ package scenes;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import gameObject.Button;
 import util.*;
@@ -16,6 +22,11 @@ public class LoginScene extends Scene {
 	private long timeElapsed;
 	private GameTimer timer = GameTimer.getInstance();;
 	
+	private ExecutorService threadPool;
+	private List<Callable<Boolean>> loadTasks;
+	private List<Future<Boolean>> loadResults;
+	private int numberOfTasks;
+	
 	private void handleEvent(Mouse muouse) {
 		startButton.handleEvent(muouse);
 		if(startButton.isClicked())
@@ -27,6 +38,21 @@ public class LoginScene extends Scene {
 	@Override
 	public void enter() {
 		
+		threadPool = Executors.newCachedThreadPool();
+		loadTasks = new ArrayList<Callable<Boolean>>();
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 9; i < 98; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
 		toNextScene = false;
 		mouse = mApp.mouse;
 		startButton = new Button("res/textures/StartButton.png", "res/textures/StartButtonClicked.png", GlobalConstants.APP_WIDTH/2 - 130, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
@@ -36,10 +62,7 @@ public class LoginScene extends Scene {
 			path = String.format("res/animation/caixukun 00%d.jpg", i + 1);
 			cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 		}
-		for(int i = 9; i < 98; i++) {
-			path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
-			cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
-		}
+		
 		
 		sequenceIndex = -1;
 		timeElapsed = 0;
@@ -63,9 +86,7 @@ public class LoginScene extends Scene {
 
 	@Override
 	public void render(Graphics2D g) {
-		
 		if(toNextScene) {
-			g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
 			mApp.loadScene(new PlayingScene());
 		}else {
 			

@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import keyValue.*;
 import util.FrameUpdate;
@@ -18,7 +19,11 @@ import util.Texture;
 public class Board{
 	
 	private static Texture boardTexture;
-	private static BoxMessage currMessage = new BoxMessageDef();
+	private static ArrayList<Info> Info;
+	private static Info currInfo;
+	private static String currInput;
+	
+	//private static BoxMessage currMessage = new BoxMessageDef();
 	
 	static private Board instance = new Board();
 	private Board() {	
@@ -32,6 +37,7 @@ public class Board{
 		return instance;
 	}
 	
+	/*
 	//if currMessage change, update the field
 	public void updateState(String m, int i) { 
 		//the integer is to indicate whether it is answer, definition or prompt
@@ -46,7 +52,7 @@ public class Board{
 		}
 		//currField.update(currMessage.getMessage()); This is a string
 	}
-
+*/
 	public void update(Key key) {
 		if(currMessage instanceof BoxMessageAns) {
 			((BoxMessageAns)currMessage).updateInput(key);
@@ -63,7 +69,15 @@ public class Board{
 		
 		AffineTransform transform = new AffineTransform(boardTexture.getScaleX(), 0.0, 0.0, boardTexture.getScaleY(), boardTexture.getPosX(), boardTexture.getPosY());
 		g.drawImage(boardTexture.getImage(), transform, null);
-		g.drawString(currMessage.getMessage(), 400, 100);
+		//g.drawString(currMessage.getMessage(), 400, 100);
+		if(currInfo != null) {
+			g.drawString(currInfo.getDefin(), 400, 100);
+			g.drawString(currInfo.getAns(), 400, 150);
+		}
 		
+	}
+
+	public void receiveMessage(Info greInfo) {
+		currInfo = greInfo;
 	}
 }

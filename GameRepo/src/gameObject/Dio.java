@@ -122,7 +122,7 @@ public class Dio implements FrameUpdate {
 					setSurround(true);
 				}
 			}
-			else {
+			if(isSurround()) {
 				dir = moveSurround();
 			}
 			if(move && dir!=null) {
