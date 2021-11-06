@@ -30,8 +30,7 @@ public class PlayingScene extends Scene{
 	private boolean change;
 	private int errorCount;
     
-  
-    
+
     private void handleMusic(Mouse mouse) {
 		musicToggle.handleEvent(mouse);
 		if(musicToggle.isClicked())
@@ -61,7 +60,7 @@ public class PlayingScene extends Scene{
 		board.setBoard("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
 		
 		dio = Dio.getInstance();
-		dio.initialize(map.getMap()[map.getColRowCount().x / 2][map.getColRowCount().y / 2]);
+		dio.enter(map.getMap()[map.getColRowCount().x / 2][map.getColRowCount().y / 2]);
 		
 		mouse = mApp.mouse;
 		key = mApp.key;

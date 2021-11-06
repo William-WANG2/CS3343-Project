@@ -7,7 +7,7 @@ import java.util.*;
 import util.*;
 import algorithm.*;
 
-public class Dio implements FrameUpdate {
+public class Dio {
 	
 	GameTimer timer = GameTimer.getInstance();
 	long timeElapsed; 
@@ -16,27 +16,13 @@ public class Dio implements FrameUpdate {
 	private boolean alive;
 	private boolean surround;
 	private Texture[] normalDio;
-	private Texture angryDio;
+	private Texture[] angryDio;
 	private ShortestPath s;
 	private static Dio dio = new Dio();
 	public static Dio getInstance() {
 		return dio;
 	}
 	private Dio() {
-	}
-	
-	public void initialize(MapNode node) {
-		this.node=node;
-		alive=true;
-		surround=false;
-		normalDio = new Texture[5];
-		String path;
-		for(int i = 0; i < 5; i++) {
-			path = String.format("res/textures/walk%d.png", i);
-			normalDio[i] = Texture.loadImage(path, 0, (int)(2*node.getState().radius * 0.75), (int)(2*node.getState().radius * 1.5), (int)(2*node.getState().radius * 1.5));
-		}
-		path = "res/textures/basketballtrash.png";
-		angryDio = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
 	}
 	
 	private void setNode(MapNode node) {
@@ -84,36 +70,38 @@ public class Dio implements FrameUpdate {
 		}
 		return null;
 	}
-	@Override
-	public void enter() {
-		
+	public void enter(MapNode node) {
+		this.node=node;
+		alive=true;
+		surround=false;
+		normalDio = new Texture[8];
+		angryDio = new Texture[8];
+		String path;
+		for(int i = 0; i < 8; i++) {
+			path = String.format("res/sprite/kunkun%d.png", i+1);
+			normalDio[i] = Texture.loadImage(path, 0, 0, (int)(2.5*node.getState().radius), (int)(4*node.getState().radius));
+		}
+		for(int i = 0; i < 8; i++) {
+			path = String.format("res/sprite/angryKunkun%d.png", i+1);
+			angryDio[i] = Texture.loadImage(path, 0, 0, (int)(2.5*node.getState().radius), (int)(4*node.getState().radius));
+		}
 	}
 
-	@Override
 	public void render(Graphics2D g) {
+		timeElapsed += timer.DeltaTime();
+		int counter=(int) (timeElapsed/300);
+		if(counter>=7) {
+			timeElapsed=0;
+			counter = 0;
+		}
 		if(surround) {
-			AffineTransform transform = new AffineTransform(angryDio.getScaleX(), 0.0, 0.0, angryDio.getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
-			g.drawImage(angryDio.getImage(), transform, null);
+			AffineTransform transform = new AffineTransform(angryDio[counter].getScaleX(), 0.0, 0.0, angryDio[counter].getScaleY(), (int)node.getState().displayPos.y - (int)(0.8*node.getState().radius), (int)node.getState().displayPos.x - (int)(2*node.getState().radius));
+			g.drawImage(angryDio[counter].getImage(), transform, null);
 		}
 		else {
-			timeElapsed += timer.DeltaTime();
-			int counter=(int) (timeElapsed/500);
-			AffineTransform transform = new AffineTransform(normalDio[counter].getScaleX(), 0.0, 0.0, normalDio[counter].getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
+			AffineTransform transform = new AffineTransform(normalDio[counter].getScaleX(), 0.0, 0.0, normalDio[counter].getScaleY(), (int)node.getState().displayPos.y - (int)(0.8*node.getState().radius), (int)node.getState().displayPos.x - (int)(2*node.getState().radius));
 			g.drawImage(normalDio[counter].getImage(), transform, null);
-			if(counter==4) {
-				timeElapsed=0;
-			}
 		}
-	}
-	@Override
-	public void exit() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void update(Mouse mouse, Key key) {
-		// TODO Auto-generated method stub
-		
 	}
 	public void update(Mouse mouse, Key key, boolean move) {
 		if (isAlive()) {

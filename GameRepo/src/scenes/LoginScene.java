@@ -20,6 +20,7 @@ public class LoginScene extends Scene {
 	private Mouse mouse;
 	private Button startButtons[] = new Button[GlobalConstants.NUM_GAME_MODE];
 	private Texture[] cxk;
+	private Texture logo;
 	private int sequenceIndex;
 	private long timeElapsed;
 	private GameTimer timer = GameTimer.getInstance();;
@@ -45,7 +46,7 @@ public class LoginScene extends Scene {
 		public Boolean call() throws Exception{
 			for(int i = start; i < start+14; i++) {
 				String path = String.format("res/animation/caixukun%d.jpg", i + 1);
-				cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				cxk[i] = Texture.loadImage(path, 400, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 			}
 			return true;
 		}
@@ -53,37 +54,39 @@ public class LoginScene extends Scene {
 	}
 	@Override
 	public void enter() {
-		
+		/*load cxk*/
 		threadPool = Executors.newCachedThreadPool();
 		loadTasks = new ArrayList<Callable<Boolean>>();
-		
 		cxk = new Texture[98];
 		
 		for(int i=0; i<91; i+=7) {
 			load(i);
 		}
-		
 		for(Callable<Boolean> task : loadTasks) {
 			threadPool.submit(task);
 		}
 		threadPool.shutdown();
 		
+		
 		toNextScene = false;
 		mouse = mApp.mouse;
 
+		/*load button*/
 		for(int i = 0; i < GlobalConstants.NUM_GAME_MODE; i++) {
 			String path1 = String.format("res/VocabularyButton/StartButton%d.png", i + 1);
 			String path2 = String.format("res/VocabularyButton/StartButtonClicked%d.png", i + 1);
-			startButtons[i] = new Button(path1, path2, GlobalConstants.APP_WIDTH/2 - 100, GlobalConstants.APP_HEIGHT/2 - 90 * i, 150, 75);
+			startButtons[i] = new Button(path1, path2, GlobalConstants.APP_WIDTH/3 , (int)(GlobalConstants.APP_HEIGHT/1.5) - 100 * i, 150, 75);
 		}
+		/*load logo*/
+		logo = Texture.loadImage("res/Logo.png", 100, 80, 400, 200);
 		
 		sequenceIndex = 0;
 		timeElapsed = 0;
+		//check if threads are killed
 		while(true) {
 			if(threadPool.isTerminated())
 				break;
 		}
-		
 	}
 
 	@Override
@@ -106,6 +109,8 @@ public class LoginScene extends Scene {
 	public void render(Graphics2D g) {
 		AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
 		g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
+		transform = new AffineTransform(logo.getScaleX(), 0.0, 0.0, logo.getScaleY(), logo.getPosX(), logo.getPosY());
+		g.drawImage(logo.getImage(), transform, null);
 		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
 			startButtons[i].render(g);
 		}
