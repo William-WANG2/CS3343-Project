@@ -1,10 +1,13 @@
 package scenes;
 
 import java.awt.Graphics2D;
+import game.GREGame;
 import gameObject.Board;
 import gameObject.Button;
 import gameObject.Dio;
 import gameObject.Map;
+
+import gameObject.WordType;
 
 import util.*;
 
@@ -18,8 +21,9 @@ public class PlayingScene extends Scene{
 	Board board;
 	Dio dio;
 	boolean toNextScene;
-	boolean win;
+	boolean isWin;
 	int correctCount;
+
 	int stepCount;
 	Button musicToggle;
     Button nomusic;
@@ -29,8 +33,8 @@ public class PlayingScene extends Scene{
     
   
     
-    private void handleEvent(Mouse muouse) {
-		musicToggle.handleEvent(muouse);
+    private void handleMusic(Mouse mouse) {
+		musicToggle.handleEvent(mouse);
 		if(musicToggle.isClicked())
 		{
 			change = !change;
@@ -40,14 +44,14 @@ public class PlayingScene extends Scene{
 			else {
 				Music.open();
 			}
-			
 		}
-		
-		
-		
-		 
 	}
    
+
+	int errorCount;
+	
+	
+
 	@Override
 	public void enter() {
 		change=true;
@@ -55,10 +59,10 @@ public class PlayingScene extends Scene{
 		
 		
 		map = Map.getInstance();
-		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 300, 300, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.6), "res/word.txt"); 
+		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 250, 250, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.55), WordType.getWordTypePath(((GREGame)mApp).getWordType())); 
 		
 		board = Board.getInstance();
-		board.setBoard("res/textures/box.png", GlobalConstants.APP_WIDTH/2, 50, (int)(GlobalConstants.APP_WIDTH * 0.8), 200);
+		board.setBoard("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
 		
 		dio = Dio.getInstance();
 		dio.initialize(map.getMap()[map.getColRowCount().x / 2][map.getColRowCount().y / 2]);
@@ -67,27 +71,30 @@ public class PlayingScene extends Scene{
 		key = mApp.key;
 		toNextScene = false;
 		correctCount = 0;
-		stepCount = 0;
+		errorCount = 0;
 	}
 
 	@Override
 	public void update() {
 		if(dio.isEscape()) {
 			toNextScene = true;
-			win = false;
+			isWin = false;
 		}
 		else if(!dio.isAlive()) {
 			toNextScene = true;
-			win = true;
+			isWin = true;
 		}
 		
-		handleEvent(mouse);
-		map.update(mouse, key);
-		board.update(key);
-		
+
+		handleMusic(mouse);
 		musicToggle.update();
+		musicToggle.setClickedFalse();
 		
 		
+		map.update(mouse, key);
+		board.update(key);	
+		mouse.mouseClicked = false;
+
 	}
 
 	@Override
@@ -114,7 +121,7 @@ public class PlayingScene extends Scene{
 
 	@Override
 	public void exit() {
-		
+		mApp.setGameResult(correctCount, errorCount, isWin);
 	}
 
 

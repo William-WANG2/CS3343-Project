@@ -91,11 +91,11 @@ public class MapNode implements FrameUpdate{
 	public void enter() {
 		//if the static variable is not loaded yet
 		if(basketball == null && hole == null) {
-			String path = "res/circle/basketball.png";
+			String path = "res/textures/basketballOrigin.png";
 			basketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
-			path = "res/circle/crack.png";
+			path = "res/textures/basketballTrash.png";
 			hole = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
-			path = "res/circle/selectedbasketball.png";
+			path = "res/textures/basketballHighlight.png";
 			selectedbasketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
 		}
 	}
@@ -104,6 +104,10 @@ public class MapNode implements FrameUpdate{
 	public void update(Mouse mouse, Key key) {
 		boolean isInGeo= Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
 		if(isInGeo && info.blocked==false) {//add restore the click if click another one
+			//If Dio is currently on the node, can not update it
+			if(Dio.getInstance().getNode() != this) {
+				
+			}
 			//display the input region
 			if(updateNode == null || updateNode == this) {
 				//check if the answer is correct or not
@@ -136,7 +140,6 @@ public class MapNode implements FrameUpdate{
 					updateNode = this;
 				}
 			}
-			mouse.mouseClicked = false;
 		}
 	}
 

@@ -8,6 +8,7 @@ import util.*;
 import algorithm.*;
 
 public class Dio implements FrameUpdate {
+	
 	GameTimer timer = GameTimer.getInstance();
 	long timeElapsed; 
 
@@ -31,15 +32,19 @@ public class Dio implements FrameUpdate {
 		normalDio = new Texture[5];
 		String path;
 		for(int i = 0; i < 5; i++) {
-			path = String.format("res/circle/walk%d.png", i);
-			normalDio[i] = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
+			path = String.format("res/textures/walk%d.png", i);
+			normalDio[i] = Texture.loadImage(path, 0, (int)(2*node.getState().radius * 0.75), (int)(2*node.getState().radius * 1.5), (int)(2*node.getState().radius * 1.5));
 		}
-		path = "res/circle/black.png";
+		path = "res/textures/basketballtrash.png";
 		angryDio = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
 	}
 	
 	private void setNode(MapNode node) {
 		this.node=node;
+	}
+	
+	public MapNode getNode() {
+		return this.node;
 	}
 	
 	private void setAlive(boolean alive) {
