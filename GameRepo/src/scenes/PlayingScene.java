@@ -2,9 +2,13 @@ package scenes;
 
 import java.awt.Graphics2D;
 import gameObject.Board;
+import gameObject.Button;
 import gameObject.Dio;
 import gameObject.Map;
+
 import util.*;
+
+
 
 public class PlayingScene extends Scene{
 
@@ -17,9 +21,38 @@ public class PlayingScene extends Scene{
 	boolean win;
 	int correctCount;
 	int stepCount;
-	
+	Button musicToggle;
+    Button nomusic;
+    
+    boolean change;
+    
+    
+  
+    
+    private void handleEvent(Mouse muouse) {
+		musicToggle.handleEvent(muouse);
+		if(musicToggle.isClicked())
+		{
+			change = !change;
+			if(!change) {
+				Music.close();
+			}
+			else {
+				Music.open();
+			}
+			
+		}
+		
+		
+		
+		 
+	}
+   
 	@Override
 	public void enter() {
+		change=true;
+		musicToggle = new Button("res/textures/sound.jpg", "res/textures/nosound.jpg", GlobalConstants.APP_WIDTH/2 -630, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
+		
 		
 		map = Map.getInstance();
 		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 300, 300, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.6), "res/word.txt"); 
@@ -47,8 +80,14 @@ public class PlayingScene extends Scene{
 			toNextScene = true;
 			win = true;
 		}
+		
+		handleEvent(mouse);
 		map.update(mouse, key);
 		board.update(key);
+		
+		musicToggle.update();
+		
+		
 	}
 
 	@Override
@@ -57,10 +96,20 @@ public class PlayingScene extends Scene{
 			mApp.loadScene(new ResultScene());
 		}
 		else {
+
 			map.render(g);
 			board.render(g);
 			dio.render(g);
+			musicToggle.render(g);
+			
 		}
+		
+		
+		
+		
+		
+		
+		 
 	}
 
 	@Override

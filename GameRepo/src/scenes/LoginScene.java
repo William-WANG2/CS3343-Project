@@ -21,6 +21,7 @@ public class LoginScene extends Scene {
 		if(startButton.isClicked())
 		{
 			toNextScene = true;
+			
 		}
 	}
 	
