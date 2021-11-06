@@ -1,9 +1,11 @@
 package scenes;
 
 import java.awt.Graphics2D;
+import game.GREGame;
 import gameObject.Board;
 import gameObject.Dio;
 import gameObject.Map;
+import gameObject.WordType;
 import util.*;
 
 public class PlayingScene extends Scene{
@@ -23,7 +25,7 @@ public class PlayingScene extends Scene{
 	public void enter() {
 		
 		map = Map.getInstance();
-		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 300, 300, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.6), "res/word.txt"); 
+		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 300, 300, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.6), WordType.getWordTypePath(((GREGame)mApp).getWordType())); 
 		
 		board = Board.getInstance();
 		board.setBoard("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);

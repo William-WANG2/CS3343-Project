@@ -9,14 +9,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import game.GREGame;
 import gameObject.Button;
+import gameObject.WordType;
 import util.*;
 import util.Texture;
 public class LoginScene extends Scene {
 
 	private Boolean toNextScene;
+	private WordType modeIndex; //indicate which mode(sort of words) we proceed in next scene
 	private Mouse mouse;
-	private Button startButton;
+	private Button startButtons[] = new Button[GlobalConstants.NUM_GAME_MODE];
 	private Texture[] cxk;
 	private int sequenceIndex;
 	private long timeElapsed;
@@ -25,11 +28,13 @@ public class LoginScene extends Scene {
 	private ExecutorService threadPool;
 	private List<Callable<Boolean>> loadTasks;
 	
-	private void handleEvent(Mouse muouse) {
-		startButton.handleEvent(muouse);
-		if(startButton.isClicked())
-		{
-			toNextScene = true;
+	private void handleEvent(Mouse mouse) {
+		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+			if(startButtons[i].isClicked())
+			{
+				toNextScene = true;
+				modeIndex = WordType.fromIntToWordType(i);
+			}
 		}
 	}
 	
@@ -180,7 +185,12 @@ public class LoginScene extends Scene {
 		
 		toNextScene = false;
 		mouse = mApp.mouse;
-		startButton = new Button("res/textures/StartButton.png", "res/textures/StartButtonClicked.png", GlobalConstants.APP_WIDTH/2 - 130, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
+
+		for(int i = 0; i < GlobalConstants.NUM_GAME_MODE; i++) {
+			String path1 = String.format("res/VocabularyButton/StartButton%d.png", i + 1);
+			String path2 = String.format("res/VocabularyButton/StartButtonClicked%d.png", i + 1);
+			startButtons[i] = new Button(path1, path2, GlobalConstants.APP_WIDTH/2 - 100, GlobalConstants.APP_HEIGHT/2 - 90 * i, 150, 75);
+		}
 		
 		sequenceIndex = 0;
 		timeElapsed = 0;
@@ -194,8 +204,11 @@ public class LoginScene extends Scene {
 	@Override
 	public void update() {
 		
+		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+			startButtons[i].handleEvent(mouse);
+			startButtons[i].update();
+		}
 		handleEvent(mouse);
-		startButton.update();
 		
 		timeElapsed += timer.DeltaTime();
 		if(timeElapsed >= 300) {
@@ -208,13 +221,15 @@ public class LoginScene extends Scene {
 	@Override
 	public void render(Graphics2D g) {
 		if(toNextScene) {
+			((GREGame)mApp).setWordType(modeIndex);
 			mApp.loadScene(new PlayingScene());
 			
 		}else {
-			
 			AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
 			g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
-			startButton.render(g);
+			for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+				startButtons[i].render(g);
+			}
 		}
 	}
 

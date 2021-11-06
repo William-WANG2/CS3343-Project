@@ -61,8 +61,10 @@ public class MapNode implements FrameUpdate{
 	public void update(Mouse mouse, Key key) {
 		boolean isInGeo= Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
 		if(isInGeo && info.blocked==false) {//add restore the click if click another one
-			
-			Board.getInstance().receiveMessage(info.greInfo);
+			//If Dio is currently on the node, can not update it
+			if(Dio.getInstance().getNode() != this) {
+				
+			}
 			//display the input region
 			if(updateNode == null || updateNode == this) {
 				//check if the answer is correct or not

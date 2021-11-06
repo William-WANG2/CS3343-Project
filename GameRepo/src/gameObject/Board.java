@@ -69,15 +69,7 @@ public class Board{
 		
 		AffineTransform transform = new AffineTransform(boardTexture.getScaleX(), 0.0, 0.0, boardTexture.getScaleY(), boardTexture.getPosX(), boardTexture.getPosY());
 		g.drawImage(boardTexture.getImage(), transform, null);
-		//g.drawString(currMessage.getMessage(), 400, 100);
-		if(currInfo != null) {
-			g.drawString(currInfo.getDefin(), 400, 100);
-			g.drawString(currInfo.getAns(), 400, 150);
-		}
+		g.drawString(currMessage.getMessage(), 400, 100);
 		
-	}
-
-	public void receiveMessage(Info greInfo) {
-		currInfo = greInfo;
 	}
 }
