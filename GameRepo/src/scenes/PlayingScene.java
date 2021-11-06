@@ -1,6 +1,8 @@
 package scenes;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+
 import game.GREGame;
 import gameObject.Board;
 import gameObject.Button;
@@ -15,21 +17,18 @@ import util.*;
 
 public class PlayingScene extends Scene{
 
-	Mouse mouse;
-	Key key;
-	Map map;
-	Board board;
-	Dio dio;
-	boolean toNextScene;
-	boolean isWin;
-	int correctCount;
-
-	int stepCount;
-	Button musicToggle;
-    Button nomusic;
-    
-    boolean change;
-    
+	private Mouse mouse;
+	private Key key;
+	private Map map;
+	private Board board;
+	private Dio dio;
+	private Texture background;
+	private boolean toNextScene;
+	private boolean isWin;
+	private int correctCount;
+	private Button musicToggle;
+	private boolean change;
+	private int errorCount;
     
   
     
@@ -46,14 +45,11 @@ public class PlayingScene extends Scene{
 			}
 		}
 	}
-   
-
-	int errorCount;
-	
-	
 
 	@Override
 	public void enter() {
+		background = Texture.loadImage("res/background/basketballCourt.png", 0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
+		
 		change=true;
 		musicToggle = new Button("res/textures/sound.jpg", "res/textures/nosound.jpg", GlobalConstants.APP_WIDTH/2 -630, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
 		
@@ -97,6 +93,8 @@ public class PlayingScene extends Scene{
 
 	@Override
 	public void render(Graphics2D g) {
+		AffineTransform transform = new AffineTransform(background.getScaleX(), 0.0, 0.0, background.getScaleY(), background.getPosX(), background.getPosY());
+		g.drawImage(background.getImage(), transform, null);
 		map.render(g);
 		board.render(g);
 		dio.render(g);

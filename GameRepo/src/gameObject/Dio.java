@@ -97,7 +97,7 @@ public class Dio implements FrameUpdate {
 		}
 		else {
 			timeElapsed += timer.DeltaTime();
-			int counter=(int) (timeElapsed/280);
+			int counter=(int) (timeElapsed/500);
 			AffineTransform transform = new AffineTransform(normalDio[counter].getScaleX(), 0.0, 0.0, normalDio[counter].getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
 			g.drawImage(normalDio[counter].getImage(), transform, null);
 			if(counter==4) {

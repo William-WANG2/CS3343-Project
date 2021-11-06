@@ -36,7 +36,6 @@ public class LoginScene extends Scene {
 				modeIndex = WordType.fromIntToWordType(i);
 				startButtons[i].setClickedFalse();
 			}
-
 		}
 	}
 	
