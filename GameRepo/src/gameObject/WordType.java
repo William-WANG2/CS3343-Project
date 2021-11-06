@@ -3,7 +3,7 @@ package gameObject;
 public enum WordType {
 	PRIMARY,
 	IELTS,
-	TOEFL,
+	TOFEL,
 	GRE;
 	
 	public static WordType fromIntToWordType(int i) {
@@ -13,7 +13,7 @@ public enum WordType {
 		case 1:
 			return IELTS;
 		case 2:
-			return TOEFL;
+			return TOFEL;
 		case 3:
 			return GRE;
 		}
@@ -27,8 +27,8 @@ public enum WordType {
 				return "res/words/PRIMARY.xml";
 			case IELTS:
 				return "res/words/IELTS.xml";
-			case TOEFL:
-				return "res/words/TOEFL.xml";
+			case TOFEL:
+				return "res/words/TOFEL.xml";
 			case GRE:
 				return "res/words/GRE.xml";
 				
