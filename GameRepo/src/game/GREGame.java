@@ -48,6 +48,8 @@ public class GREGame extends GameApplication{
 		loadScene(new LoginScene());
 		gameThread = new Thread(this);
 		gameThread.start();
+		String filepath = "res/textures/CXKisBeautiful.wav";
+		Music.playMusic(filepath);
 	}
 	@Override
 	public void loadScene(Scene next) {

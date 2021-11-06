@@ -44,17 +44,19 @@ public class Button {
 		return isClicked;
 	}
 	public void setClickedFalse() {
-		  isClicked = false;
+		isClicked = false;
 	}
 	
 	public void update() {
 		if(isClicked) {
 			currTexture = clickedTexture;
-			clickedTexture = unclickTexture;
-			unclickTexture = currTexture;
+			clickedTexture=unclickTexture;
+			unclickTexture=currTexture;
+
 		}else {
 			currTexture = unclickTexture;
 		}
+		
 	}
 
 	public void render(Graphics2D g) {

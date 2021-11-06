@@ -24,6 +24,7 @@ public class LoginScene extends Scene {
 	private long timeElapsed;
 	private GameTimer timer = GameTimer.getInstance();;
 	
+
 	private ExecutorService threadPool;
 	private List<Callable<Boolean>> loadTasks;
 	
@@ -35,6 +36,7 @@ public class LoginScene extends Scene {
 				modeIndex = WordType.fromIntToWordType(i);
 				startButtons[i].setClickedFalse();
 			}
+
 		}
 	}
 	

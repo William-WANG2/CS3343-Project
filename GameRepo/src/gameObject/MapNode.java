@@ -2,7 +2,15 @@ package gameObject;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import keyValue.Info;
 import util.FrameUpdate;
@@ -11,6 +19,41 @@ import util.Mouse;
 import util.Texture;
 
 public class MapNode implements FrameUpdate{
+	
+	  public class Mythread extends Thread{
+		  private String Path;
+		  public Mythread(String pathname) {
+			  Path=pathname;
+		}
+		
+	    	public void run() {
+	    		try
+	    		{
+	    			File musicPath = new File(Path);
+	    			
+	    			if(musicPath.exists())
+	    			{
+	    				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+	    				Clip clip = AudioSystem.getClip();
+	    				clip.open(audioInput);
+	    				FloatControl gainControl=(FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
+	    				gainControl.setValue(0);
+	    				clip.start();
+	    				
+	    			}
+	    			else
+	    			{
+	    				
+	    			}
+	    		}
+	    		catch(Exception ex)
+	    		{
+	    			ex.printStackTrace();
+	    		}
+	    	}
+	    	
+	    	
+	    }
 	
 	private MapNodeInfo info;
 	private ArrayList<MapNode> adjacency;
@@ -71,12 +114,19 @@ public class MapNode implements FrameUpdate{
 				if(updateNode == this) {
 					if(Board.isInputValid()) {
 						info.blocked = true;
+						Mythread thread1=new Mythread("res/textures/good.wav");
+						thread1.start();
 						Board.getInstance().updateState("Well down!", 2);
-						Dio.getInstance().update(mouse, key, false); //dio doesn't move if input is correct
+						Dio.getInstance().update(mouse, key, false);
+						
+						//dio doesn't move if input is correct
 					}
 					else {
+						Mythread thread=new Mythread("res/textures/bad.wav");
+						thread.start();
 						Board.getInstance().updateState("Oh no!", 2);
-						Dio.getInstance().update(mouse, key, true); //dio moves if input is wrong
+						Dio.getInstance().update(mouse, key, true); 
+						//dio moves if input is wrong
 					}
 					updateNode = null;
 					viewNode = null;

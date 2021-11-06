@@ -13,9 +13,7 @@ public class EntryPoint{
 		});	
 		
 		
-		String filepath = "res/textures/CXKisBeautiful.wav";
-		Music musicObject = new Music();
-		musicObject.playMusic(filepath);
+		
 		
 		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
