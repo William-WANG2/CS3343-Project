@@ -5,10 +5,8 @@ import java.awt.geom.AffineTransform;
 
 import game.GREGame;
 import gameObject.Board;
-import gameObject.Button;
 import gameObject.Dio;
 import gameObject.Map;
-
 import gameObject.WordType;
 
 import util.*;
@@ -16,6 +14,7 @@ import util.*;
 
 
 public class PlayingScene extends Scene{
+
 
 	private Mouse mouse;
 	private Key key;
@@ -26,38 +25,16 @@ public class PlayingScene extends Scene{
 	private boolean toNextScene;
 	private boolean isWin;
 	private int correctCount;
-	private Button musicToggle;
-	private boolean change;
 	private int errorCount;
-    
-
-    private void handleMusic(Mouse mouse) {
-		musicToggle.handleEvent(mouse);
-		if(musicToggle.isClicked())
-		{
-			change = !change;
-			if(!change) {
-				Music.close();
-			}
-			else {
-				Music.open();
-			}
-		}
-	}
 
 	@Override
 	public void enter() {
-		background = Texture.loadImage("res/background/basketballCourt.png", 0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
-		
-		change=true;
-		musicToggle = new Button("res/textures/sound.jpg", "res/textures/nosound.jpg", GlobalConstants.APP_WIDTH/2 -630, GlobalConstants.APP_HEIGHT/2 - 150, 200, 200);
-		
+		background = Texture.loadImage("res/b.png", 0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
 		
 		map = Map.getInstance();
 		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 250, 250, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.55), WordType.getWordTypePath(((GREGame)mApp).getWordType())); 
 		
 		board = Board.getInstance();
-		board.setBoard("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
 		
 		dio = Dio.getInstance();
 		dio.enter(map.getMap()[map.getColRowCount().x / 2][map.getColRowCount().y / 2]);
@@ -79,15 +56,9 @@ public class PlayingScene extends Scene{
 			toNextScene = true;
 			isWin = true;
 		}
-
-		handleMusic(mouse);
-		musicToggle.update();
-		musicToggle.setClickedFalse();
 		
 		map.update(mouse, key);
-		board.update(key);	
 		mouse.mouseClicked = false;
-
 	}
 
 	@Override
@@ -97,7 +68,7 @@ public class PlayingScene extends Scene{
 		map.render(g);
 		board.render(g);
 		dio.render(g);
-		musicToggle.render(g); 
+		
 	}
 
 	@Override
