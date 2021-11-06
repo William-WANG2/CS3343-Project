@@ -57,7 +57,7 @@ public class LoginScene extends Scene {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 9; i < 20; i++) {
+				for(int i = 9; i < 10; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
@@ -69,7 +69,7 @@ public class LoginScene extends Scene {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 20; i < 40; i++) {
+				for(int i = 10; i < 20; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
@@ -81,7 +81,7 @@ public class LoginScene extends Scene {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 40; i < 60; i++) {
+				for(int i = 20; i < 30; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
@@ -93,7 +93,7 @@ public class LoginScene extends Scene {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 60; i < 80; i++) {
+				for(int i = 30; i < 40; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
@@ -105,13 +105,74 @@ public class LoginScene extends Scene {
 			
 			@Override
 			public Boolean call() throws Exception{
-				for(int i = 80; i < 98; i++) {
+				for(int i = 40; i < 50; i++) {
 					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
 					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
 				}
 				return true;
 			}
 		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 50; i < 60; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 60; i < 70; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 70; i < 80; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 80; i < 90; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
+		loadTasks.add(new Callable<Boolean>() {
+			
+			@Override
+			public Boolean call() throws Exception{
+				for(int i = 90; i < 98; i++) {
+					String path = String.format("res/animation/caixukun 0%d.jpg", i + 1);
+					cxk[i] = Texture.loadImage(path, 0, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				}
+				return true;
+			}
+		});
+		
 		for(Callable<Boolean> task : loadTasks) {
 			threadPool.submit(task);
 		}
@@ -148,6 +209,7 @@ public class LoginScene extends Scene {
 	public void render(Graphics2D g) {
 		if(toNextScene) {
 			mApp.loadScene(new PlayingScene());
+			
 		}else {
 			
 			AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());

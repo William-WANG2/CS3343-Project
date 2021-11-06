@@ -48,11 +48,11 @@ public class MapNode implements FrameUpdate{
 	public void enter() {
 		//if the static variable is not loaded yet
 		if(basketball == null && hole == null) {
-			String path = "res/circle/basketball.png";
+			String path = "res/textures/basketballOrigin.png";
 			basketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
-			path = "res/circle/crack.png";
+			path = "res/textures/basketballTrash.png";
 			hole = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
-			path = "res/circle/selectedbasketball.png";
+			path = "res/textures/basketballHighlight.png";
 			selectedbasketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
 		}
 	}
@@ -88,7 +88,6 @@ public class MapNode implements FrameUpdate{
 					updateNode = this;
 				}
 			}
-			mouse.mouseClicked = false;
 		}
 	}
 
