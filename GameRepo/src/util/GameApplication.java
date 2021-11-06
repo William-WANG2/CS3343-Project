@@ -62,26 +62,26 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		setupInput();
 	}
 	
-	public void gameloop(GameTimer timer) {
+	private void gameloop(GameTimer timer) {
 		timer.Tick();
 		update();
 		render();
+		exit();
 	}
 	
 	public void terminate(){
 	}
 	
-	public void update(){
+	private void update(){
 		currScene.update();
 	}
 	
-	public void renderFrame(Graphics g){
+	private void renderFrame(Graphics g){
 		g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
 		currScene.render((Graphics2D)g);
 	}
 	
-	public void render(){
-		
+	private void render(){	
 		do {
 			do {
 				Graphics g = null;
@@ -89,7 +89,6 @@ public abstract class GameApplication extends JFrame implements Runnable{
 					g = bs.getDrawGraphics();
 					renderFrame(g);
 					//calculateFrameRate(g);
-				
 				} catch (Exception e) {
 					e.printStackTrace();
 				} finally {
@@ -101,25 +100,27 @@ public abstract class GameApplication extends JFrame implements Runnable{
 			bs.show();
 		} while (bs.contentsLost());
 	}
-	
-	public void calculateFrameRate(Graphics g) {
-		
-		frameCount++;
-		timeElapsed += timer.DeltaTime();
-		
-		if((timeElapsed) >= 1000)
-		{			
-			String frameRate = String.format("FPS %s", frameCount);
-			g.clearRect( 0, 0, clientWidth, clientHeight);
-			g.setColor(Color.RED);
-			g.setFont(new Font("TimesRoman", Font.BOLD, 10));
-			
-			g.drawString(frameRate, 30, 30);
-			
-			frameCount = 0;
-			timeElapsed -= 1000;
-		}	
+	private void exit() {
+		currScene.exit();
 	}
+	
+//	private void calculateFrameRate(Graphics g) {
+//		
+//		frameCount++;
+//		timeElapsed += timer.DeltaTime();
+//		
+//		if((timeElapsed) >= 1000)
+//		{			
+//			String frameRate = String.format("FPS %s", frameCount);
+//			g.clearRect( 0, 0, clientWidth, clientHeight);
+//			g.setColor(Color.RED);
+//			g.setFont(new Font("TimesRoman", Font.BOLD, 10));
+//			g.drawString(frameRate, 30, 30);
+//			
+//			frameCount = 0;
+//			timeElapsed -= 1000;
+//		}	
+//	}
 	
 	public void run() {
 		running = true;
@@ -132,15 +133,6 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	}
 	
 	public abstract void loadScene(Scene next);
-	/*{
-		
-		if(null != currScene) {
-			currScene.exit();
-		}
-		currScene = next;
-		currScene.mApp = this;
-		currScene.enter();
-	}*/
 	
 	private void setupInput() {
 		canvas.addMouseListener(new MouseAdapter() {

@@ -51,7 +51,6 @@ public class PlayingScene extends Scene{
 			isWin = true;
 		}
 		
-		
 		map.update(mouse, key);
 		board.update(key);
 		mouse.mouseClicked = false;
@@ -59,19 +58,17 @@ public class PlayingScene extends Scene{
 
 	@Override
 	public void render(Graphics2D g) {
-		if(toNextScene) {
-			mApp.loadScene(new ResultScene());
-		}
-		else {
-			map.render(g);
-			board.render(g);
-			dio.render(g);
-		}
+		map.render(g);
+		board.render(g);
+		dio.render(g);
 	}
 
 	@Override
 	public void exit() {
-		mApp.setGameResult(correctCount, errorCount, isWin);
+		if(toNextScene) {
+			mApp.setGameResult(correctCount, errorCount, isWin);
+			mApp.loadScene(new ResultScene());
+		}
 	}
 
 

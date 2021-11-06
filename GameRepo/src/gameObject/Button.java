@@ -43,6 +43,9 @@ public class Button {
 	public Boolean isClicked() {
 		return isClicked;
 	}
+	public void setClickedFalse() {
+		  isClicked = false;
+	}
 	
 	public void update() {
 		if(isClicked) {

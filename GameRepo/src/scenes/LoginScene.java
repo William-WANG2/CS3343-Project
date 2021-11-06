@@ -33,6 +33,7 @@ public class LoginScene extends Scene {
 			{
 				toNextScene = true;
 				modeIndex = WordType.fromIntToWordType(i);
+				startButtons[i].setClickedFalse();
 			}
 		}
 	}
@@ -92,7 +93,6 @@ public class LoginScene extends Scene {
 			startButtons[i].update();
 		}
 		handleEvent(mouse);
-		
 		timeElapsed += timer.DeltaTime();
 		if(timeElapsed >= 300) {
 			sequenceIndex++;
@@ -103,21 +103,18 @@ public class LoginScene extends Scene {
 
 	@Override
 	public void render(Graphics2D g) {
-		if(toNextScene) {
-			((GREGame)mApp).setWordType(modeIndex);
-			mApp.loadScene(new PlayingScene());
-			
-		}else {
-			AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
-			g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
-			for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
-				startButtons[i].render(g);
-			}
+		AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
+		g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
+		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+			startButtons[i].render(g);
 		}
 	}
 
 	@Override
 	public void exit() {
-		
+		if(toNextScene) {
+			((GREGame)mApp).setWordType(modeIndex);
+			mApp.loadScene(new PlayingScene());
+		}
 	}
 }

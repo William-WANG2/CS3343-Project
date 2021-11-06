@@ -51,10 +51,6 @@ public class GREGame extends GameApplication{
 	}
 	@Override
 	public void loadScene(Scene next) {
-		
-		if(null != currScene) {
-			currScene.exit();
-		}
 		currScene = next;
 		currScene.mApp = this;
 		currScene.enter();
