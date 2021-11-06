@@ -8,7 +8,7 @@ import util.*;
 import algorithm.*;
 
 public class Dio{
-	
+
 	GameTimer timer = GameTimer.getInstance();
 	long timeElapsed; 
 
@@ -16,29 +16,17 @@ public class Dio{
 	private boolean alive;
 	private boolean surround;
 	private Texture[] normalDio;
+
 	private int sequenceIndex;
-	private Texture angryDio;
+
+	private Texture[] angryDio;
+
 	private ShortestPath s;
 	private static Dio dio = new Dio();
 	public static Dio getInstance() {
 		return dio;
 	}
 	private Dio() {
-	}
-	
-	public void initialize(MapNode node) {
-		this.node=node;
-		alive=true;
-		surround=false;
-		normalDio = new Texture[6];
-		String path;
-		for(int i = 0; i < 6; i++) {
-			path = String.format("res/textures/walk%d.png", i);
-			normalDio[i] = Texture.loadImage(path, 0, (int)(2*node.getState().radius * 0.75), (int)(2*node.getState().radius * 1.5), (int)(2*node.getState().radius * 1.5));
-		}
-		sequenceIndex = 0;
-		path = "res/textures/basketballtrash.png";
-		angryDio = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
 	}
 	
 	private void setNode(MapNode node) {
@@ -86,16 +74,34 @@ public class Dio{
 		}
 		return null;
 	}
-	public void enter() {
-		
+
+	public void enter(MapNode node) {
+		this.node=node;
+		alive=true;
+		surround=false;
+		normalDio = new Texture[8];
+		angryDio = new Texture[8];
+		String path;
+		for(int i = 0; i < 8; i++) {
+			path = String.format("res/sprite/kunkun%d.png", i+1);
+			normalDio[i] = Texture.loadImage(path, 0, 0, (int)(2.5*node.getState().radius), (int)(4*node.getState().radius));
+		}
+		for(int i = 0; i < 8; i++) {
+			path = String.format("res/sprite/angryKunkun%d.png", i+1);
+			angryDio[i] = Texture.loadImage(path, 0, 0, (int)(2.5*node.getState().radius), (int)(4*node.getState().radius));
+		}
 	}
 
 	public void render(Graphics2D g) {
+		
+		timeElapsed += timer.DeltaTime();
+		
 		if(surround) {
-			AffineTransform transform = new AffineTransform(angryDio.getScaleX(), 0.0, 0.0, angryDio.getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
-			g.drawImage(angryDio.getImage(), transform, null);
+			AffineTransform transform = new AffineTransform(angryDio[sequenceIndex].getScaleX(), 0.0, 0.0, angryDio[sequenceIndex].getScaleY(), (int)node.getState().displayPos.y - (int)(0.8*node.getState().radius), (int)node.getState().displayPos.x - (int)(2*node.getState().radius));
+			g.drawImage(angryDio[sequenceIndex].getImage(), transform, null);
 		}
 		else {
+
 			timeElapsed += timer.DeltaTime();
 			if(timeElapsed >= 150) {
 				timeElapsed = 0;
@@ -109,17 +115,13 @@ public class Dio{
 		}
 	}
 
-	public void exit() {
-		// TODO Auto-generated method stub
+	public void upadateAnimationSequence() {
 		
-	}
-
-	public void update(Mouse mouse, Key key) {
-		// TODO Auto-generated method stub
 		
 	}
 	
-	public void update(boolean move) {
+	public void updatePosition() {
+
 		if (isAlive()) {
 			MapNode dir = null; 
 			//whether change to surround from normal / death from surround
@@ -134,7 +136,7 @@ public class Dio{
 			if(isSurround()) {
 				dir = moveSurround();
 			}
-			if(move && dir!=null) {
+			if(dir!=null) {
 				setNode(dir);
 			}
 		}

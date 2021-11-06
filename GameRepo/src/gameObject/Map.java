@@ -144,7 +144,7 @@ public class Map{
 	}
 
 	public void exit() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -155,9 +155,7 @@ public class Map{
 					map[i][j].handleClickEvent(mouse.mousePos.x, mouse.mousePos.y);
 				}
 			}
-			//if(mouse.mouseClicked) { 
-				mouse.mouseClicked = false;
-			//}
+
 		}
 	}
 }

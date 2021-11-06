@@ -16,51 +16,17 @@ import util.Key;
 import util.Mouse;
 import util.Texture;
 
+
 public class MapNode{
 	
-	  public class Mythread extends Thread{
-		  private String Path;
-		  public Mythread(String pathname) {
-			  Path=pathname;
-		}
-		
-	    	public void run() {
-	    		try
-	    		{
-	    			File musicPath = new File(Path);
-	    			
-	    			if(musicPath.exists())
-	    			{
-	    				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
-	    				Clip clip = AudioSystem.getClip();
-	    				clip.open(audioInput);
-	    				FloatControl gainControl=(FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-	    				gainControl.setValue(0);
-	    				clip.start();
-	    				
-	    			}
-	    			else
-	    			{
-	    				
-	    			}
-	    		}
-	    		catch(Exception ex)
-	    		{
-	    			ex.printStackTrace();
-	    		}
-	    	}
-	    }
-	
 	private MapNodeInfo info;
-	
-	private static Mythread musicCorrectThread; 
-	private static Mythread musicWrongThread; 
 	
 	private ArrayList<MapNode> adjacency;
 	private static Texture basketball = null;
 	private static Texture selectedbasketball = null;
 	private static Texture hole = null;
-	private static MapNode updateNode = null; //the node user is currently typing the answer for 
+	private static MapNode updateNode = null; // the node user is currently typing the answer for
+
 	public static MapNode getUpdateNode() {
 		return updateNode;
 	}
@@ -80,34 +46,28 @@ public class MapNode{
 	public void addAdj(MapNode n) {
 		adjacency.add(n);
 	}
+
 	public MapNodeInfo getState() {
 		return info;
 	}
-	
-	public ArrayList<MapNode> getAdjacency(){
+
+	public ArrayList<MapNode> getAdjacency() {
 		return adjacency;
 	}
+
 	public boolean isBorder() {
 		return adjacency.contains(Map.getInstance().getDummy());
 	}
-	
+
 	public void enter() {
-		//if the static variable is not loaded yet
-		if(basketball == null && hole == null) {
+		// if the static variable is not loaded yet
+		if (basketball == null && hole == null) {
 			String path = "res/textures/basketballOrigin.png";
-			basketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
+			basketball = Texture.loadImage(path, 0, 0, (int) (2 * info.radius), (int) (2 * info.radius));
 			path = "res/textures/basketballTrash.png";
-			hole = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
+			hole = Texture.loadImage(path, 0, 0, (int) (2 * info.radius), (int) (2 * info.radius));
 			path = "res/textures/basketballHighlight.png";
-			selectedbasketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
-		}
-		if(null == musicCorrectThread)
-		{
-			musicCorrectThread = new Mythread("res/textures/good.wav");
-		}
-		if(null == musicWrongThread)
-		{
-			musicWrongThread = new Mythread("res/textures/bad.wav");
+			selectedbasketball = Texture.loadImage(path, 0, 0, (int) (2 * info.radius), (int) (2 * info.radius));
 		}
 	}
 	
@@ -117,7 +77,7 @@ public class MapNode{
 				viewNode.info.blocked = true;
 			}
 			else {
-			      Dio.getInstance().update(true);
+			      Dio.getInstance().updatePosition();
 			}
 		}
 		viewNode = null;
@@ -134,7 +94,6 @@ public class MapNode{
 				}
 			}
 			viewNode = this;
-			
 		}
 	}
 	
@@ -150,21 +109,21 @@ public class MapNode{
 		if(info.blocked) {
 			transform = new AffineTransform(hole.getScaleX(), 0.0, 0.0, hole.getScaleY(), info.displayPos.y, info.displayPos.x);
 			g.drawImage(hole.getImage(), transform, null);
-		}
-		else {
-			if(viewNode == this) {
-				transform = new AffineTransform(selectedbasketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(), info.displayPos.y, info.displayPos.x);
+		} else {
+			if (viewNode == this) {
+				transform = new AffineTransform(selectedbasketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(),
+						info.displayPos.y, info.displayPos.x);
 				g.drawImage(selectedbasketball.getImage(), transform, null);
-			}
-			else {
-				transform = new AffineTransform(basketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(), info.displayPos.y, info.displayPos.x);
+			} else {
+				transform = new AffineTransform(basketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(),
+						info.displayPos.y, info.displayPos.x);
 				g.drawImage(basketball.getImage(), transform, null);
 			}
 		}
 	}
 
 	public void exit() {
-		
+
 	}
 
 }

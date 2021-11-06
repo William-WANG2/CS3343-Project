@@ -10,7 +10,7 @@ public class GlobalConstants {
 
 	public static final String APP_TITLE = "JIJICAT";
 
-	public static final int MAP_ROW = 12;
-	public static final int MAP_COLUMN = 12;
+	public static final int MAP_ROW = 11;
+	public static final int MAP_COLUMN = 11;
 	public static final int NUM_GAME_MODE = 4;
 }

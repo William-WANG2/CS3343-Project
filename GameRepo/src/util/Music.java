@@ -24,10 +24,6 @@ public class Music {
 				clip.start();
 				clip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
-			else
-			{
-				
-			}
 		}
 		catch(Exception ex)
 		{
@@ -42,7 +38,6 @@ public class Music {
 	
 	public static void open() {
 		clip.start();
-		
 	}
 
 }
