@@ -20,6 +20,7 @@ public class PlayingScene extends Scene{
 	int correctCount;
 	int errorCount;
 	
+	
 	@Override
 	public void enter() {
 		
@@ -27,7 +28,7 @@ public class PlayingScene extends Scene{
 		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 300, 300, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.6), WordType.getWordTypePath(((GREGame)mApp).getWordType())); 
 		
 		board = Board.getInstance();
-		board.setBoard("res/textures/box.png", GlobalConstants.APP_WIDTH/2, 50, (int)(GlobalConstants.APP_WIDTH * 0.8), 200);
+		board.setBoard("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
 		
 		dio = Dio.getInstance();
 		dio.initialize(map.getMap()[map.getColRowCount().x / 2][map.getColRowCount().y / 2]);
@@ -49,8 +50,11 @@ public class PlayingScene extends Scene{
 			toNextScene = true;
 			isWin = true;
 		}
+		
+		
 		map.update(mouse, key);
 		board.update(key);
+		mouse.mouseClicked = false;
 	}
 
 	@Override
