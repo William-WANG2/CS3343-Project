@@ -20,10 +20,18 @@ public enum WordType {
 		return null;
 	}
 	
+	//obtain the path for the words resources
 	public static String getWordTypePath(WordType w) {
 		switch(w) {
 			case PRIMARY:
-				return "res/word.txt";
+				return "res/words/PRIMARY.xml";
+			case IELTS:
+				return "res/words/IELTS.xml";
+			case TOEFL:
+				return "res/words/TOEFL.xml";
+			case GRE:
+				return "res/words/GRE.xml";
+				
 		}
 		return null;
 	}
