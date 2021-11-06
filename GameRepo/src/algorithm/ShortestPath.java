@@ -38,21 +38,21 @@ public class ShortestPath {
 		visited[s.x][s.y] = true;
 		while(!Q.isEmpty()) {
 			MapNode temp = Q.remove();
-			visited[temp.getState().abstractPos.x][temp.getState().abstractPos.y] = true;
+			visited[temp.getNodeInformation().abstractPos.x][temp.getNodeInformation().abstractPos.y] = true;
 			ArrayList<MapNode> adj = temp.getAdjacency();
 			for(MapNode n: adj) {
-				if(visited[n.getState().abstractPos.x][n.getState().abstractPos.y] || n.getState().blocked) {
+				if(visited[n.getNodeInformation().abstractPos.x][n.getNodeInformation().abstractPos.y] || n.getNodeInformation().blocked) {
 					continue;
 				}
 				else {
 					if(n == map.getDummy()) {
-						res = temp.getState().abstractPos;
+						res = temp.getNodeInformation().abstractPos;
 						return res;
 					}
 					else {
-						visited[n.getState().abstractPos.x][n.getState().abstractPos.y] = true;
+						visited[n.getNodeInformation().abstractPos.x][n.getNodeInformation().abstractPos.y] = true;
 						Q.add(n);
-						path[n.getState().abstractPos.x][n.getState().abstractPos.y] = temp.getState().abstractPos;
+						path[n.getNodeInformation().abstractPos.x][n.getNodeInformation().abstractPos.y] = temp.getNodeInformation().abstractPos;
 					}
 				}
 			}	

@@ -19,7 +19,7 @@ import util.Texture;
 
 public class MapNode{
 	
-	private MapNodeInfo info;
+	private MapNodeInfo nodeInfo;
 	
 	private ArrayList<MapNode> adjacency;
 	private static Texture basketball = null;
@@ -39,7 +39,7 @@ public class MapNode{
 	
 	
 	public MapNode(float x, float y, float r, int m, int n, WordInfo wordInformation) {
-		info = new MapNodeInfo(x, y, r, m, n, wordInformation);
+		nodeInfo = new MapNodeInfo(x, y, r, m, n, wordInformation);
 		adjacency = new ArrayList<MapNode>();
 	}
 
@@ -47,8 +47,8 @@ public class MapNode{
 		adjacency.add(n);
 	}
 
-	public MapNodeInfo getState() {
-		return info;
+	public MapNodeInfo getNodeInformation() {
+		return nodeInfo;
 	}
 
 	public ArrayList<MapNode> getAdjacency() {
@@ -63,34 +63,35 @@ public class MapNode{
 		// if the static variable is not loaded yet
 		if (basketball == null && hole == null) {
 			String path = "res/textures/basketballOrigin.png";
-			basketball = Texture.loadImage(path, 0, 0, (int) (2 * info.radius), (int) (2 * info.radius));
+			basketball = Texture.loadImage(path, 0, 0, (int) (2 * nodeInfo.radius), (int) (2 * nodeInfo.radius));
 			path = "res/textures/basketballTrash.png";
-			hole = Texture.loadImage(path, 0, 0, (int) (2 * info.radius), (int) (2 * info.radius));
+			hole = Texture.loadImage(path, 0, 0, (int) (2 * nodeInfo.radius), (int) (2 * nodeInfo.radius));
 			path = "res/textures/basketballHighlight.png";
-			selectedbasketball = Texture.loadImage(path, 0, 0, (int) (2 * info.radius), (int) (2 * info.radius));
+			selectedbasketball = Texture.loadImage(path, 0, 0, (int) (2 * nodeInfo.radius), (int) (2 * nodeInfo.radius));
 		}
 	}
 	
 	static public void handleViewNodeInput() {
 		if(null != viewNode) {
 			if(Board.isCorrectAnswer()) {
-				viewNode.info.blocked = true;
+				viewNode.nodeInfo.blocked = true;
+				 Dio.getInstance().recomputeShortestPath(false);
 			}
 			else {
-			      Dio.getInstance().updatePosition();
+			      Dio.getInstance().recomputeShortestPath(true);
 			}
 		}
 		viewNode = null;
 	}
 	
 	public void handleClickEvent(int mousePositionX, int mousePositionY) {
-		boolean isInGeo= Math.pow(mousePositionX - info.displayPos.y - info.radius,2) + Math.pow(mousePositionY - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
-		if(isInGeo && info.blocked==false) {//add restore the click if click another one
+		boolean isInGeo= Math.pow(mousePositionX - nodeInfo.displayPos.y - nodeInfo.radius,2) + Math.pow(mousePositionY - nodeInfo.displayPos.x - nodeInfo.radius, 2) < Math.pow(nodeInfo.radius, 2);
+		if(isInGeo && nodeInfo.blocked==false) {//add restore the click if click another one
 			//If Dio is currently on the node, can not update it
 			if(this != Dio.getInstance().getNode()) {
 				//set board
-				if( this.info.getWordInfo() != Board.getInstance().getWordInfo()) {
-					Board.getInstance().setWordInfo(info.getWordInfo());
+				if( this.nodeInfo.getWordInfo() != Board.getInstance().getWordInfo()) {
+					Board.getInstance().setWordInfo(nodeInfo.getWordInfo());
 				}
 			}
 			viewNode = this;
@@ -106,17 +107,17 @@ public class MapNode{
 			return;
 		}
 		
-		if(info.blocked) {
-			transform = new AffineTransform(hole.getScaleX(), 0.0, 0.0, hole.getScaleY(), info.displayPos.y, info.displayPos.x);
+		if(nodeInfo.blocked) {
+			transform = new AffineTransform(hole.getScaleX(), 0.0, 0.0, hole.getScaleY(), nodeInfo.displayPos.y, nodeInfo.displayPos.x);
 			g.drawImage(hole.getImage(), transform, null);
 		} else {
 			if (viewNode == this) {
 				transform = new AffineTransform(selectedbasketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(),
-						info.displayPos.y, info.displayPos.x);
+						nodeInfo.displayPos.y, nodeInfo.displayPos.x);
 				g.drawImage(selectedbasketball.getImage(), transform, null);
 			} else {
 				transform = new AffineTransform(basketball.getScaleX(), 0.0, 0.0, basketball.getScaleY(),
-						info.displayPos.y, info.displayPos.x);
+						nodeInfo.displayPos.y, nodeInfo.displayPos.x);
 				g.drawImage(basketball.getImage(), transform, null);
 			}
 		}

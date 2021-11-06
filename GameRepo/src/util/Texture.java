@@ -10,6 +10,8 @@ public class Texture {
 	
 	private BufferedImage image;
 	private Transform transform;
+	int height;
+	int width;
 	
 	public Texture(BufferedImage image, Transform transform) {
 		this.image = image;
@@ -36,6 +38,15 @@ public class Texture {
 		return this.transform.position.y;
 	}
 	
+	public float getHeight() {
+		height = (int)(image.getHeight() * transform.scale.y);
+		return height;
+	}
+	
+	public float getWidth() {
+		width = (int)(image.getWidth() * transform.scale.x);
+		return width;
+	}
 	static public Texture loadImage(String filePath, int x, int y, int width, int height) {
 		
 		InputStream stream = ResourceLoader.load(Texture.class, filePath, null);
@@ -45,6 +56,7 @@ public class Texture {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		Vector2f position = new Vector2f(x, y);
 		Vector2f scale = new Vector2f((float)width/(float)image.getWidth(), (float)height/(float)image.getHeight());
 		Transform transform = new Transform(position, scale);

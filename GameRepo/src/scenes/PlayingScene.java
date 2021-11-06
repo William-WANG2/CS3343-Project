@@ -85,7 +85,7 @@ public class PlayingScene extends Scene{
 		musicToggle.setClickedFalse();
 		
 		map.update(mouse, key);
-		
+		dio.upadateAnimationSequencePerFrame();
 		board.handleKeyboardInput(key);	
 		
 		mouse.mouseClicked = false;

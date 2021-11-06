@@ -55,6 +55,7 @@ public class Board{
 			else if(keyEvent == KeyEvent.VK_ENTER) {
 				MapNode.handleViewNodeInput();
 				currentInput = "";
+				currentWordInformation = null;
 			}
 			
 			key.queuingEvent.removeFirst();
@@ -76,7 +77,10 @@ public class Board{
 		if(currentWordInformation != null)
 		{
 			g.drawString(currentInput, 400, 150);
-			g.drawString(currentWordInformation.getDefinition(), 400, 100);
+			if(currentWordInformation != null) {
+				g.drawString(currentWordInformation.getDefinition(), 400, 100);
+			}
+			
 		}
 	}
 }
