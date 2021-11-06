@@ -16,9 +16,9 @@ public class PlayingScene extends Scene{
 	Board board;
 	Dio dio;
 	boolean toNextScene;
-	boolean win;
+	boolean isWin;
 	int correctCount;
-	int stepCount;
+	int errorCount;
 	
 	@Override
 	public void enter() {
@@ -36,18 +36,18 @@ public class PlayingScene extends Scene{
 		key = mApp.key;
 		toNextScene = false;
 		correctCount = 0;
-		stepCount = 0;
+		errorCount = 0;
 	}
 
 	@Override
 	public void update() {
 		if(dio.isEscape()) {
 			toNextScene = true;
-			win = false;
+			isWin = false;
 		}
 		else if(!dio.isAlive()) {
 			toNextScene = true;
-			win = true;
+			isWin = true;
 		}
 		map.update(mouse, key);
 		board.update(key);
@@ -67,7 +67,7 @@ public class PlayingScene extends Scene{
 
 	@Override
 	public void exit() {
-		
+		mApp.setGameResult(correctCount, errorCount, isWin);
 	}
 
 

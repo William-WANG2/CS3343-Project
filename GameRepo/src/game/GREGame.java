@@ -49,6 +49,16 @@ public class GREGame extends GameApplication{
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
+	@Override
+	public void loadScene(Scene next) {
+		
+		if(null != currScene) {
+			currScene.exit();
+		}
+		currScene = next;
+		currScene.mApp = this;
+		currScene.enter();
+	}
 	
 	
 }

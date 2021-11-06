@@ -63,32 +63,33 @@ public class MapNode implements FrameUpdate{
 		if(isInGeo && info.blocked==false) {//add restore the click if click another one
 			//If Dio is currently on the node, can not update it
 			if(Dio.getInstance().getNode() != this) {
-				//display the input region
-				if(updateNode == null || updateNode == this) {
-					//check if the answer is correct or not
-					if(updateNode == this) {
-						if(Board.isInputValid()) {
-							info.blocked = true;
-							Board.getInstance().updateState("Well down!", 2);
-							Dio.getInstance().update(mouse, key, false); //dio doesn't move if input is correct
-						}
-						else {
-							Board.getInstance().updateState("Oh no!", 2);
-							Dio.getInstance().update(mouse, key, true); //dio moves if input is wrong
-						}
-						updateNode = null;
-						viewNode = null;
-					}
-					else if(viewNode==null || viewNode!=this) {
-						viewNode = this;
-						Board.getInstance().updateState(info.greInfo.getDefin(), 0);
+				
+			}
+			//display the input region
+			if(updateNode == null || updateNode == this) {
+				//check if the answer is correct or not
+				if(updateNode == this) {
+					if(Board.isInputValid()) {
+						info.blocked = true;
+						Board.getInstance().updateState("Well down!", 2);
+						Dio.getInstance().update(mouse, key, false); //dio doesn't move if input is correct
 					}
 					else {
-						Board.getInstance().updateState(info.greInfo.getAns(), 1);
-						updateNode = this;
+						Board.getInstance().updateState("Oh no!", 2);
+						Dio.getInstance().update(mouse, key, true); //dio moves if input is wrong
 					}
+					updateNode = null;
+					viewNode = null;
 				}
-			}	
+				else if(viewNode==null || viewNode!=this) {
+					viewNode = this;
+					Board.getInstance().updateState(info.greInfo.getDefin(), 0);
+				}
+				else {
+					Board.getInstance().updateState(info.greInfo.getAns(), 1);
+					updateNode = this;
+				}
+			}
 			mouse.mouseClicked = false;
 		}
 	}

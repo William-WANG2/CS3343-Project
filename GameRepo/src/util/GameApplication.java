@@ -131,7 +131,8 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		terminate();
 	}
 	
-	public final void loadScene(Scene next) {
+	public abstract void loadScene(Scene next);
+	/*{
 		
 		if(null != currScene) {
 			currScene.exit();
@@ -139,7 +140,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		currScene = next;
 		currScene.mApp = this;
 		currScene.enter();
-	}
+	}*/
 	
 	private void setupInput() {
 		canvas.addMouseListener(new MouseAdapter() {

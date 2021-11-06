@@ -48,7 +48,7 @@ public class nodeInfoTest {
 	}
 	@Test
 	public void test5() {
-		Board bc = Board.getInstance();
+		//Board bc = Board.getInstance();
 		//bc.update("d",1);
 		//boolean res = bc.checkInput();
 		//assertEquals(true,res);

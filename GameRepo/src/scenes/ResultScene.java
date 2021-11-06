@@ -69,7 +69,8 @@ public class ResultScene extends Scene{
 				g.drawString(member, 20, height);
 				height += 20;
 			}
-			if(true) {
+			if(mApp.isGameWin()) {
+
 				g.drawString("You win!!!", 30, 30);
 			}
 			else {

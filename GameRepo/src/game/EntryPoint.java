@@ -6,9 +6,9 @@ import javax.swing.*;
 public class EntryPoint{
 	public static void main(String args[])
 	{
-		GameApplication test = new GREGame();
+		GameApplication game = new GREGame();
 		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {test.initialize();}
+			public void run() {game.initialize();}
 
 		});	
 		
@@ -17,7 +17,7 @@ public class EntryPoint{
 		Music musicObject = new Music();
 		musicObject.playMusic(filepath);
 		
-		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 
 	};

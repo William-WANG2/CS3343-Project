@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import keyValue.*;
 import util.FrameUpdate;
@@ -18,6 +19,10 @@ import util.Texture;
 public class Board{
 	
 	private static Texture boardTexture;
+	private static ArrayList<Info> Info;
+	private static Info currInfo;
+	private static String currInput;
+	
 	private static BoxMessage currMessage = new BoxMessageDef();
 	
 	static private Board instance = new Board();
@@ -31,6 +36,7 @@ public class Board{
 	public static Board getInstance() {
 		return instance;
 	}
+	
 	
 	//if currMessage change, update the field
 	public void updateState(String m, int i) { 
