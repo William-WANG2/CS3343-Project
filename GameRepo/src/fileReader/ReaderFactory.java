@@ -1,15 +1,15 @@
 package fileReader;
 
-import java.io.FileNotFoundException;
+import java.io.FileNotFoundException; 
 import java.util.ArrayList;
 
 import exception.ExMapExceedWordSize;
-import keyValue.Info;
+import gameObject.WordInfo;
 
 public class ReaderFactory extends ReaderApp{
 
 	@Override
-	public ArrayList<Info> convert(String path, int m, int n) throws ExMapExceedWordSize, FileNotFoundException {
+	public ArrayList<WordInfo> convert(String path, int m, int n) throws ExMapExceedWordSize, FileNotFoundException {
 		String extension = getFileType(path);
 		if(extension.equals("txt")) {
 			return TxtReader.convert(path, m, n);

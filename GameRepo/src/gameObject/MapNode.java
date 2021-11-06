@@ -12,13 +12,11 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import keyValue.Info;
-import util.FrameUpdate;
 import util.Key;
 import util.Mouse;
 import util.Texture;
 
-public class MapNode implements FrameUpdate{
+public class MapNode{
 	
 	  public class Mythread extends Thread{
 		  private String Path;
@@ -51,11 +49,13 @@ public class MapNode implements FrameUpdate{
 	    			ex.printStackTrace();
 	    		}
 	    	}
-	    	
-	    	
 	    }
 	
 	private MapNodeInfo info;
+	
+	private static Mythread musicCorrectThread; 
+	private static Mythread musicWrongThread; 
+	
 	private ArrayList<MapNode> adjacency;
 	private static Texture basketball = null;
 	private static Texture selectedbasketball = null;
@@ -67,8 +67,13 @@ public class MapNode implements FrameUpdate{
 
 	private static MapNode viewNode = null; //the node user is currently viewing the definition 
 	
-	public MapNode(float x, float y, float r, int m, int n, Info gre) {
-		info = new MapNodeInfo(x, y, r, m, n, gre);
+	public static boolean isViewExist() {
+		return (null != viewNode);
+	}
+	
+	
+	public MapNode(float x, float y, float r, int m, int n, WordInfo wordInformation) {
+		info = new MapNodeInfo(x, y, r, m, n, wordInformation);
 		adjacency = new ArrayList<MapNode>();
 	}
 
@@ -86,8 +91,6 @@ public class MapNode implements FrameUpdate{
 		return adjacency.contains(Map.getInstance().getDummy());
 	}
 	
-
-	@Override
 	public void enter() {
 		//if the static variable is not loaded yet
 		if(basketball == null && hole == null) {
@@ -98,54 +101,52 @@ public class MapNode implements FrameUpdate{
 			path = "res/textures/basketballHighlight.png";
 			selectedbasketball = Texture.loadImage(path, 0, 0, (int)(2*info.radius), (int)(2*info.radius));
 		}
-	}
-
-	@Override
-	public void update(Mouse mouse, Key key) {
-		boolean isInGeo= Math.pow(mouse.mousePos.x - info.displayPos.y - info.radius,2) + Math.pow(mouse.mousePos.y - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
-		if(isInGeo && info.blocked==false) {//add restore the click if click another one
-			//If Dio is currently on the node, can not update it
-			if(Dio.getInstance().getNode() != this) {
-				
-			}
-			//display the input region
-			if(updateNode == null || updateNode == this) {
-				//check if the answer is correct or not
-				if(updateNode == this) {
-					if(Board.isInputValid()) {
-						info.blocked = true;
-						Mythread thread1=new Mythread("res/textures/good.wav");
-						thread1.start();
-						Board.getInstance().updateState("Well down!", 2);
-						Dio.getInstance().update(mouse, key, false);
-						
-						//dio doesn't move if input is correct
-					}
-					else {
-						Mythread thread=new Mythread("res/textures/bad.wav");
-						thread.start();
-						Board.getInstance().updateState("Oh no!", 2);
-						Dio.getInstance().update(mouse, key, true); 
-						//dio moves if input is wrong
-					}
-					updateNode = null;
-					viewNode = null;
-				}
-				else if(viewNode==null || viewNode!=this) {
-					viewNode = this;
-					Board.getInstance().updateState(info.greInfo.getDefin(), 0);
-				}
-				else {
-					Board.getInstance().updateState(info.greInfo.getAns(), 1);
-					updateNode = this;
-				}
-			}
+		if(null == musicCorrectThread)
+		{
+			musicCorrectThread = new Mythread("res/textures/good.wav");
+		}
+		if(null == musicWrongThread)
+		{
+			musicWrongThread = new Mythread("res/textures/bad.wav");
 		}
 	}
-
-	@Override
+	
+	static public void handleViewNodeInput() {
+		if(null != viewNode) {
+			if(Board.isCorrectAnswer()) {
+				viewNode.info.blocked = true;
+			}
+			else {
+			      Dio.getInstance().update(true);
+			}
+		}
+		viewNode = null;
+	}
+	
+	public void handleClickEvent(int mousePositionX, int mousePositionY) {
+		boolean isInGeo= Math.pow(mousePositionX - info.displayPos.y - info.radius,2) + Math.pow(mousePositionY - info.displayPos.x - info.radius, 2) < Math.pow(info.radius, 2);
+		if(isInGeo && info.blocked==false) {//add restore the click if click another one
+			//If Dio is currently on the node, can not update it
+			if(this != Dio.getInstance().getNode()) {
+				//set board
+				if( this.info.getWordInfo() != Board.getInstance().getWordInfo()) {
+					Board.getInstance().setWordInfo(info.getWordInfo());
+				}
+			}
+			viewNode = this;
+			
+		}
+	}
+	
+	
 	public void render(Graphics2D g) {
 		AffineTransform transform;
+		
+		if(this == Dio.getInstance().getNode())
+		{
+			return;
+		}
+		
 		if(info.blocked) {
 			transform = new AffineTransform(hole.getScaleX(), 0.0, 0.0, hole.getScaleY(), info.displayPos.y, info.displayPos.x);
 			g.drawImage(hole.getImage(), transform, null);
@@ -162,9 +163,7 @@ public class MapNode implements FrameUpdate{
 		}
 	}
 
-	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
 		
 	}
 

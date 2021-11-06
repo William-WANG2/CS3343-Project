@@ -10,8 +10,6 @@ import java.awt.geom.AffineTransform;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import keyValue.*;
-import util.FrameUpdate;
 import util.Key;
 import util.Mouse;
 import util.Texture;
@@ -19,57 +17,66 @@ import util.Texture;
 public class Board{
 	
 	private static Texture boardTexture;
-	private static ArrayList<Info> Info;
-	private static Info currInfo;
-	private static String currInput;
-	
-	private static BoxMessage currMessage = new BoxMessageDef();
+	private static String currentInput = "";
+	private static WordInfo currentWordInformation;
 	
 	static private Board instance = new Board();
 	private Board() {	
-	}
-	
-	public void setBoard(String boxTexturePath, int centerX, int centerY, int width, int height){
-		boardTexture = Texture.loadImage(boxTexturePath, centerX - width/2, centerY - height/2, width, height);
 	}
 	
 	public static Board getInstance() {
 		return instance;
 	}
 	
+	public void setBoardAppearance(String boxTexturePath, int centerX, int centerY, int width, int height){
+		boardTexture = Texture.loadImage(boxTexturePath, centerX - width/2, centerY - height/2, width, height);
+	}
 	
-	//if currMessage change, update the field
-	public void updateState(String m, int i) { 
-		//the integer is to indicate whether it is answer, definition or prompt
-		if(i==0) {
-			currMessage = new BoxMessageDef(m);
-		}
-		else if(i==1) {
-			currMessage = new BoxMessageAns(m);
-		}
-		else {
-			currMessage = new BoxMessagePrompt(m);
-		}
-		//currField.update(currMessage.getMessage()); This is a string
+	public void setWordInfo(WordInfo wordInformation) {
+		currentWordInformation = wordInformation;
+		currentInput = "";
 	}
 
-	public void update(Key key) {
-		if(currMessage instanceof BoxMessageAns) {
-			((BoxMessageAns)currMessage).updateInput(key);
+	public void handleKeyboardInput(Key key) {
+		
+		while(!key.queuingEvent.isEmpty()) {
+			if(!MapNode.isViewExist()) {
+				key.queuingEvent.clear();
+				return;
+			}
+			int keyEvent = key.queuingEvent.getFirst();
+			
+			if(keyEvent == KeyEvent.VK_BACK_SPACE) {
+				currentInput = currentInput.length() <= 1 ? "" : currentInput.substring(0, currentInput.length()-1);
+			}
+			else if(keyEvent >= KeyEvent.VK_A && keyEvent <= KeyEvent.VK_Z){
+				currentInput += (char)(keyEvent - KeyEvent.VK_A+'a');
+			}
+			else if(keyEvent == KeyEvent.VK_ENTER) {
+				MapNode.handleViewNodeInput();
+				currentInput = "";
+			}
+			
+			key.queuingEvent.removeFirst();
 		}
 	}
-	public static boolean isInputValid() {
-		if(currMessage instanceof BoxMessageAns) {
-			return ((BoxMessageAns)currMessage).isInputValid();
-		}
-		return false;
+	
+	public static boolean isCorrectAnswer() {
+		return (currentInput.equals(currentWordInformation.getWord()));
+	}
+	
+	public WordInfo getWordInfo() {
+		return currentWordInformation;
 	}
 	
 	public void render(Graphics2D g) {
 		
 		AffineTransform transform = new AffineTransform(boardTexture.getScaleX(), 0.0, 0.0, boardTexture.getScaleY(), boardTexture.getPosX(), boardTexture.getPosY());
 		g.drawImage(boardTexture.getImage(), transform, null);
-		g.drawString(currMessage.getMessage(), 400, 100);
-		
+		if(currentWordInformation != null)
+		{
+			g.drawString(currentInput, 400, 150);
+			g.drawString(currentWordInformation.getDefinition(), 400, 100);
+		}
 	}
 }

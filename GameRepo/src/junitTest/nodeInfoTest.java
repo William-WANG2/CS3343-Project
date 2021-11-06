@@ -12,10 +12,9 @@ import fileReader.ReaderFactory;
 import fileReader.TxtReader;
 import fileReader.XMLReader;
 import gameObject.Board;
-import gameObject.BoxMessage;
 import gameObject.MapNode;
 import gameObject.MapNodeInfo;
-import keyValue.Info;
+import gameObject.WordInfo;
 import util.Mouse;
 import util.Key;
 
@@ -36,8 +35,8 @@ public class nodeInfoTest {
 	@Test
 	public void test3() throws FileNotFoundException, ExMapExceedWordSize {
 		ReaderFactory rf = new ReaderFactory();	
-		ArrayList<Info> a = rf.convert("./res/word.txt", 0, 0);
-		String res = a.get(0).getAns();
+		ArrayList<WordInfo> a = rf.convert("./res/word.txt", 0, 0);
+		String res = a.get(0).getWord();
 		assertEquals("a",res);
 	}
 	@Test

@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 
 
 import exception.ExMapExceedWordSize;
-import keyValue.*;
+import gameObject.WordInfo;
 
 public class XMLReader{
 	/**
@@ -25,9 +25,9 @@ public class XMLReader{
 	 * 
 	 * @throws ExMapExceedWordSize
 	 **/
-	public static ArrayList<Info> convert(String path, int m, int n) throws ExMapExceedWordSize {
-		ArrayList<Info> wordlist = new ArrayList<Info>();
-		ArrayList<Info> res = new ArrayList<Info>();
+	public static ArrayList<WordInfo> convert(String path, int m, int n) throws ExMapExceedWordSize {
+		ArrayList<WordInfo> wordlist = new ArrayList<WordInfo>();
+		ArrayList<WordInfo> res = new ArrayList<WordInfo>();
 		NodeList wl = getFile(path);
 		for(int i=0;i<wl.getLength();i++) {
 			Node node = wl.item(i);
@@ -44,8 +44,7 @@ public class XMLReader{
 						ans= d.getTextContent();
 					}
 				}
-				Info word = new WordInfo(def, ans);
-				wordlist.add(word);
+				wordlist.add(new WordInfo(def, ans));
 			}
 		}
 		if (m * n > wordlist.size() + 1) {

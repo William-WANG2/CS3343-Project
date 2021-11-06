@@ -6,10 +6,9 @@ import java.util.ArrayList;
 
 import exception.ExMapExceedWordSize;
 import fileReader.*;
-import keyValue.*;
 import util.*;
 
-public class Map implements FrameUpdate{
+public class Map{
 	//singleton pattern to use the map across the game
 	private static Map instance = new Map();
 	public static Map getInstance() {
@@ -29,7 +28,7 @@ public class Map implements FrameUpdate{
 		map = new MapNode[columnNodeCount][rowNodeCount];
 		dummyNode = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
 		colRowCount = new Vector2d(columnNodeCount, rowNodeCount);
-		ArrayList<Info> wordList = new ArrayList<Info>(columnNodeCount * rowNodeCount);
+		ArrayList<WordInfo> wordList = new ArrayList<WordInfo>(columnNodeCount * rowNodeCount);
 		ReaderApp rdapp = new ReaderFactory();
 		try {
 			wordList = rdapp.getList(vocabularyPath, columnNodeCount, rowNodeCount);
@@ -133,11 +132,9 @@ public class Map implements FrameUpdate{
 		return dummyNode;
 	}
 
-	@Override
 	public void enter() {
 	}
 
-	@Override
 	public void render(Graphics2D g) {
 		for(int i=0; i<colRowCount.x; i++) {
 			for(int j=0; j<colRowCount.y; j++) {
@@ -146,18 +143,16 @@ public class Map implements FrameUpdate{
 		}
 	}
 
-	@Override
 	public void exit() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void update(Mouse mouse, Key key) {
 		if(mouse.mouseClicked) {
 			for(int i=0; i<colRowCount.x; i++) {
 				for(int j=0; j<colRowCount.y; j++) {
-					map[i][j].update(mouse, key);
+					map[i][j].handleClickEvent(mouse.mousePos.x, mouse.mousePos.y);
 				}
 			}
 			//if(mouse.mouseClicked) { 

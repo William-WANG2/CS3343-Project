@@ -153,18 +153,8 @@ public abstract class GameApplication extends JFrame implements Runnable{
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(MapNode.getUpdateNode()!=null) { 
-					//Only if the game enter the input answer mode, we process the keyboard signal
-					if(e.getExtendedKeyCode()==KeyEvent.VK_BACK_SPACE) {
-						key.deletePressed = true;
-					}
-					//Process only the valid keyboard input
-					else if(e.getExtendedKeyCode() >= KeyEvent.VK_A && e.getExtendedKeyCode() <= KeyEvent.VK_Z){
-						key.queuingChars.add((char) (e.getExtendedKeyCode()-KeyEvent.VK_A+'a'));
-					}	
-				}
+				key.queuingEvent.add(e.getExtendedKeyCode());
 			}
-			
 		});
 	}
 }

@@ -7,7 +7,7 @@ import java.util.*;
 import util.*;
 import algorithm.*;
 
-public class Dio implements FrameUpdate {
+public class Dio{
 	
 	GameTimer timer = GameTimer.getInstance();
 	long timeElapsed; 
@@ -16,6 +16,7 @@ public class Dio implements FrameUpdate {
 	private boolean alive;
 	private boolean surround;
 	private Texture[] normalDio;
+	private int sequenceIndex;
 	private Texture angryDio;
 	private ShortestPath s;
 	private static Dio dio = new Dio();
@@ -29,12 +30,13 @@ public class Dio implements FrameUpdate {
 		this.node=node;
 		alive=true;
 		surround=false;
-		normalDio = new Texture[5];
+		normalDio = new Texture[6];
 		String path;
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 6; i++) {
 			path = String.format("res/textures/walk%d.png", i);
 			normalDio[i] = Texture.loadImage(path, 0, (int)(2*node.getState().radius * 0.75), (int)(2*node.getState().radius * 1.5), (int)(2*node.getState().radius * 1.5));
 		}
+		sequenceIndex = 0;
 		path = "res/textures/basketballtrash.png";
 		angryDio = Texture.loadImage(path, 0, 0, (int)(2*node.getState().radius), (int)(2*node.getState().radius));
 	}
@@ -84,12 +86,10 @@ public class Dio implements FrameUpdate {
 		}
 		return null;
 	}
-	@Override
 	public void enter() {
 		
 	}
 
-	@Override
 	public void render(Graphics2D g) {
 		if(surround) {
 			AffineTransform transform = new AffineTransform(angryDio.getScaleX(), 0.0, 0.0, angryDio.getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
@@ -97,25 +97,29 @@ public class Dio implements FrameUpdate {
 		}
 		else {
 			timeElapsed += timer.DeltaTime();
-			int counter=(int) (timeElapsed/280);
-			AffineTransform transform = new AffineTransform(normalDio[counter].getScaleX(), 0.0, 0.0, normalDio[counter].getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
-			g.drawImage(normalDio[counter].getImage(), transform, null);
-			if(counter==4) {
-				timeElapsed=0;
+			if(timeElapsed >= 150) {
+				timeElapsed = 0;
+				sequenceIndex++;
+				sequenceIndex%=6;
 			}
+			
+			AffineTransform transform = new AffineTransform(normalDio[sequenceIndex].getScaleX(), 0.0, 0.0, normalDio[sequenceIndex].getScaleY(), node.getState().displayPos.y, node.getState().displayPos.x);
+			g.drawImage(normalDio[sequenceIndex].getImage(), transform, null);
+			
 		}
 	}
-	@Override
+
 	public void exit() {
 		// TODO Auto-generated method stub
 		
 	}
-	@Override
+
 	public void update(Mouse mouse, Key key) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void update(Mouse mouse, Key key, boolean move) {
+	
+	public void update(boolean move) {
 		if (isAlive()) {
 			MapNode dir = null; 
 			//whether change to surround from normal / death from surround

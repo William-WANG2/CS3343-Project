@@ -6,7 +6,7 @@ import gameObject.Board;
 import gameObject.Button;
 import gameObject.Dio;
 import gameObject.Map;
-
+import gameObject.MapNode;
 import gameObject.WordType;
 
 import util.*;
@@ -20,18 +20,17 @@ public class PlayingScene extends Scene{
 	Map map;
 	Board board;
 	Dio dio;
-	boolean toNextScene;
-	boolean isWin;
-	int correctCount;
-
-	int stepCount;
 	Button musicToggle;
     Button nomusic;
     
+    
+	boolean toNextScene;
+	boolean isWin;
+	int correctCount;
+	int errorCount;
+	int stepCount;
+	
     boolean change;
-    
-    
-  
     
     private void handleMusic(Mouse mouse) {
 		musicToggle.handleEvent(mouse);
@@ -48,10 +47,6 @@ public class PlayingScene extends Scene{
 	}
    
 
-	int errorCount;
-	
-	
-
 	@Override
 	public void enter() {
 		change=true;
@@ -62,7 +57,7 @@ public class PlayingScene extends Scene{
 		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 250, 250, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.55), WordType.getWordTypePath(((GREGame)mApp).getWordType())); 
 		
 		board = Board.getInstance();
-		board.setBoard("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
+		board.setBoardAppearance("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
 		
 		dio = Dio.getInstance();
 		dio.initialize(map.getMap()[map.getColRowCount().x / 2][map.getColRowCount().y / 2]);
@@ -90,7 +85,9 @@ public class PlayingScene extends Scene{
 		musicToggle.setClickedFalse();
 		
 		map.update(mouse, key);
-		board.update(key);	
+		
+		board.handleKeyboardInput(key);	
+		
 		mouse.mouseClicked = false;
 
 	}

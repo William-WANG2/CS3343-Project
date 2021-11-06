@@ -15,10 +15,9 @@ import fileReader.ReaderFactory;
 import fileReader.TxtReader;
 import fileReader.XMLReader;
 import gameObject.Board;
-import gameObject.BoxMessage;
 import gameObject.MapNode;
 import gameObject.MapNodeInfo;
-import keyValue.Info;
+import gameObject.WordInfo;
 import util.Mouse;
 import util.Key;
 
@@ -48,15 +47,15 @@ public class fileReaderTest {
 	@Test
 	public void test10() throws ExMapExceedWordSize, FileNotFoundException {
 		String p = "./res/word.txt";
-		ArrayList<Info> l = TxtReader.convert(p, 0, 0);
-		String res=l.get(0).getAns();
+		ArrayList<WordInfo> l = TxtReader.convert(p, 0, 0);
+		String res=l.get(0).getWord();
 		assertEquals("a", res);
 	}
 	@Test
 	public void test2() throws ExMapExceedWordSize {
 		String p = "./res/word.xml";
-		ArrayList<Info> l = XMLReader.convert(p, 10, 10);
-		String res = l.get(0).getAns();
+		ArrayList<WordInfo> l = XMLReader.convert(p, 10, 10);
+		String res = l.get(0).getWord();
 		assertEquals(1,1);
 	}
 }
