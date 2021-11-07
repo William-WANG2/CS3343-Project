@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 
 import game.GREGame;
 import gameObject.Button;
+import gameObject.MusicController;
 import gameObject.WordType;
 import util.*;
 import util.Texture;
@@ -103,6 +104,8 @@ public class LoginScene extends Scene {
 			sequenceIndex %= 98;
 			timeElapsed -= 300;
 		}
+		MusicController.getInstance().update(mouse);
+		mouse.mouseClicked = false;
 	}
 
 	@Override
@@ -114,6 +117,7 @@ public class LoginScene extends Scene {
 		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
 			startButtons[i].render(g);
 		}
+		MusicController.getInstance().render(g);
 	}
 
 	@Override
