@@ -83,11 +83,7 @@ public class LoginScene extends Scene {
 		
 		sequenceIndex = 0;
 		timeElapsed = 0;
-		//check if threads are killed
-		while(true) {
-			if(threadPool.isTerminated())
-				break;
-		}
+		
 	}
 
 	@Override
@@ -111,7 +107,8 @@ public class LoginScene extends Scene {
 	@Override
 	public void render(Graphics2D g) {
 		AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
-		g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
+		if(cxk[sequenceIndex]!=null)
+			g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
 		transform = new AffineTransform(logo.getScaleX(), 0.0, 0.0, logo.getScaleY(), logo.getPosX(), logo.getPosY());
 		g.drawImage(logo.getImage(), transform, null);
 		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
