@@ -101,7 +101,7 @@ public class MapNode{
 	
 	
 	public void render(Graphics2D g) {
-		AffineTransform transform;
+		AffineTransform transform; //can not use Texture's render since it depends on the nodeInfo which is dynamic
 		
 		if(this == Dio.getInstance().getNode())
 		{

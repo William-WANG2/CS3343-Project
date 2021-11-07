@@ -10,7 +10,7 @@ import scenes.*;
 public class GREGame extends GameApplication{
 	
 	//These are for score statistics
-	GameResult result;
+	private GameResult result;
 	private WordType wordType;
 	
 	public GREGame() {

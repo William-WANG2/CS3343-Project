@@ -60,7 +60,6 @@ public class Button {
 	}
 
 	public void render(Graphics2D g) {
-		AffineTransform transform = new AffineTransform(currTexture.getScaleX(), 0.0, 0.0, currTexture.getScaleY(), currTexture.getPosX(), currTexture.getPosY());
-		g.drawImage(currTexture.getImage(), transform, null);
+		currTexture.render(g);
 	}
 }

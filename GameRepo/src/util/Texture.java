@@ -1,5 +1,7 @@
 package util;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,5 +63,10 @@ public class Texture {
 		Vector2f scale = new Vector2f((float)width/(float)image.getWidth(), (float)height/(float)image.getHeight());
 		Transform transform = new Transform(position, scale);
 		return new Texture(image, transform);
+	}
+	
+	public void render(Graphics2D g) {
+		AffineTransform transform = new AffineTransform(this.getScaleX(), 0.0, 0.0, this.getScaleY(), this.getPosX(), this.getPosY());
+		g.drawImage(this.getImage(), transform, null);
 	}
 }
