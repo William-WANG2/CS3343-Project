@@ -88,6 +88,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 				try {
 					g = bs.getDrawGraphics();
 					renderFrame(g);
+					Thread.sleep(100);
 					//calculateFrameRate(g);
 				} catch (Exception e) {
 					e.printStackTrace();

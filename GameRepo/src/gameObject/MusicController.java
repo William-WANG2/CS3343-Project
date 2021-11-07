@@ -37,6 +37,7 @@ public class MusicController {
 		musicToggle.handleEvent(mousePosition);
 		if(musicToggle.isClicked())
 		{
+			musicToggle.update();
 			change = !change;
 			if(change) {
 				background.close();
@@ -44,13 +45,12 @@ public class MusicController {
 			else {
 				background.loop();
 			}
+			musicToggle.setClickedFalse();
 		}
 	}
 
 	public void handleClickEvent(Vector2d mousePosition) {
 		handleBackgroundMusic(mousePosition);
-		musicToggle.update();
-		musicToggle.setClickedFalse();
 	}
 		
 	

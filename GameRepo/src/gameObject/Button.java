@@ -29,6 +29,7 @@ public class Button {
 		
 		unclickTexture = Texture.loadImage(texturePath1, left, top, width, height);
 		clickedTexture = Texture.loadImage(texturePath2, left, top, width, height);
+		currTexture = unclickTexture;
 		btnRegion = new BoundingBox(left, top, width, height);
 		isClicked = false;
 	}
