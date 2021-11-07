@@ -43,7 +43,6 @@ public class ResultScene extends Scene{
 	public void enter() {
 		/*load resources*/
 		if(!resHasLoaded) {
-			restartButton = new Button("res/endScene/Menu.png", "res/endScene/Menu2.png", GlobalConstants.APP_WIDTH/2 - 100, 120, 180, 180);
 			kunkun = Texture.loadImage("res/endScene/endKunkun.png", 50, GlobalConstants.APP_HEIGHT/3, 500, 500);
 			winMsg = Texture.loadImage("res/endScene/congrat.png", GlobalConstants.APP_WIDTH/2 - 500, 50, 1000, 200);	
 			loseMsg = Texture.loadImage("res/endScene/lose.png", GlobalConstants.APP_WIDTH/2 - 500, 50, 1000, 200);
@@ -51,7 +50,7 @@ public class ResultScene extends Scene{
 			resHasLoaded = true;
 		}
 		
-		restartButton = new Button("res/endScene/Menu.png", "res/endScene/Menu2.png", GlobalConstants.APP_WIDTH/2-100 , GlobalConstants.APP_HEIGHT/2, 150, 75);
+		restartButton = new Button("res/endScene/Restart.png", "res/endScene/Restart2.png", GlobalConstants.APP_WIDTH/2-100 , GlobalConstants.APP_HEIGHT/2, 150, 75);
 		toNextScene = false;
 		mouse = mApp.mouse;
 		gameResult = ((GREGame)(mApp)).getGameResult();
