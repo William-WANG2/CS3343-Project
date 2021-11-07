@@ -75,10 +75,12 @@ public class MapNode{
 		if(null != viewNode) {
 			if(Board.isCorrectAnswer()) {
 				viewNode.nodeInfo.blocked = true;
-				 Dio.getInstance().recomputeShortestPath(false);
+				MusicController.getInstance().soundEffectWin();
+				Dio.getInstance().recomputeShortestPath(false);
 			}
 			else {
-			      Dio.getInstance().recomputeShortestPath(true);
+				MusicController.getInstance().soundEffectLose();
+			    Dio.getInstance().recomputeShortestPath(true);
 			}
 		}
 		viewNode = null;

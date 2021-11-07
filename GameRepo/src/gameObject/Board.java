@@ -2,7 +2,7 @@ package gameObject;
 
 import gameObject.MapNode;
 
-
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -72,6 +72,7 @@ public class Board{
 	
 	public void render(Graphics2D g) {
 		
+		g.setFont(new Font("Dialog", Font.BOLD+Font.ITALIC, 24));
 		AffineTransform transform = new AffineTransform(boardTexture.getScaleX(), 0.0, 0.0, boardTexture.getScaleY(), boardTexture.getPosX(), boardTexture.getPosY());
 		g.drawImage(boardTexture.getImage(), transform, null);
 		if(currentWordInformation != null)

@@ -9,6 +9,9 @@ import util.Music;
 public class MusicController {
 	private Button musicToggle;
 	private boolean change;
+	private Music background;
+	private Music good;
+	private Music bad;
 	private static MusicController instance = new MusicController();
 	public static MusicController getInstance() {
 		return instance;
@@ -16,29 +19,50 @@ public class MusicController {
 	private MusicController() {
 		change=false;
 		musicToggle = new Button("res/music/musicOn.png", "res/music/musicOff.png", GlobalConstants.APP_WIDTH/15, GlobalConstants.APP_HEIGHT/15, 50, 50);
+		String filepath = "res/music/CXKisBeautiful.wav";
+		background = new Music(filepath, -30);
+		filepath = "res/music/good.wav";
+		good = new Music(filepath, 0);
+		filepath = "res/music/bad.wav";
+		bad = new Music(filepath, 0);
 	}
 	
-	private void handleMusic(Mouse mouse) {
+	public void startBackground() {
+		background.loop();
+	}
+	
+	private void handleBackgroundMusic(Mouse mouse) {
 		musicToggle.handleEvent(mouse);
 		if(musicToggle.isClicked())
 		{
 			change = !change;
 			if(change) {
-				Music.close();
+				background.close();
 			}
 			else {
-				Music.open();
+				background.loop();
 			}
 		}
 	}
 	
-	public void update(Mouse mouse) {
-		handleMusic(mouse);
+	public void updateBackgroundMusic(Mouse mouse) {
+		handleBackgroundMusic(mouse);
 		musicToggle.update();
 		musicToggle.setClickedFalse();
 	}
 	
-	public void render(Graphics2D g) {
+	public void renderBackgroundButton(Graphics2D g) {
 		musicToggle.render(g); 
+	}
+	
+	public void soundEffectWin() {
+		good.start();
+	}
+	public void soundEffectLose() {
+		bad.start();
+	}
+	public void soundEffectExit() {
+		good.close();
+		bad.close();
 	}
 }

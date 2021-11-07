@@ -65,7 +65,7 @@ public class PlayingScene extends Scene{
 		map.update(mouse, key);
 		dio.upadateAnimationSequencePerFrame();
 		board.handleKeyboardInput(key);	
-		MusicController.getInstance().update(mouse);
+		MusicController.getInstance().updateBackgroundMusic(mouse);
 		
 		mouse.mouseClicked = false;
 
@@ -78,7 +78,7 @@ public class PlayingScene extends Scene{
 		map.render(g);
 		board.render(g);
 		dio.render(g);
-		MusicController.getInstance().render(g);
+		MusicController.getInstance().renderBackgroundButton(g);
 	}
 
 	@Override

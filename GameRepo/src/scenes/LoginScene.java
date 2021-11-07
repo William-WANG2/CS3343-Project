@@ -80,10 +80,11 @@ public class LoginScene extends Scene {
 		}
 		/*load logo*/
 		logo = Texture.loadImage("res/Logo.png", 100, 80, 400, 200);
-		
 		sequenceIndex = 0;
 		timeElapsed = 0;
 		
+		/*start background music*/
+		MusicController.getInstance().startBackground();
 	}
 
 	@Override
@@ -100,7 +101,7 @@ public class LoginScene extends Scene {
 			sequenceIndex %= 98;
 			timeElapsed -= 300;
 		}
-		MusicController.getInstance().update(mouse);
+		MusicController.getInstance().updateBackgroundMusic(mouse);
 		mouse.mouseClicked = false;
 	}
 
@@ -114,7 +115,7 @@ public class LoginScene extends Scene {
 		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
 			startButtons[i].render(g);
 		}
-		MusicController.getInstance().render(g);
+		MusicController.getInstance().renderBackgroundButton(g);
 	}
 
 	@Override
