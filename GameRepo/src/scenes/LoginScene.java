@@ -13,7 +13,6 @@ import gameObject.Button;
 import gameObject.MusicController;
 import gameObject.WordType;
 import util.*;
-import util.Texture;
 public class LoginScene extends Scene {
 
 	private Boolean toNextScene;
@@ -31,7 +30,17 @@ public class LoginScene extends Scene {
 	private ExecutorService threadPool;
 	private List<Callable<Boolean>> loadTasks;
 	
-	private void handleEvent(Mouse mouse) {
+	private void handleMouseClick(Mouse mouse) {
+		if(mouse.isClicked) {
+			MusicController.getInstance().handleClickEvent(mouse.mousePos);
+			
+			for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+				startButtons[i].handleEvent(mouse.mousePos);
+				startButtons[i].update();
+			}
+			mouse.isClicked = false;
+		}
+		
 		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
 			if(startButtons[i].isClicked())
 			{
@@ -95,19 +104,14 @@ public class LoginScene extends Scene {
 	@Override
 	public void update() {
 		
-		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
-			startButtons[i].handleEvent(mouse.mousePos);
-			startButtons[i].update();
-		}
-		handleEvent(mouse);
+		
+		handleMouseClick(mouse);
 		timeElapsed += timer.DeltaTime();
 		if(timeElapsed >= 300) {
 			sequenceIndex++;
 			sequenceIndex %= 98;
 			timeElapsed -= 300;
 		}
-		MusicController.getInstance().handleClickEvent(mouse.mousePos);
-		mouse.isClicked = false;
 	}
 
 	@Override
