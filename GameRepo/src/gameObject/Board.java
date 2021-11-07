@@ -42,7 +42,7 @@ public class Board{
 		currentInput = currentInput.length() <= 1 ? "" : currentInput.substring(0, currentInput.length()-1);
 	}
 	public void handleInputLetter(char letter) {
-		if(currentInput.length() < currentWordInformation.getWordLength()){
+		if(currentInput.length() < currentWordInformation.getWordLength()-currentWordInformation.getWordLength()/3*2){
 			currentInput += letter;
 		}		
 	}
@@ -53,7 +53,7 @@ public class Board{
 	}
 	
 	public boolean isCorrectAnswer() {
-		return (currentInput.equals(currentWordInformation.getWord()));
+		return (currentInput.equals(currentWordInformation.getWord().substring(currentWordInformation.getWordLength()/3, currentWordInformation.getWordLength()-currentWordInformation.getWordLength()/3)));
 	}
 	
 	public WordInfo getWordInfo() {
@@ -61,16 +61,17 @@ public class Board{
 	}
 	
 	public void render(Graphics2D g) {
-		
-		showString = "";
 		g.setFont(new Font("Dialog", Font.BOLD+Font.ITALIC, 24));
 		AffineTransform transform = new AffineTransform(boardTexture.getScaleX(), 0.0, 0.0, boardTexture.getScaleY(), boardTexture.getPosX(), boardTexture.getPosY());
 		g.drawImage(boardTexture.getImage(), transform, null);
 		if(currentWordInformation != null)
 		{
-			for(int i = 0; i < currentWordInformation.getWordLength(); i++) {
-				showString += i < currentInput.length() ? (currentInput.charAt(i) + " ") : "_ ";
+			int existNum = currentWordInformation.getWordLength()/3;
+			showString = currentWordInformation.getWord().substring(0, existNum);
+			for(int i = 0; i < currentWordInformation.getWordLength()-existNum*2; i++) {
+				showString += i < currentInput.length() ? (currentInput.charAt(i)) : "_ ";
 			}
+			showString+=currentWordInformation.getWord().substring(currentWordInformation.getWordLength()-existNum,currentWordInformation.getWordLength());
 			g.drawString(showString, 400, 150);
 			if(currentWordInformation != null) {
 				g.drawString(currentWordInformation.getDefinition(), 400, 100);
