@@ -2,13 +2,14 @@ package util;
 
 import java.io.File;
 
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.*;
 public class Music {
-    private static Clip clip;
-	public static void playMusic(String musicLocation)
+    private Clip clip;
+	public Music(String musicLocation, int volumn)
 	{
 		try
 		{
@@ -20,9 +21,7 @@ public class Music {
 				clip = AudioSystem.getClip();
 				clip.open(audioInput);
 				FloatControl gainControl=(FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
-				gainControl.setValue(-30);
-				clip.start();
-				clip.loop(Clip.LOOP_CONTINUOUSLY);
+				gainControl.setValue(volumn);
 			}
 		}
 		catch(Exception ex)
@@ -31,13 +30,17 @@ public class Music {
 		}
 	}
 	
-	public static void close() {
+	public void close() {
 		clip.stop();
-		
 	}
 	
-	public static void open() {
+	public void loop() {
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+	public void start() {
+		clip.setFramePosition(0);
 		clip.start();
 	}
+	
 
 }

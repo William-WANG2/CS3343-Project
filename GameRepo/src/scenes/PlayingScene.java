@@ -118,7 +118,7 @@ public class PlayingScene extends Scene{
 		map.render(g);
 		board.render(g);
 		dio.render(g);
-		MusicController.getInstance().render(g);
+		MusicController.getInstance().renderBackgroundButton(g);
 	}
 
 	@Override

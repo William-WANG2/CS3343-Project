@@ -84,6 +84,7 @@ public class MapNode{
 		}
 	}
 	
+
 	public void handleClickEvent(int mousePositionX, int mousePositionY) {
 		boolean isInGeo= Math.pow(mousePositionX - nodeInfo.displayPos.y - nodeInfo.radius,2) + Math.pow(mousePositionY - nodeInfo.displayPos.x - nodeInfo.radius, 2) < Math.pow(nodeInfo.radius, 2);
 		if(isInGeo && nodeInfo.blocked==false) {//add restore the click if click another one
