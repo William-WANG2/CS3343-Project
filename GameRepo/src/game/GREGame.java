@@ -1,33 +1,24 @@
 package game;
 
 import util.*;
+import gameObject.GameResult;
 import gameObject.WordType;
 import scenes.*;
 
 public class GREGame extends GameApplication{
 	
 	//These are for score statistics
-	private int correctCount;
-	private int errorCount;
-	private int stepCount;
-	private boolean isWin;
+	GameResult result;
 	private WordType wordType;
 	
 	public GREGame() {
 	}
 	
-	public void setGameResult(int correctCount, int errorCount, Boolean isWin) {
-		this.correctCount = correctCount;
-		this.errorCount = errorCount;
-		this.isWin = isWin;
-		this.stepCount = correctCount + errorCount;
+	public void setGameResult(GameResult result) {
+		this.result = result;
 	}
-	
-	public int getCorrectCount() {
-		return correctCount;
-	}
-	public int getErrorCount() {
-		return errorCount;
+	public GameResult getGameResult() {
+		return result;
 	}
 	public WordType getWordType()
 	{
@@ -35,12 +26,6 @@ public class GREGame extends GameApplication{
 	}
 	public void setWordType(WordType w) {
 		wordType = w;
-	}
-	public Boolean isGameWin() {
-		return isWin;
-	}
-	public int getStepCount() {
-		return stepCount;
 	}
 	public void initialize() {
 		

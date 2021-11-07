@@ -18,8 +18,9 @@ public class Board{
 	
 	private static Texture boardTexture;
 	private static String currentInput = "";
+	private static String showString;
 	private static WordInfo currentWordInformation;
-	
+
 	static private Board instance = new Board();
 	private Board() {	
 	}
@@ -28,7 +29,7 @@ public class Board{
 		return instance;
 	}
 	
-	public void setBoardAppearance(String boxTexturePath, int centerX, int centerY, int width, int height){
+	public void reset(String boxTexturePath, int centerX, int centerY, int width, int height){
 		boardTexture = Texture.loadImage(boxTexturePath, centerX - width/2, centerY - height/2, width, height);
 	}
 	
@@ -36,33 +37,22 @@ public class Board{
 		currentWordInformation = wordInformation;
 		currentInput = "";
 	}
-
-	public void handleKeyboardInput(Key key) {
-		
-		while(!key.queuingEvent.isEmpty()) {
-			if(!MapNode.isViewExist()) {
-				key.queuingEvent.clear();
-				return;
-			}
-			int keyEvent = key.queuingEvent.getFirst();
-			
-			if(keyEvent == KeyEvent.VK_BACK_SPACE) {
-				currentInput = currentInput.length() <= 1 ? "" : currentInput.substring(0, currentInput.length()-1);
-			}
-			else if(keyEvent >= KeyEvent.VK_A && keyEvent <= KeyEvent.VK_Z){
-				currentInput += (char)(keyEvent - KeyEvent.VK_A+'a');
-			}
-			else if(keyEvent == KeyEvent.VK_ENTER) {
-				MapNode.handleViewNodeInput();
-				currentInput = "";
-				currentWordInformation = null;
-			}
-			
-			key.queuingEvent.removeFirst();
-		}
+	
+	public void handleInputDelete() {
+		currentInput = currentInput.length() <= 1 ? "" : currentInput.substring(0, currentInput.length()-1);
+	}
+	public void handleInputLetter(char letter) {
+		if(currentInput.length() < currentWordInformation.getWordLength()){
+			currentInput += letter;
+		}		
 	}
 	
-	public static boolean isCorrectAnswer() {
+	public void handleInputFinish() {
+		currentInput = "";
+		currentWordInformation = null;
+	}
+	
+	public boolean isCorrectAnswer() {
 		return (currentInput.equals(currentWordInformation.getWord()));
 	}
 	
@@ -72,15 +62,18 @@ public class Board{
 	
 	public void render(Graphics2D g) {
 		
+		showString = "";
 		AffineTransform transform = new AffineTransform(boardTexture.getScaleX(), 0.0, 0.0, boardTexture.getScaleY(), boardTexture.getPosX(), boardTexture.getPosY());
 		g.drawImage(boardTexture.getImage(), transform, null);
 		if(currentWordInformation != null)
 		{
-			g.drawString(currentInput, 400, 150);
+			for(int i = 0; i < currentWordInformation.getWordLength(); i++) {
+				showString += i < currentInput.length() ? (currentInput.charAt(i) + " ") : "_ ";
+			}
+			g.drawString(showString, 400, 150);
 			if(currentWordInformation != null) {
 				g.drawString(currentWordInformation.getDefinition(), 400, 100);
 			}
-			
 		}
 	}
 }

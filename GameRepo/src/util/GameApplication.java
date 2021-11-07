@@ -138,7 +138,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				mouse.mouseClicked = true;
+				mouse.isClicked = true;
 				mouse.mousePos.x = e.getX();
 				mouse.mousePos.y = e.getY();
 			}

@@ -143,19 +143,12 @@ public class Map{
 		}
 	}
 
-	public void exit() {
+	public void handleMouseClickEvent(Vector2d clickPosition) {
 		
-		
-	}
-
-	public void update(Mouse mouse, Key key) {
-		if(mouse.mouseClicked) {
-			for(int i=0; i<colRowCount.x; i++) {
-				for(int j=0; j<colRowCount.y; j++) {
-					map[i][j].handleClickEvent(mouse.mousePos.x, mouse.mousePos.y);
-				}
+		for(int i=0; i<colRowCount.x; i++) {
+			for(int j=0; j<colRowCount.y; j++) {
+				map[i][j].handleClickEvent(clickPosition.x, clickPosition.y);
 			}
-
 		}
 	}
 }

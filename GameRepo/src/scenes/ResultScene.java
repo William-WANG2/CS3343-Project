@@ -5,7 +5,9 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 
+import game.GREGame;
 import gameObject.Button;
+import gameObject.GameResult;
 import util.GlobalConstants;
 import util.Mouse;
 
@@ -14,6 +16,7 @@ public class ResultScene extends Scene{
 	private Boolean toNextScene;
 	private Mouse mouse;
 	Button restartButton;
+	private GameResult gameResult;
 	String[] groupMembers = {
 			
 			"GameFlow & Animation : Zhang Yuyang",
@@ -28,7 +31,7 @@ public class ResultScene extends Scene{
 	
 	private void handleEvent() {
 		
-		restartButton.handleEvent(mouse);
+		restartButton.handleEvent(mouse.mousePos);
 		if(restartButton.isClicked())
 		{
 			toNextScene = true;
@@ -42,7 +45,7 @@ public class ResultScene extends Scene{
 		toNextScene = false;
 		mouse = mApp.mouse;
 		restartButton = new Button("res/textures/RestartButton.png", "res/textures/RestartButton.png", GlobalConstants.APP_WIDTH/2 - 100, 120, 180, 180);
-		
+		gameResult = ((GREGame)(mApp)).getGameResult();
 	}
 
 	@Override
@@ -64,7 +67,7 @@ public class ResultScene extends Scene{
 			g.drawString(member, 20, height);
 			height += 20;
 		}
-		if(mApp.isGameWin()) {
+		if(gameResult.isGameWin()) {
 
 			g.drawString("You win!!!", 30, 30);
 		}

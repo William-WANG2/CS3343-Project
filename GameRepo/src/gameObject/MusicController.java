@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import util.GlobalConstants;
 import util.Mouse;
 import util.Music;
+import util.Vector2d;
 
 public class MusicController {
 	private Button musicToggle;
@@ -18,8 +19,8 @@ public class MusicController {
 		musicToggle = new Button("res/music/musicOn.png", "res/music/musicOff.png", GlobalConstants.APP_WIDTH/15, GlobalConstants.APP_HEIGHT/15, 50, 50);
 	}
 	
-	private void handleMusic(Mouse mouse) {
-		musicToggle.handleEvent(mouse);
+	private void handleMusic(Vector2d mousePosition) {
+		musicToggle.handleEvent(mousePosition);
 		if(musicToggle.isClicked())
 		{
 			change = !change;
@@ -32,8 +33,9 @@ public class MusicController {
 		}
 	}
 	
-	public void update(Mouse mouse) {
-		handleMusic(mouse);
+	public void handleClickEvent(Vector2d mousePosition) {
+		
+		handleMusic(mousePosition);
 		musicToggle.update();
 		musicToggle.setClickedFalse();
 	}

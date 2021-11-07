@@ -54,7 +54,20 @@ public class MapNode{
 	public ArrayList<MapNode> getAdjacency() {
 		return adjacency;
 	}
-
+	
+	//If the user input is correct, we should block the node
+	public static void setViewNodeBlock() {
+		viewNode.nodeInfo.blocked = true;
+		Dio.getInstance().recomputeShortestPath(false);
+		viewNode = null;
+	}
+	
+	//If the user input is incorrect, ignore.
+	public static void setViewNodeNull() {
+		Dio.getInstance().recomputeShortestPath(true);
+		viewNode = null;
+	}
+	
 	public boolean isBorder() {
 		return adjacency.contains(Map.getInstance().getDummy());
 	}
@@ -69,19 +82,6 @@ public class MapNode{
 			path = "res/textures/basketballHighlight.png";
 			selectedbasketball = Texture.loadImage(path, 0, 0, (int) (2 * nodeInfo.radius), (int) (2 * nodeInfo.radius));
 		}
-	}
-	
-	static public void handleViewNodeInput() {
-		if(null != viewNode) {
-			if(Board.isCorrectAnswer()) {
-				viewNode.nodeInfo.blocked = true;
-				 Dio.getInstance().recomputeShortestPath(false);
-			}
-			else {
-			      Dio.getInstance().recomputeShortestPath(true);
-			}
-		}
-		viewNode = null;
 	}
 	
 	public void handleClickEvent(int mousePositionX, int mousePositionY) {
@@ -122,9 +122,4 @@ public class MapNode{
 			}
 		}
 	}
-
-	public void exit() {
-
-	}
-
 }

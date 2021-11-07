@@ -12,6 +12,7 @@ import scenes.Scene;
 import util.BoundingBox;
 import util.Mouse;
 import util.Texture;
+import util.Vector2d;
 
 public class Button {
 	
@@ -32,11 +33,10 @@ public class Button {
 		isClicked = false;
 	}
 	
-	public void handleEvent(Mouse mouse) {
+	public void handleEvent(Vector2d mousePosition) {
 		
-		if(mouse.mouseClicked && btnRegion.isInGeo(mouse.mousePos)) {
+		if( btnRegion.isInGeo(mousePosition)) {
 			isClicked = true;
-			mouse.mouseClicked = false;
 		}
 	}
 	

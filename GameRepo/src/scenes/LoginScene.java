@@ -90,7 +90,7 @@ public class LoginScene extends Scene {
 	public void update() {
 		
 		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
-			startButtons[i].handleEvent(mouse);
+			startButtons[i].handleEvent(mouse.mousePos);
 			startButtons[i].update();
 		}
 		handleEvent(mouse);
@@ -100,8 +100,8 @@ public class LoginScene extends Scene {
 			sequenceIndex %= 98;
 			timeElapsed -= 300;
 		}
-		MusicController.getInstance().update(mouse);
-		mouse.mouseClicked = false;
+		MusicController.getInstance().handleClickEvent(mouse.mousePos);
+		mouse.isClicked = false;
 	}
 
 	@Override
