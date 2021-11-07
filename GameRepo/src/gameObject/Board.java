@@ -75,6 +75,6 @@ public class Board{
 			if(currentWordInformation != null) {
 				g.drawString(currentWordInformation.getDefinition(), 400, 100);
 			}
-		}
+		} 
 	}
 }
