@@ -24,7 +24,8 @@ public class PlayingScene extends Scene{
 	private Map map;
 	private Board board;
 	private Dio dio;
-	private Texture background;
+	private static boolean resHasLoaded = false; //indicate whether the pictures have been loaded, if yes, skip the loading process
+	private static Texture background;
 	private boolean toNextScene;
 	private GameResult gameResult;
 	
@@ -61,10 +62,12 @@ public class PlayingScene extends Scene{
 				if(board.isCorrectAnswer()) {
 					MapNode.setViewNodeBlock();
 					gameResult.increaseCorrectCount();
+					MusicController.getInstance().soundEffectWin();
 				}
 				else {
 					MapNode.setViewNodeNull();
 					gameResult.increaseErrorCount();
+					MusicController.getInstance().soundEffectLose();
 				}
 				board.handleInputFinish();
 			}
@@ -75,16 +78,20 @@ public class PlayingScene extends Scene{
 	
 	@Override
 	public void enter() {
-		background = Texture.loadImage("res/background/basketballCourt.png", 0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
-		
+		/*load resources*/
+		if(!resHasLoaded) {
+			background = Texture.loadImage("res/background/basketballCourt.png", 0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
+			resHasLoaded = true;
+		}
+			
 		map = Map.getInstance();
 		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 250, 250, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.55), WordType.getWordTypePath(((GREGame)mApp).getWordType())); 
 		
-		board = Board.getInstance();
-		board.reset("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
-		
 		dio = Dio.getInstance();
 		dio.enter(map.getMap()[map.getColRowCount().x / 2][map.getColRowCount().y / 2]);
+		
+		board = Board.getInstance();
+		board.reset("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
 		
 		gameResult = new GameResult();
 		
