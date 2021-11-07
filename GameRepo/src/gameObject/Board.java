@@ -64,8 +64,7 @@ public class Board{
 		
 		showString = "";
 		g.setFont(new Font("Dialog", Font.BOLD+Font.ITALIC, 24));
-		AffineTransform transform = new AffineTransform(boardTexture.getScaleX(), 0.0, 0.0, boardTexture.getScaleY(), boardTexture.getPosX(), boardTexture.getPosY());
-		g.drawImage(boardTexture.getImage(), transform, null);
+		boardTexture.render(g);
 		if(currentWordInformation != null)
 		{
 			for(int i = 0; i < currentWordInformation.getWordLength(); i++) {

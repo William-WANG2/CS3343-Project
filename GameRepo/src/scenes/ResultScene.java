@@ -67,20 +67,16 @@ public class ResultScene extends Scene{
 	@Override
 	public void render(Graphics2D g) {
 		g.setFont(new Font("Dialog", Font.BOLD+Font.ITALIC, 30));
-		AffineTransform transform = new AffineTransform(kunkun.getScaleX(), 0.0, 0.0, kunkun.getScaleY(), kunkun.getPosX(), kunkun.getPosY());
-		g.drawImage(kunkun.getImage(), transform, null);
+		kunkun.render(g);
 		restartButton.render(g);
 		g.setFont(new Font("TimesRoman", Font.PLAIN, 15));
 		if(gameResult.isGameWin()) {
-			transform = new AffineTransform(winMsg.getScaleX(), 0.0, 0.0, winMsg.getScaleY(), winMsg.getPosX(), winMsg.getPosY());
-			g.drawImage(winMsg.getImage(), transform, null);
+			winMsg.render(g);
 		}
 		else {
-			transform = new AffineTransform(loseMsg.getScaleX(), 0.0, 0.0, loseMsg.getScaleY(), loseMsg.getPosX(), loseMsg.getPosY());
-			g.drawImage(loseMsg.getImage(), transform, null);
+			loseMsg.render(g);
 		}
-		transform = new AffineTransform(ack.getScaleX(), 0.0, 0.0, ack.getScaleY(), ack.getPosX(), ack.getPosY());
-		g.drawImage(ack.getImage(), transform, null);
+		ack.render(g);
 	}
 
 	@Override

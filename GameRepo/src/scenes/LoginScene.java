@@ -115,8 +115,8 @@ public class LoginScene extends Scene {
 		AffineTransform transform = new AffineTransform(cxk[sequenceIndex].getScaleX(), 0.0, 0.0, cxk[sequenceIndex].getScaleY(), cxk[sequenceIndex].getPosX(), cxk[sequenceIndex].getPosY());
 		if(cxk[sequenceIndex]!=null)
 			g.drawImage(cxk[sequenceIndex].getImage(), transform, null);
-		transform = new AffineTransform(logo.getScaleX(), 0.0, 0.0, logo.getScaleY(), logo.getPosX(), logo.getPosY());
-		g.drawImage(logo.getImage(), transform, null);
+		
+		logo.render(g);
 		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
 			startButtons[i].render(g);
 		}

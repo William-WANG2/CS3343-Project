@@ -93,7 +93,7 @@ public class Dio{
 	}
 
 	public void render(Graphics2D g) {
-		
+		//can not use Texture's render since it depends on the nodeInfo which is dynamic
 		if(isTrapped) {
 			//AffineTransform transformNode = new AffineTransform(node.);
 			AffineTransform transform = new AffineTransform(angryDio[sequenceIndex].getScaleX(), 0.0, 0.0, angryDio[sequenceIndex].getScaleY(), node.getNodeInformation().displayPos.y, node.getNodeInformation().displayPos.x - normalDio[sequenceIndex].getHeight() * 0.4);

@@ -120,8 +120,7 @@ public class PlayingScene extends Scene{
 
 	@Override
 	public void render(Graphics2D g) {
-		AffineTransform transform = new AffineTransform(background.getScaleX(), 0.0, 0.0, background.getScaleY(), background.getPosX(), background.getPosY());
-		g.drawImage(background.getImage(), transform, null);
+		background.render(g);
 		map.render(g);
 		board.render(g);
 		dio.render(g);
