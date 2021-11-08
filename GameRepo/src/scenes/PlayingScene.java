@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 
 import game.GREGame;
 import gameObject.Board;
-import gameObject.Button;
+import gameObject.GameButton;
 import gameObject.Dio;
 import gameObject.GameResult;
 import gameObject.Map;
@@ -19,14 +19,11 @@ import util.*;
 public class PlayingScene extends Scene{
 
 
-	private Mouse mouse;
 	private Key key;
 	private Map map;
 	private Board board;
 	private Dio dio;
-	private static boolean resHasLoaded = false; //indicate whether the pictures have been loaded, if yes, skip the loading process
 	private static Texture background;
-	private boolean toNextScene;
 	private GameResult gameResult;
 	
 	private void handleMouseClick(Mouse mouse) {

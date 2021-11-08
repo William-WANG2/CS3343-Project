@@ -8,7 +8,7 @@ import util.Music;
 import util.Vector2d;
 
 public class MusicController {
-	private Button musicToggle;
+	private GameButton musicToggle;
 	private boolean change;
 	private Music background;
 	private Music good;
@@ -19,7 +19,7 @@ public class MusicController {
 	}
 	private MusicController() {
 		change=false;
-		musicToggle = new Button("res/music/musicOn.png", "res/music/musicOff.png", GlobalConstants.APP_WIDTH/15, GlobalConstants.APP_HEIGHT/15, 50, 50);
+		musicToggle = new GameButton("res/music/musicOn.png", "res/music/musicOff.png", 10, GlobalConstants.APP_HEIGHT/13, 50, 50);
 		String filepath = "res/music/CXKisBeautiful.wav";
 		background = new Music(filepath, -30);
 		filepath = "res/music/good.wav";
@@ -33,11 +33,10 @@ public class MusicController {
 		background.loop();
 	}
 	
-	private void handleBackgroundMusic(Vector2d mousePosition) {
+	private void updateBackgroundMusic(Vector2d mousePosition) {
 		musicToggle.handleEvent(mousePosition);
 		if(musicToggle.isClicked())
 		{
-			musicToggle.update();
 			change = !change;
 			if(change) {
 				background.close();
@@ -45,12 +44,12 @@ public class MusicController {
 			else {
 				background.loop();
 			}
-			musicToggle.setClickedFalse();
+			musicToggle.update();
 		}
 	}
 
 	public void handleClickEvent(Vector2d mousePosition) {
-		handleBackgroundMusic(mousePosition);
+		updateBackgroundMusic(mousePosition);
 	}
 		
 	

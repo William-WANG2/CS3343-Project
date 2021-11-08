@@ -6,7 +6,7 @@ import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 
 import game.GREGame;
-import gameObject.Button;
+import gameObject.GameButton;
 import gameObject.GameResult;
 import gameObject.MusicController;
 import util.GlobalConstants;
@@ -15,10 +15,7 @@ import util.Texture;
 
 public class ResultScene extends Scene{
 	
-	private Boolean toNextScene;
-	private Mouse mouse;
-	private Button restartButton;
-	private static boolean resHasLoaded = false; //indicate whether the pictures have been loaded, if yes, skip the loading process
+	private GameButton restartButton;
 	private static Texture kunkun;
 	private static Texture winMsg;
 	private static Texture loseMsg;
@@ -31,6 +28,7 @@ public class ResultScene extends Scene{
 	
 	private void handleMouseClick(Mouse mouse) {
 		if(mouse.isClicked) {
+			MusicController.getInstance().handleClickEvent(mouse.mousePos);
 			restartButton.handleEvent(mouse.mousePos);
 			if(restartButton.isClicked())
 			{
@@ -50,7 +48,7 @@ public class ResultScene extends Scene{
 			resHasLoaded = true;
 		}
 		
-		restartButton = new Button("res/endScene/Restart.png", "res/endScene/Restart2.png", GlobalConstants.APP_WIDTH/2-100 , GlobalConstants.APP_HEIGHT/2, 150, 75);
+		restartButton = new GameButton("res/Button/Restart.png", "res/Button/Restart2.png", GlobalConstants.APP_WIDTH/2-100 , GlobalConstants.APP_HEIGHT/2, 150, 75);
 		toNextScene = false;
 		mouse = mApp.mouse;
 		gameResult = ((GREGame)(mApp)).getGameResult();
@@ -76,6 +74,7 @@ public class ResultScene extends Scene{
 			loseMsg.render(g);
 		}
 		ack.render(g);
+		MusicController.getInstance().renderBackgroundButton(g);
 	}
 
 	@Override
