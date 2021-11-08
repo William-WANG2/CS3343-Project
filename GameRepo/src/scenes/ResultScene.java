@@ -34,6 +34,7 @@ public class ResultScene extends Scene{
 			{
 				toNextScene = true;
 			}
+			mouse.isClicked = false;
 		}
 	}
 	
@@ -56,7 +57,6 @@ public class ResultScene extends Scene{
 
 	@Override
 	public void update() {
-		
 		handleMouseClick(mouse);
 		restartButton.update();
 	}
