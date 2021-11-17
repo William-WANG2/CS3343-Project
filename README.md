@@ -33,7 +33,7 @@ git clone https://github.com/William-WANG2/CS3343-Project
 Go to application folder,
 
 ```
-cd GameRepo
+cd CS3343-Project/GameRepo
 ```
 
 To create new bin folder, 
