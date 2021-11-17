@@ -10,8 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import javax.swing.*;
 
-import gameObject.MapNode;
-
 public abstract class GameApplication extends JFrame implements Runnable{
 	
 	/**

@@ -3,7 +3,6 @@ package game;
 import util.*;
 
 import gameObject.GameResult;
-import gameObject.MusicController;
 import gameObject.WordType;
 import scenes.*;
 

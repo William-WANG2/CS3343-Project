@@ -2,18 +2,8 @@ package gameObject;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-import util.Key;
-import util.Mouse;
 import util.Texture;
 
 

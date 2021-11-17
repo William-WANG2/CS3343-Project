@@ -3,7 +3,6 @@ package gameObject;
 import java.awt.Graphics2D;
 
 import util.GlobalConstants;
-import util.Mouse;
 import util.Music;
 import util.Vector2d;
 

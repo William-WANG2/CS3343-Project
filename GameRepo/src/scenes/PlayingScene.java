@@ -2,11 +2,9 @@ package scenes;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.geom.AffineTransform;
 
 import game.GREGame;
 import gameObject.Board;
-import gameObject.GameButton;
 import gameObject.Dio;
 import gameObject.GameResult;
 import gameObject.Map;

@@ -1,16 +1,9 @@
 package gameObject;
 
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
-
-import scenes.Scene;
 import util.BoundingBox;
-import util.Mouse;
+
 import util.Texture;
 import util.Vector2d;
 
