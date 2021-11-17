@@ -25,7 +25,7 @@ This is a funny game to practice your GRE vocabulary.
 Download the source code from [Project page](https://github.com/William-WANG2/CS3343-Project) and Unzip
 *or* download by git clone,
 ```
-git clone https://github.com/patrickwang96/CS3343.git
+git clone https://github.com/William-WANG2/CS3343-Project
 ```
 
 ### Executing program
