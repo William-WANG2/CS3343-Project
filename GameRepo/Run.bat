@@ -1,3 +1,8 @@
 @ECHO OFF
 
-java -jar GREGame.jar
+IF EXIST "GREGame.jar" (
+	java -jar GREGame.jar
+)ELSE (
+	build.bat
+	Run.bat
+)

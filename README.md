@@ -66,6 +66,7 @@ To run the jar file
 java -jar GREGame.jar
 ```
 
+For Windows users, double click build.bat file to compile and generate jar file. Then double click Run.bat to run the application.
 
 
 ## Version Control System
