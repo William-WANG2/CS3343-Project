@@ -1,7 +1,9 @@
 package util;
-
+/*
+ * Transform is a wrapped position and scale information
+ */
 public class Transform {
-	
+
 	public Vector2f position;
 	public Vector2f scale;
 	

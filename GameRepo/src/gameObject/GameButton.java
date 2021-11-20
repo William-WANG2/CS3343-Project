@@ -41,8 +41,8 @@ public class GameButton {
 	public void update() {
 		if(isClicked) {
 			currTexture = clickedTexture;
-			clickedTexture=unclickTexture;
-			unclickTexture=currTexture;
+			clickedTexture = unclickTexture;
+			unclickTexture = currTexture;
 		}
 		else {
 			currTexture = unclickTexture;

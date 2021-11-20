@@ -13,6 +13,7 @@ import util.Texture;
 
 public class ResultScene extends Scene{
 	
+	/*All resources used in this scene*/
 	private GameButton restartButton;
 	private static Texture kunkun;
 	private static Texture winMsg;

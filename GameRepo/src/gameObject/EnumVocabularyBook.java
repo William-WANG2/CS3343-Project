@@ -21,8 +21,8 @@ public enum EnumVocabularyBook {
 	}
 	
 	//obtain the path for the words resources
-	public static String getWordTypePath(EnumVocabularyBook w) {
-		switch(w) {
+	public static String getWordTypePath(EnumVocabularyBook b) {
+		switch(b) {
 			case PRIMARY:
 				return "res/words/PRIMARY.xml";
 			case IELTS:

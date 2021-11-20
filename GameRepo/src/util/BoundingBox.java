@@ -1,5 +1,7 @@
 package util;
-
+/*
+ * Bounding box is a box region.
+ */
 public class BoundingBox extends Geometry{
 	
 	Vector2f leftUp;

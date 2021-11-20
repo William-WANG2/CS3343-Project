@@ -1,5 +1,5 @@
 package util;
-
+/*Record time context for the game*/
 public class GameTimer {
 	
 	public static GameTimer mTimer = new GameTimer();

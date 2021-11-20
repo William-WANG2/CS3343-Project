@@ -11,7 +11,7 @@ public abstract class Scene {
 	protected Boolean toNextScene;
 	protected Mouse mouse;
 	private static boolean next;
-	protected boolean resHasLoaded = false; //indicate whether the pictures have been loaded, if yes, skip the loading process
+	protected boolean resHasLoaded = false; //indicate whether the resources have been loaded, if yes, skip the loading process
 	
 	public static void setNextScene(boolean n) {
 		next = n;

@@ -1,5 +1,7 @@
 package gameObject;
-
+/*
+ * Record the word information, which is its correct spell and definition
+ */
 public class WordInfo{
 	
 	private String word;

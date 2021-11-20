@@ -15,6 +15,7 @@ import gameObject.EnumVocabularyBook;
 import util.*;
 public class LoginScene extends Scene {
 
+	/*All resources used in this scene*/
 	private boolean isRuleNextScene;
 	private EnumVocabularyBook modeIndex; //indicate which mode(sort of words) we proceed in next scene
 	private GameButton startButtons[] = new GameButton[GameSettingConstants.NUM_GAME_MODE];
@@ -25,11 +26,13 @@ public class LoginScene extends Scene {
 	private long timeElapsed;
 	private GameTimer timer = GameTimer.getInstance();;
 	
-
+	//Multi threads utilities for resource loading
 	private ExecutorService threadPool;
 	private List<Callable<Boolean>> loadTasks;
 	
+	//Mouse input handler for this scene
 	private void handleMouseClick(Mouse mouse) {
+		
 		if(mouse.isClicked) {
 			MusicController.getInstance().handleClickEvent(mouse.mousePos);
 			rule.handleEvent(mouse.mousePos);
@@ -51,6 +54,7 @@ public class LoginScene extends Scene {
 		}
 	}
 	
+	//To load animation sequence per thread
 	private void load(int start) {
 		loadTasks.add(new Callable<Boolean>() {
 		@Override
@@ -63,6 +67,7 @@ public class LoginScene extends Scene {
 		}
 		});
 	}
+	
 	@Override
 	public void enter() {
 		/*load resources*/
@@ -75,9 +80,11 @@ public class LoginScene extends Scene {
 			for(int i=0; i<91; i+=7) {
 				load(i);
 			}
+			
 			for(Callable<Boolean> task : loadTasks) {
 				threadPool.submit(task);
 			}
+			
 			threadPool.shutdown();
 			/*load logo*/
 			logo = Texture.loadImage("res/Logo.png", 100, 80, 400, 200);

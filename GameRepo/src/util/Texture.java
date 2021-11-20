@@ -8,12 +8,13 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+/*Texture is a wrapped image*/
 public class Texture {
 	
 	private BufferedImage image;
 	private Transform transform;
-	int height;
-	int width;
+	private int height;
+	private int width;
 	
 	public Texture(BufferedImage image, Transform transform) {
 		this.image = image;
