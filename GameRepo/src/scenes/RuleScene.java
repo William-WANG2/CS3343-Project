@@ -2,9 +2,9 @@ package scenes;
 
 import java.awt.Graphics2D;
 
+import game.GameSettingConstants;
 import gameObject.GameButton;
 import gameObject.MusicController;
-import util.GlobalConstants;
 import util.Mouse;
 import util.Texture;
 
@@ -30,10 +30,10 @@ public class RuleScene extends Scene {
 	public void enter() {
 		/*load resources*/
 		if(!resHasLoaded) {
-			rule = Texture.loadImage("res/rule.png", 0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT-200);
+			rule = Texture.loadImage("res/rule.png", 0, 0, GameSettingConstants.APP_WIDTH, GameSettingConstants.APP_HEIGHT-200);
 			resHasLoaded = true;
 		}
-		menu = new GameButton("res/Button/Menu.png", "res/Button/Menu2.png", GlobalConstants.APP_WIDTH - 155 , GlobalConstants.APP_HEIGHT - 300, 150, 75);
+		menu = new GameButton("res/Button/Menu.png", "res/Button/Menu2.png", GameSettingConstants.APP_WIDTH - 155 , GameSettingConstants.APP_HEIGHT - 300, 150, 75);
 		toNextScene = false;
 		mouse = mApp.mouse;
 	}

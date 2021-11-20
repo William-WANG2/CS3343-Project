@@ -1,12 +1,12 @@
 package gameObject;
-
-
 import java.awt.Font;
 import java.awt.Graphics2D;
 
 
 import util.Texture;
-
+/*
+ * The region of vocabulary and answer region.
+ */
 public class Board{
 	
 	private static Texture boardTexture;
@@ -34,6 +34,7 @@ public class Board{
 	public void handleInputDelete() {
 		currentInput = currentInput.length() <= 1 ? "" : currentInput.substring(0, currentInput.length()-1);
 	}
+	
 	public void handleInputLetter(char letter) {
 		if(currentInput.length() < currentWordInformation.getWordLength()-currentWordInformation.getWordLength()/3*2){
 			currentInput += letter;

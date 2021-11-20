@@ -7,12 +7,12 @@ import java.util.*;
 import util.*;
 import algorithm.*;
 
-public class Dio{
+public class Character{
 
-	GameTimer timer = GameTimer.getInstance();
-	long timeElapsed; 
+	GameTimer timer = GameTimer.getInstance(); //The api of timer is thread safe in our application.
+	long timeElapsed; //Time for animation control 
 
-	private MapNode node;
+	private MapNode node; //Reference to current node
 	private boolean isAlive;
 	private boolean isTrapped;
 	private Texture[] normalDio;
@@ -22,11 +22,11 @@ public class Dio{
 	private Texture[] angryDio;
 
 	private ShortestPath s;
-	private static Dio dio = new Dio();
-	public static Dio getInstance() {
+	private static Character dio = new Character();
+	public static Character getInstance() {
 		return dio;
 	}
-	private Dio() {
+	private Character() {
 	}
 	
 	private void setNode(MapNode node) {
@@ -56,7 +56,8 @@ public class Dio{
 	public boolean isEscape() {
 		return node.isBorder();
 	}
-	//return next "random" Node when Dio is angry, null if Dio is dead
+	
+	//return next "random" Node when character is angry, null if Dio is dead
 	private MapNode moveSurround() {
 		ArrayList<MapNode> adjacency=node.getAdjacency();
 		int n=0;

@@ -1,9 +1,8 @@
-package util;
+package game;
 
 import java.awt.Color;
-
-public class GlobalConstants {
-
+public class GameSettingConstants {
+	
 	public static final Color APP_BORDER = Color.DARK_GRAY;
 	public static final int APP_WIDTH = 1280;
 	public static final int APP_HEIGHT = 960;
@@ -13,4 +12,5 @@ public class GlobalConstants {
 	public static final int MAP_ROW = 11;
 	public static final int MAP_COLUMN = 11;
 	public static final int NUM_GAME_MODE = 4;
+	
 }

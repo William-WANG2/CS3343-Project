@@ -48,13 +48,13 @@ public class MapNode{
 	//If the user input is correct, we should block the node
 	public static void setViewNodeBlock() {
 		viewNode.nodeInfo.blocked = true;
-		Dio.getInstance().recomputeShortestPath(false);
+		Character.getInstance().recomputeShortestPath(false);
 		viewNode = null;
 	}
 	
 	//If the user input is incorrect, ignore.
 	public static void setViewNodeNull() {
-		Dio.getInstance().recomputeShortestPath(true);
+		Character.getInstance().recomputeShortestPath(true);
 		viewNode = null;
 	}
 	
@@ -79,7 +79,7 @@ public class MapNode{
 		boolean isInGeo= Math.pow(mousePositionX - nodeInfo.displayPos.y - nodeInfo.radius,2) + Math.pow(mousePositionY - nodeInfo.displayPos.x - nodeInfo.radius, 2) < Math.pow(nodeInfo.radius, 2);
 		if(isInGeo && nodeInfo.blocked==false) {//add restore the click if click another one
 			//If Dio is currently on the node, can not update it
-			if(this != Dio.getInstance().getNode()) {
+			if(this != Character.getInstance().getNode()) {
 				//set board
 				if( this.nodeInfo.getWordInfo() != Board.getInstance().getWordInfo()) {
 					Board.getInstance().setWordInfo(nodeInfo.getWordInfo());
@@ -93,7 +93,7 @@ public class MapNode{
 	public void render(Graphics2D g) {
 		AffineTransform transform; //can not use Texture's render since it depends on the nodeInfo which is dynamic
 		
-		if(this == Dio.getInstance().getNode())
+		if(this == Character.getInstance().getNode())
 		{
 			return;
 		}

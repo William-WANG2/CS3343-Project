@@ -2,7 +2,7 @@ package gameObject;
 
 import java.awt.Graphics2D;
 
-import util.GlobalConstants;
+import game.GameSettingConstants;
 import util.Music;
 import util.Vector2d;
 
@@ -18,7 +18,7 @@ public class MusicController {
 	}
 	private MusicController() {
 		change=false;
-		musicToggle = new GameButton("res/music/musicOn.png", "res/music/musicOff.png", 10, GlobalConstants.APP_HEIGHT/13, 50, 50);
+		musicToggle = new GameButton("res/music/musicOn.png", "res/music/musicOff.png", 10, GameSettingConstants.APP_HEIGHT/13, 50, 50);
 		String filepath = "res/music/CXKisBeautiful.wav";
 		background = new Music(filepath, -30);
 		filepath = "res/music/good.wav";

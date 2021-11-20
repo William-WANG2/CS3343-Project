@@ -8,15 +8,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import game.GREGame;
+import game.GameSettingConstants;
 import gameObject.GameButton;
 import gameObject.MusicController;
-import gameObject.WordType;
+import gameObject.EnumVocabularyBook;
 import util.*;
 public class LoginScene extends Scene {
 
 	private boolean isRuleNextScene;
-	private WordType modeIndex; //indicate which mode(sort of words) we proceed in next scene
-	private GameButton startButtons[] = new GameButton[GlobalConstants.NUM_GAME_MODE];
+	private EnumVocabularyBook modeIndex; //indicate which mode(sort of words) we proceed in next scene
+	private GameButton startButtons[] = new GameButton[GameSettingConstants.NUM_GAME_MODE];
 	private GameButton rule;
 	private static Texture[] cxk;
 	private static Texture logo;
@@ -32,17 +33,17 @@ public class LoginScene extends Scene {
 		if(mouse.isClicked) {
 			MusicController.getInstance().handleClickEvent(mouse.mousePos);
 			rule.handleEvent(mouse.mousePos);
-			for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+			for(int i=0; i<GameSettingConstants.NUM_GAME_MODE; i++) {
 				startButtons[i].handleEvent(mouse.mousePos);
 			}
 			mouse.isClicked = false;
 		}
 		
-		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+		for(int i=0; i<GameSettingConstants.NUM_GAME_MODE; i++) {
 			if(startButtons[i].isClicked())
 			{
 				toNextScene = true;
-				modeIndex = WordType.fromIntToWordType(i);
+				modeIndex = EnumVocabularyBook.IntToWordType(i);
 			}
 		}
 		if(rule.isClicked()) {
@@ -56,7 +57,7 @@ public class LoginScene extends Scene {
 		public Boolean call() throws Exception{
 			for(int i = start; i < start+14; i++) {
 				String path = String.format("res/animation/caixukun%d.jpg", i + 1);
-				cxk[i] = Texture.loadImage(path, 400, 30, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT - 30);
+				cxk[i] = Texture.loadImage(path, 400, 30, GameSettingConstants.APP_WIDTH, GameSettingConstants.APP_HEIGHT - 30);
 			}
 			return true;
 		}
@@ -85,14 +86,14 @@ public class LoginScene extends Scene {
 		}
 		
 		/*load start buttons*/
-		for(int i = 0; i < GlobalConstants.NUM_GAME_MODE; i++) {
+		for(int i = 0; i < GameSettingConstants.NUM_GAME_MODE; i++) {
 			String path1 = String.format("res/Button/StartButton%d.png", i + 1);
 			String path2 = String.format("res/Button/StartButtonClicked%d.png", i + 1);
-			startButtons[i] = new GameButton(path1, path2, GlobalConstants.APP_WIDTH/3 + 50, (int)(GlobalConstants.APP_HEIGHT/1.4) - 100 * i, 150, 75);
+			startButtons[i] = new GameButton(path1, path2, GameSettingConstants.APP_WIDTH/3 + 50, (int)(GameSettingConstants.APP_HEIGHT/1.4) - 100 * i, 150, 75);
 		}
 		
 		/*load rule button*/
-		rule = new GameButton("res/Button/Rule.png", "res/Button/Rule2.png", GlobalConstants.APP_WIDTH/3 + 50, (int)(GlobalConstants.APP_HEIGHT/1.4) - 400, 150, 75);
+		rule = new GameButton("res/Button/Rule.png", "res/Button/Rule2.png", GameSettingConstants.APP_WIDTH/3 + 50, (int)(GameSettingConstants.APP_HEIGHT/1.4) - 400, 150, 75);
 		
 		toNextScene = false;
 		isRuleNextScene = false;
@@ -107,7 +108,7 @@ public class LoginScene extends Scene {
 	@Override
 	public void update() {
 		handleMouseClick(mouse);
-		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+		for(int i=0; i<GameSettingConstants.NUM_GAME_MODE; i++) {
 			startButtons[i].update();
 		}
 		rule.update();
@@ -126,7 +127,7 @@ public class LoginScene extends Scene {
 		}
 		
 		logo.render(g);
-		for(int i=0; i<GlobalConstants.NUM_GAME_MODE; i++) {
+		for(int i=0; i<GameSettingConstants.NUM_GAME_MODE; i++) {
 			startButtons[i].render(g);
 		}
 		rule.render(g);
@@ -136,7 +137,7 @@ public class LoginScene extends Scene {
 	@Override
 	public void exit() {
 		if(toNextScene) {
-			((GREGame)mApp).setWordType(modeIndex);
+			((GREGame)mApp).setBookType(modeIndex);
 			mApp.loadScene(new PlayingScene());
 		}
 		if(isRuleNextScene) {

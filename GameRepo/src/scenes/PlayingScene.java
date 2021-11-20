@@ -4,13 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import game.GREGame;
+import game.GameSettingConstants;
 import gameObject.Board;
-import gameObject.Dio;
+import gameObject.Character;
 import gameObject.GameResult;
 import gameObject.Map;
 import gameObject.MapNode;
 import gameObject.MusicController;
-import gameObject.WordType;
+import gameObject.EnumVocabularyBook;
 
 import util.*;
 
@@ -20,7 +21,7 @@ public class PlayingScene extends Scene{
 	private Key key;
 	private Map map;
 	private Board board;
-	private Dio dio;
+	private Character dio;
 	private static Texture background;
 	private GameResult gameResult;
 	
@@ -75,18 +76,18 @@ public class PlayingScene extends Scene{
 	public void enter() {
 		/*load resources*/
 		if(!resHasLoaded) {
-			background = Texture.loadImage("res/background/basketballCourt.png", 0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
+			background = Texture.loadImage("res/background/basketballCourt.png", 0, 0, GameSettingConstants.APP_WIDTH, GameSettingConstants.APP_HEIGHT);
 			resHasLoaded = true;
 		}
 			
 		map = Map.getInstance();
-		map.initialize(GlobalConstants.MAP_ROW, GlobalConstants.MAP_COLUMN, 250, 250, GlobalConstants.APP_WIDTH/2, (int)(GlobalConstants.APP_HEIGHT * 0.55), WordType.getWordTypePath(((GREGame)mApp).getWordType())); 
+		map.initialize(GameSettingConstants.MAP_ROW, GameSettingConstants.MAP_COLUMN, 250, 250, GameSettingConstants.APP_WIDTH/2, (int)(GameSettingConstants.APP_HEIGHT * 0.55), EnumVocabularyBook.getWordTypePath(((GREGame)mApp).getBookType())); 
 		
-		dio = Dio.getInstance();
+		dio = Character.getInstance();
 		dio.enter(map.getMap()[map.getColRowCount().x / 2][map.getColRowCount().y / 2]);
 		
 		board = Board.getInstance();
-		board.reset("res/textures/box.png", GlobalConstants.APP_WIDTH/2 - 20, 100, (int)(GlobalConstants.APP_WIDTH), 400);
+		board.reset("res/textures/box.png", GameSettingConstants.APP_WIDTH/2 - 20, 100, (int)(GameSettingConstants.APP_WIDTH), 400);
 		
 		gameResult = new GameResult();
 		

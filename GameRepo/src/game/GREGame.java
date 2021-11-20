@@ -3,14 +3,16 @@ package game;
 import util.*;
 
 import gameObject.GameResult;
-import gameObject.WordType;
+import gameObject.EnumVocabularyBook;
 import scenes.*;
 
+/*
+ * The specific game we made. 
+ */
 public class GREGame extends GameApplication{
 	
-	//These are for score statistics
 	private GameResult result;
-	private WordType wordType;
+	private EnumVocabularyBook vocabularyBookType;
 	
 	public GREGame() {
 	}
@@ -18,29 +20,31 @@ public class GREGame extends GameApplication{
 	public void setGameResult(GameResult result) {
 		this.result = result;
 	}
+	
 	public GameResult getGameResult() {
 		return result;
 	}
-	public WordType getWordType()
-	{
-		return wordType;
+	
+	public EnumVocabularyBook getBookType(){
+		return vocabularyBookType;
 	}
-	public void setWordType(WordType w) {
-		wordType = w;
+	
+	public void setBookType(EnumVocabularyBook b) {
+		vocabularyBookType = b;
 	}
+	
 	public void initialize() {
-		
 		super.initialize();
+		//The first scene of our game.
 		loadScene(new LoginScene());
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
+	
 	@Override
 	public void loadScene(Scene next) {
 		currScene = next;
 		currScene.mApp = this;
 		currScene.enter();
 	}
-	
-	
 }

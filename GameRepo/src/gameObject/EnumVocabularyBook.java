@@ -1,12 +1,12 @@
 package gameObject;
 
-public enum WordType {
+public enum EnumVocabularyBook {
 	PRIMARY,
 	IELTS,
 	TOFEL,
 	GRE;
 	
-	public static WordType fromIntToWordType(int i) {
+	public static EnumVocabularyBook IntToWordType(int i) {
 		switch(i) {
 		case 0:
 			return PRIMARY;
@@ -21,7 +21,7 @@ public enum WordType {
 	}
 	
 	//obtain the path for the words resources
-	public static String getWordTypePath(WordType w) {
+	public static String getWordTypePath(EnumVocabularyBook w) {
 		switch(w) {
 			case PRIMARY:
 				return "res/words/PRIMARY.xml";

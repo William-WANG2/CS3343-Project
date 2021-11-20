@@ -10,19 +10,21 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import javax.swing.*;
 
+import game.GameSettingConstants;
+/*
+ * The common settings of a game
+*/
 public abstract class GameApplication extends JFrame implements Runnable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	//Window context
 	public Canvas canvas;
 	Color backgroundColor = Color.WHITE;
-	int clientWidth = GlobalConstants.APP_WIDTH;
-	int clientHeight = GlobalConstants.APP_HEIGHT;
+	int clientWidth = GameSettingConstants.APP_WIDTH;
+	int clientHeight = GameSettingConstants.APP_HEIGHT;
 	
-	String winTitle = GlobalConstants.APP_TITLE;
+	String winTitle = GameSettingConstants.APP_TITLE;
 	BufferStrategy bs;
 	Graphics g;
 	
@@ -32,8 +34,9 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	public static Scene currScene;
 	
 	//Time context
-	private int frameCount = 0;
-	private float timeElapsed = 0;
+	//dubug purpose
+	//private int frameCount = 0;
+	//private float timeElapsed = 0;
 	GameTimer timer = GameTimer.getInstance();
 	
 	//Event context
@@ -67,15 +70,12 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		exit();
 	}
 	
-	public void terminate(){
-	}
-	
 	private void update(){
 		currScene.update();
 	}
 	
 	private void renderFrame(Graphics g){
-		g.clearRect(0, 0, GlobalConstants.APP_WIDTH, GlobalConstants.APP_HEIGHT);
+		g.clearRect(0, 0, GameSettingConstants.APP_WIDTH, GameSettingConstants.APP_HEIGHT);
 		currScene.render((Graphics2D)g);
 	}
 	
@@ -102,7 +102,8 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	private void exit() {
 		currScene.exit();
 	}
-	
+
+//  Debug purpose frame rate
 //	private void calculateFrameRate(Graphics g) {
 //		
 //		frameCount++;
@@ -128,7 +129,6 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		while (running) {
 			gameloop(timer);
 		}
-		terminate();
 	}
 	
 	public abstract void loadScene(Scene next);
