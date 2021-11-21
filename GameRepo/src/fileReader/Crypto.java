@@ -40,7 +40,7 @@ public class Crypto {
 		} catch (NoSuchPaddingException | NoSuchAlgorithmException 
 				| InvalidKeyException | BadPaddingException
 				| IllegalBlockSizeException | IOException e) {
-			e.printStackTrace();
+			
 		}
 	}
 	
@@ -67,7 +67,7 @@ public class Crypto {
 			
 		} catch (IOException | NoSuchAlgorithmException 
 				| NoSuchPaddingException | InvalidKeyException e){
-			e.printStackTrace();
+			
 		}
 		return content;
 	}

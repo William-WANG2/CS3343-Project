@@ -55,11 +55,11 @@ public class XMLReader{
 			Document document = db.parse(path);
 			nl= document.getElementsByTagName("word");
 		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
+			
 		} catch (SAXException e) {
-			e.printStackTrace();
+			
 		} catch (IOException e) {
-			e.printStackTrace();
+			
 		}
 		return nl;
 	}

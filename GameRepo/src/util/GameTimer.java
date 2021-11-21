@@ -26,17 +26,7 @@ public class GameTimer {
 	
 	
 	
-	public long TotalTime() 
-	{
-		if(isStop)
-		{
-			return (stopTime - pausedTime - baseTime);
-		}
-		else
-		{
-			return (currTime - pausedTime - baseTime);
-		}
-	}
+	
 	
 	public long DeltaTime()
 	{
@@ -52,15 +42,7 @@ public class GameTimer {
 		stopTime = 0;
 		isStop = false;
 	}
-	public void Start()
-	{
-		long startTime;
-		startTime = (System.currentTimeMillis());
-		pausedTime += (startTime - stopTime);
-		prevTime = startTime;
-		stopTime = 0;
-		isStop = false;
-	}
+
 	public void Stop()
 	{
 		if(!isStop)

@@ -79,7 +79,7 @@ public class MapNode{
 	}
 	
 	public void handleClickEvent(int mousePositionX, int mousePositionY) {
-		viewNode = null;
+
 		boolean isInGeo = circleRegion.isInGeo(new Vector2f(mousePositionY, mousePositionX));
 		if(isInGeo && nodeInfo.blocked==false) {//add restore the click if click another one
 			//If the character is currently on the node, can not update it
