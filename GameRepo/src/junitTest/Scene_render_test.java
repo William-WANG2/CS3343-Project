@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import gameObject.Character;
 import gameObject.MapNode;
+import gameObject.WordInfo;
 import util.ResourceLoader;
 import util.Texture;
 import util.Transform;
@@ -13,8 +14,10 @@ import util.Transform;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.Canvas;
-import java.awt.Graphics2D;
+import java.awt.*;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
 import java.awt.image.BufferStrategy;
 
 public class Scene_render_test {
@@ -75,7 +78,18 @@ public class Scene_render_test {
 		}
 		
 		// Texture.render
-		public void test05() {
+		@Test
+		public void test05() {		
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			
 			BufferedImage image = null;
 			try {
 				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
@@ -83,11 +97,25 @@ public class Scene_render_test {
 				e.printStackTrace();
 			}
 			Transform transform = new Transform();
-			Texture texture = new Texture(image, transform);
-			Canvas canvas = new Canvas();
-			BufferStrategy bs = canvas.getBufferStrategy();
-			Graphics2D g = null;
-			texture.render(g);
+			Texture texture = new Texture(image, transform);			
+			texture.render((Graphics2D)g);
+		}
+		
+		// WordInfo.getDefinition
+		@Test
+		public void test06() {
+			WordInfo wordInfo = new WordInfo("abcd", "efgh");
+			String res = wordInfo.getDefinition();
+			assertEquals("abcd", res);
+			
+		}
+		
+		// WordInfo.getWord
+		@Test
+		public void test07() {
+			WordInfo wordInfo = new WordInfo("abcd", "efgh");
+			String res = wordInfo.getWord();
+			assertEquals("efgh", res);
 		}
 
 }
