@@ -1,0 +1,10 @@
+<dictionary>
+    <word>
+        <define>test1def</define>
+        <answer>test1ans</answer>
+    </word>
+    <word>
+        <define>test2def</define>
+        <answer>test2ans</answer>
+    </word>
+</dictionary>

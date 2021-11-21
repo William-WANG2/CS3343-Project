@@ -24,4 +24,5 @@ public class WordInfo{
 	public int getWordLength() {
 		return word.length();
 	}
+	
 }

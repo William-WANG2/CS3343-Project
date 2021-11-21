@@ -1,8 +1,8 @@
 package fileReader;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,8 +13,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
-import exception.ExMapExceedWordSize;
 import gameObject.WordInfo;
 
 public class XMLReader{
@@ -25,9 +23,8 @@ public class XMLReader{
 	 * 
 	 * @throws ExMapExceedWordSize
 	 **/
-	public static ArrayList<WordInfo> convert(String path, int m, int n) throws ExMapExceedWordSize {
+	public static ArrayList<WordInfo> convert(String path){
 		ArrayList<WordInfo> wordlist = new ArrayList<WordInfo>();
-		ArrayList<WordInfo> res = new ArrayList<WordInfo>();
 		NodeList wl = getFile(path);
 		for(int i=0;i<wl.getLength();i++) {
 			Node node = wl.item(i);
@@ -47,14 +44,7 @@ public class XMLReader{
 				wordlist.add(new WordInfo(def, ans));
 			}
 		}
-		if (m * n > wordlist.size() + 1) {
-			throw new ExMapExceedWordSize();
-		}
-		int startPosInList = new Random().nextInt(wl.getLength() + 1 - m * n);
-		for (int i = startPosInList; i < startPosInList + m * n; i++) {
-			res.add(wordlist.get(i));
-		}
-		return res;
+		return wordlist;
 	}
 	
 	public static NodeList getFile(String path) {
