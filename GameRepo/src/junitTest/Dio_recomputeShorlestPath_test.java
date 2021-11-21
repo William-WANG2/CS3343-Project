@@ -2,7 +2,16 @@ package junitTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 import org.junit.Test;
 
@@ -11,6 +20,9 @@ import gameObject.Map;
 import gameObject.MapNode;
 import gameObject.MapNodeInfo;
 import gameObject.WordInfo;
+import util.ResourceLoader;
+import util.Texture;
+import util.Transform;
 import util.Vector2d;
 import gameObject.Board;
 import gameObject.Character;
@@ -81,21 +93,10 @@ public class Dio_recomputeShorlestPath_test {
 		cxk.enter(map2d[2][2]);
 		map2d[2][1].handleClickEvent(-22, 26);
 		MapNode.setViewNodeBlock();
-		map2d[2][3].handleClickEvent(74, 26);
-		MapNode.setViewNodeBlock();
-		map2d[1][1].handleClickEvent(-2, -22);
-		MapNode.setViewNodeBlock();
-		map2d[1][2].handleClickEvent(46, -22);
-		MapNode.setViewNodeBlock();
-		map2d[3][1].handleClickEvent(-2, 74);
-		MapNode.setViewNodeBlock();
-		map2d[3][2].handleClickEvent(46, 74);
-		MapNode.setViewNodeBlock();
 		
-		map2d[1][1].handleClickEvent(1000, 1000);
-		map2d[1][1].handleClickEvent(-2, -22);
+		map2d[2][1].handleClickEvent(1000, 1000);
+		map2d[2][1].handleClickEvent(-22, -26);
 		map2d[4][4].handleClickEvent(1000, 1000);
-		map2d[2][2].handleClickEvent(26, 26);
 		Board board = Board.getInstance();
 		board.setWordInfo(map2d[4][4].getNodeInformation().getWordInfo());
 		map2d[4][4].handleClickEvent(122, 122);
@@ -114,14 +115,110 @@ public class Dio_recomputeShorlestPath_test {
 		MapNode.setViewNodeBlock();
 		map2d[1][1].handleClickEvent(-2, -22);
 		MapNode.setViewNodeBlock();
-		map2d[1][2].handleClickEvent(46, -22);
+		map2d[0][2].handleClickEvent(26, -70);
+		MapNode.setViewNodeBlock();
+		map2d[0][3].handleClickEvent(74, -70);
+		MapNode.setViewNodeBlock();
+		map2d[1][3].handleClickEvent(94, -22);
 		MapNode.setViewNodeBlock();
 		map2d[3][1].handleClickEvent(-2, 74);
 		MapNode.setViewNodeBlock();
 		map2d[3][2].handleClickEvent(46, 74);
-		
-		cxk.recomputeShortestPath(false);
 		MapNode.setViewNodeBlock();
-		cxk.recomputeShortestPath(false);
+		Character.getInstance().recomputeShortestPath(false);
+		Character.getInstance().recomputeShortestPath(false);
+		Character.getInstance().recomputeShortestPath(true);
+		map2d[1][2].handleClickEvent(46, -22);
+		MapNode.setViewNodeBlock();
+		map2d[2][2].handleClickEvent(26, 26);
+		MapNode.setViewNodeBlock();
+		Character.getInstance().recomputeShortestPath(true);
+	}
+	//Character.upadateAnimationSequencePerFrame
+	@Test
+	public void test08() {
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		Character cxk = Character.getInstance();
+		cxk.enter(map2d[2][2]);
+		cxk.upadateAnimationSequencePerFrame();
+	}
+	
+	//Character.render()
+	@Test
+	public void test09(){
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		Character cxk = Character.getInstance();
+		cxk.enter(map2d[2][2]);
+		map2d[2][1].handleClickEvent(-22, 26);
+		MapNode.setViewNodeBlock();
+		map2d[2][3].handleClickEvent(74, 26);
+		MapNode.setViewNodeBlock();
+		map2d[1][1].handleClickEvent(-2, -22);
+		MapNode.setViewNodeBlock();
+		map2d[0][2].handleClickEvent(26, -70);
+		MapNode.setViewNodeBlock();
+		map2d[0][3].handleClickEvent(74, -70);
+		MapNode.setViewNodeBlock();
+		map2d[1][3].handleClickEvent(94, -22);
+		MapNode.setViewNodeBlock();
+		map2d[3][1].handleClickEvent(-2, 74);
+		MapNode.setViewNodeBlock();
+		map2d[3][2].handleClickEvent(46, 74);
+		MapNode.setViewNodeBlock();
+		Character.getInstance().recomputeShortestPath(false);
+		Character.getInstance().recomputeShortestPath(false);
+		Character.getInstance().recomputeShortestPath(true);
+		map2d[1][2].handleClickEvent(46, -22);
+		MapNode.setViewNodeBlock();
+		map2d[2][2].handleClickEvent(26, 26);
+		MapNode.setViewNodeBlock();
+		JFrame f = new JFrame();
+		Canvas canvas = new Canvas();
+		f.getContentPane().add(canvas);
+		f.setSize(100, 100);
+		f.setTitle("Ji ni tai mei");
+		f.setVisible(true);
+		canvas.createBufferStrategy(2);
+		BufferStrategy bs = canvas.getBufferStrategy();
+		Graphics g = bs.getDrawGraphics();
+		
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
+		} catch (IOException e) {
+			
+		}
+		cxk.render((Graphics2D)g);
+	}
+	
+	@Test
+	public void test10(){
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		Character cxk = Character.getInstance();
+		cxk.enter(map2d[2][2]);
+		
+		JFrame f = new JFrame();
+		Canvas canvas = new Canvas();
+		f.getContentPane().add(canvas);
+		f.setSize(100, 100);
+		f.setTitle("Ji ni tai mei");
+		f.setVisible(true);
+		canvas.createBufferStrategy(2);
+		BufferStrategy bs = canvas.getBufferStrategy();
+		Graphics g = bs.getDrawGraphics();
+		
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
+		} catch (IOException e) {
+			
+		}
+		cxk.render((Graphics2D)g);
 	}
 }

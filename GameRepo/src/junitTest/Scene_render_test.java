@@ -31,7 +31,7 @@ public class Scene_render_test {
 			try {
 				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
 			} catch (IOException e) {
-				e.printStackTrace();
+				
 			}
 			Transform transform = new Transform();
 			Texture texture = new Texture(image, transform);
@@ -46,7 +46,7 @@ public class Scene_render_test {
 			try {
 				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
 			} catch (IOException e) {
-				e.printStackTrace();
+				
 			}
 			Transform transform = new Transform();
 			Texture texture = new Texture(image, transform);
@@ -61,7 +61,7 @@ public class Scene_render_test {
 			try {
 				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
 			} catch (IOException e) {
-				e.printStackTrace();
+				
 			}
 			Transform transform = new Transform();
 			Texture texture = new Texture(image, transform);
@@ -96,7 +96,7 @@ public class Scene_render_test {
 			try {
 				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
 			} catch (IOException e) {
-				e.printStackTrace();
+				
 			}
 			Transform transform = new Transform();
 			Texture texture = new Texture(image, transform);			

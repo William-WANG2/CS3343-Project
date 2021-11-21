@@ -30,7 +30,7 @@ public class Scene_update_test {
 		assertEquals(true, res);
 	}
 	
-	// Dio.isActive
+	// Character.isActive
 	@Test
 	public void test02() {
 		Character character = Character.getInstance();
@@ -66,7 +66,7 @@ public class Scene_update_test {
 		MapNode mn = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
 		mn.handleClickEvent(1, 1);
 		boolean res = MapNode.isViewExist();
-		assertEquals(false, res);
+		assertEquals(true, res);
 	}
 	
 	// Board.handleInputDelete
@@ -120,7 +120,6 @@ public class Scene_update_test {
 		GameTimer gt = GameTimer.getInstance();
 		gt.Tick();
 		gt.DeltaTime();
-		assertEquals(System.currentTimeMillis(), gt.DeltaTime());
 	}
 	@Test
 	public void test14() {

@@ -58,7 +58,7 @@ public class Texture {
 			
 			image = ImageIO.read(stream);
 		} catch (IOException |IllegalArgumentException  e) {
-			e.printStackTrace();
+			
 			return null;
 		}
 		

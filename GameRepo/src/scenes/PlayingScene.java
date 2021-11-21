@@ -19,6 +19,7 @@ public class PlayingScene extends Scene{
 
 	/*All resources used in this scene*/
 	private Key key;
+	private Mouse mouse;
 	private Map map;
 	private Board board;
 	private Character dio;

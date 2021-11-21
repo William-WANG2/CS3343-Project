@@ -10,6 +10,7 @@ import util.Texture;
 
 public class RuleScene extends Scene {
 	
+	/*All resources used in this scene*/
 	private static Texture rule;
 	private GameButton menu;
 	

@@ -19,7 +19,7 @@ public class ResourceLoader {
 				in = new FileInputStream(filePath);
 			} catch (FileNotFoundException e) {
 				System.out.print("No file");
-				e.printStackTrace();
+				
 			}
 		}
 		return in;

@@ -4,12 +4,15 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
+import util.BoundingCircle;
 import util.Texture;
+import util.Vector2f;
 
 
 public class MapNode{
 	
 	private MapNodeInfo nodeInfo;
+	private BoundingCircle circleRegion;
 	
 	private ArrayList<MapNode> adjacency;
 	private static Texture basketball = null;
@@ -29,6 +32,7 @@ public class MapNode{
 	
 	
 	public MapNode(float x, float y, float r, int m, int n, WordInfo wordInformation) {
+		circleRegion = new BoundingCircle(x + r,y + r,r);
 		nodeInfo = new MapNodeInfo(x, y, r, m, n, wordInformation);
 		adjacency = new ArrayList<MapNode>();
 	}
@@ -75,7 +79,8 @@ public class MapNode{
 	}
 	
 	public void handleClickEvent(int mousePositionX, int mousePositionY) {
-		boolean isInGeo= Math.pow(mousePositionX - nodeInfo.displayPos.y - nodeInfo.radius,2) + Math.pow(mousePositionY - nodeInfo.displayPos.x - nodeInfo.radius, 2) < Math.pow(nodeInfo.radius, 2);
+
+		boolean isInGeo = circleRegion.isInGeo(new Vector2f(mousePositionY, mousePositionX));
 		if(isInGeo && nodeInfo.blocked==false) {//add restore the click if click another one
 			//If the character is currently on the node, can not update it
 			if(this != Character.getInstance().getNode()) {

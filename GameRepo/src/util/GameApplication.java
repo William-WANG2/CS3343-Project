@@ -28,7 +28,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 	BufferStrategy bs;
 	Graphics g;
 	
-	//Game context
+	//GameApplication.java
 	private volatile boolean running;
 	protected Thread gameThread;
 	public static Scene currScene;
@@ -62,7 +62,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		canvas.requestFocus();
 		setupInput();
 	}
-	
+
 	private void gameloop(GameTimer timer) {
 		timer.Tick();
 		update();
@@ -89,7 +89,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 					Thread.sleep(100);
 					//calculateFrameRate(g);
 				} catch (Exception e) {
-					e.printStackTrace();
+					
 				} finally {
 					if (g != null) {
 						g.dispose();
