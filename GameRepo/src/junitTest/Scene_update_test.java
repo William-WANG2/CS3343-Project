@@ -16,6 +16,7 @@ import gameObject.MapNode;
 import gameObject.MusicController;
 import gameObject.WordInfo;
 import util.GameTimer;
+import util.Music;
 import util.Vector2d;
 
 public class Scene_update_test { 
@@ -184,5 +185,21 @@ public class Scene_update_test {
 		Vector2d mouse = new Vector2d(2, 5);
 		gb.handleEvent(mouse);
 		assertEquals(false, gb.isClicked());
+	}
+	
+	// MusicController.soundEffectExit
+	@Test
+	public void test21() {
+		MusicController music = MusicController.getInstance();
+		music.soundEffectWin();
+		music.soundEffectLose();
+		music.soundEffectExit();
+	}
+	
+	// Music.loop
+	@Test
+	public void test22() {
+		Music good = new Music("res/music/good.wav", 0);
+		good.loop();
 	}
 }
