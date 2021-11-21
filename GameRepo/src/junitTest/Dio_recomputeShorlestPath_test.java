@@ -77,21 +77,51 @@ public class Dio_recomputeShorlestPath_test {
 		Map map = Map.getInstance();
 		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
 		MapNode[][] map2d = map.getMap();
+		Character cxk = Character.getInstance();
+		cxk.enter(map2d[2][2]);
 		map2d[2][1].handleClickEvent(-22, 26);
+		MapNode.setViewNodeBlock();
 		map2d[2][3].handleClickEvent(74, 26);
+		MapNode.setViewNodeBlock();
 		map2d[1][1].handleClickEvent(-2, -22);
+		MapNode.setViewNodeBlock();
 		map2d[1][2].handleClickEvent(46, -22);
+		MapNode.setViewNodeBlock();
 		map2d[3][1].handleClickEvent(-2, 74);
+		MapNode.setViewNodeBlock();
 		map2d[3][2].handleClickEvent(46, 74);
+		MapNode.setViewNodeBlock();
 		
 		map2d[1][1].handleClickEvent(1000, 1000);
 		map2d[1][1].handleClickEvent(-2, -22);
 		map2d[4][4].handleClickEvent(1000, 1000);
-		Character cxk = Character.getInstance();
-		cxk.enter(map2d[2][2]);
 		map2d[2][2].handleClickEvent(26, 26);
 		Board board = Board.getInstance();
 		board.setWordInfo(map2d[4][4].getNodeInformation().getWordInfo());
 		map2d[4][4].handleClickEvent(122, 122);
+	}
+	//Character.moveSurround()
+	@Test
+	public void test07(){
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		Character cxk = Character.getInstance();
+		cxk.enter(map2d[2][2]);
+		map2d[2][1].handleClickEvent(-22, 26);
+		MapNode.setViewNodeBlock();
+		map2d[2][3].handleClickEvent(74, 26);
+		MapNode.setViewNodeBlock();
+		map2d[1][1].handleClickEvent(-2, -22);
+		MapNode.setViewNodeBlock();
+		map2d[1][2].handleClickEvent(46, -22);
+		MapNode.setViewNodeBlock();
+		map2d[3][1].handleClickEvent(-2, 74);
+		MapNode.setViewNodeBlock();
+		map2d[3][2].handleClickEvent(46, 74);
+		
+		cxk.recomputeShortestPath(false);
+		MapNode.setViewNodeBlock();
+		cxk.recomputeShortestPath(false);
 	}
 }

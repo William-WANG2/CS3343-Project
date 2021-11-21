@@ -3,3 +3,4 @@
 .metadata
 **/dist
 *.jar
+.DS_Store
