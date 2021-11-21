@@ -9,7 +9,7 @@ clean:
 	rm -rf bin $(JAR_NAME) 
 
 build: 
-	$(JAVAC) -d bin src/*/*.java
+	$(JAVAC) -d bin src/algorithm/*.java src/exception/*.java src/fileReader/*.java src/game/*.java src/gameObject/*.java src/scenes/*.java src/util/*.java
 
 rebuild: clean new build
 
