@@ -4,14 +4,21 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import game.GREGame;
 import gameObject.Board;
 import gameObject.Character;
+import gameObject.EnumVocabularyBook;
 import gameObject.Map;
 import gameObject.MapNode;
 import gameObject.WordInfo;
+import gameObject.GameButton;
 import util.ResourceLoader;
 import util.Texture;
 import util.Transform;
+import util.Mouse;
+import scenes.PlayingScene;
+import scenes.RuleScene;
+import scenes.Scene;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -141,6 +148,59 @@ public class Scene_render_test {
 			board.render((Graphics2D)g);
 		}
 		
-		// 
+		// GameButton.render
+		@Test
+		public void test11() {
+			GameButton gameButton = new GameButton("res/animation/caixukun1.jpg", "res/animation/caixukun2.jpg",0,0,0,0);
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			gameButton.render((Graphics2D)g);
+		}
+		
+		// RuleScene.render
+		@Test
+		public void test17() {
+			RuleScene ruleScene = new RuleScene();
+			GREGame gre = new GREGame();
+			gre.loadScene(ruleScene);
+			ruleScene.enter();
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			ruleScene.render((Graphics2D)g);
+		}
+		
+		// Scene.render
+		@Test
+		public void test18() {
+			Scene scene = new PlayingScene();
+			scene.setNextScene(false);
+			GREGame gre = new GREGame();
+			gre.setBookType(EnumVocabularyBook.IntToWordType(3));
+			gre.loadScene(scene);
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			scene.render((Graphics2D)g);
+		}
 
 }
