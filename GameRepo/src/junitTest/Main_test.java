@@ -7,7 +7,6 @@ import game.GREGame;
 import scenes.ResultScene;
 import util.GameApplication;
 import util.GameTimer;
-import util.Texture;
 
 public class Main_test {
 	//Unit test begin
