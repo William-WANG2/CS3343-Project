@@ -96,7 +96,6 @@ public class MapNode{
 		{
 			return;
 		}
-		
 		if(nodeInfo.blocked) {
 			transform = new AffineTransform(hole.getScaleX(), 0.0, 0.0, hole.getScaleY(), nodeInfo.displayPos.y, nodeInfo.displayPos.x);
 			g.drawImage(hole.getImage(), transform, null);

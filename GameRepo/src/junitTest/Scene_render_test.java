@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import gameObject.Board;
 import gameObject.Character;
+import gameObject.Map;
 import gameObject.MapNode;
 import gameObject.WordInfo;
 import util.ResourceLoader;
@@ -117,5 +119,28 @@ public class Scene_render_test {
 			String res = wordInfo.getWord();
 			assertEquals("efgh", res);
 		}
+		
+		// Integration test begin
+		// Board.render
+		@Test
+		public void test09() {
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			
+			Board board = Board.getInstance();
+			WordInfo wordInformation = new WordInfo("abcd", "efgh");
+			board.setWordInfo(wordInformation);
+			board.reset("res/animation/caixukun1.jpg", 0, 0, 0, 0);
+			board.render((Graphics2D)g);
+		}
+		
+		// 
 
 }
