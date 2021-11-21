@@ -159,8 +159,30 @@ public class Scene_update_test {
 	// MapNodeInfo.getWordInfo
 	@Test
 	public void test17() {
-		GameButton gb = new GameButton("res/Button/Rule.png", "res/Button/Rule2.png", 0, 0, 2, 2);
-		Vector2d mouse = new Vector2d(1, 1);
+		GameButton gb = new GameButton("res/Button/Rule.png", "res/Button/Rule2.png", 1, 1, 2, 2);
+		Vector2d mouse = new Vector2d(0, 0);
 		gb.handleEvent(mouse);
+		assertEquals(false, gb.isClicked());
+	}
+	@Test
+	public void test18() {
+		GameButton gb = new GameButton("res/Button/Rule.png", "res/Button/Rule2.png", 1, 1, 2, 2);
+		Vector2d mouse = new Vector2d(5, 5);
+		gb.handleEvent(mouse);
+		assertEquals(false, gb.isClicked());
+	}
+	@Test
+	public void test19() {
+		GameButton gb = new GameButton("res/Button/Rule.png", "res/Button/Rule2.png", 1, 1, 2, 2);
+		Vector2d mouse = new Vector2d(2, 0);
+		gb.handleEvent(mouse);
+		assertEquals(false, gb.isClicked());
+	}
+	@Test
+	public void test20() {
+		GameButton gb = new GameButton("res/Button/Rule.png", "res/Button/Rule2.png", 1, 1, 2, 2);
+		Vector2d mouse = new Vector2d(2, 5);
+		gb.handleEvent(mouse);
+		assertEquals(false, gb.isClicked());
 	}
 }
