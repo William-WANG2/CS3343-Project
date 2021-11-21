@@ -1,5 +1,5 @@
 package util;
-
+/*Bounding circle is a circle region*/
 public class BoundingCircle extends Geometry{
 	
 	Vector2f center;

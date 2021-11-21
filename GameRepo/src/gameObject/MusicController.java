@@ -16,6 +16,7 @@ public class MusicController {
 	public static MusicController getInstance() {
 		return instance;
 	}
+	
 	private MusicController() {
 		isOff=false;
 		musicToggle = new GameButton("res/music/musicOn.png", "res/music/musicOff.png", 10, GameSettingConstants.APP_HEIGHT/13, 50, 50);
@@ -27,7 +28,6 @@ public class MusicController {
 		bad = new Music(filepath, 0);
 	}
 	
-
 	public void startBackground() {
 		if(!isOff) {
 			background.loop();
@@ -61,9 +61,11 @@ public class MusicController {
 	public void soundEffectWin() {
 		good.start();
 	}
+	
 	public void soundEffectLose() {
 		bad.start();
 	}
+	
 	public void soundEffectExit() {
 		good.close();
 		bad.close();

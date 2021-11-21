@@ -1,6 +1,6 @@
 package util;
 /*
- * Bounding box is a box region.
+ * Bounding box is a rectangle region.
  */
 public class BoundingBox extends Geometry{
 	

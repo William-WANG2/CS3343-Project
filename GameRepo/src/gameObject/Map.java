@@ -145,8 +145,8 @@ public class Map{
 
 	public void handleMouseClickEvent(Vector2d clickPosition) {
 		
-		for(int i=0; i<colRowCount.x; i++) {
-			for(int j=0; j<colRowCount.y; j++) {
+		for(int i = 0; i<colRowCount.y; i++) {
+			for(int j = 0; j<colRowCount.x; j++) {
 				map[i][j].handleClickEvent(clickPosition.x, clickPosition.y);
 			}
 		}

@@ -24,7 +24,7 @@ public class Scene_update_test {
 		assertEquals(true, res);
 	}
 	
-	// Dio.isActive
+	// Character.isActive
 	@Test
 	public void test02() {
 		Character character = Character.getInstance();
