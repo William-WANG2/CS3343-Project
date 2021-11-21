@@ -34,6 +34,7 @@ public class Map{
 			wordList = rdapp.getList(vocabularyPath, rowCount, columnCount);
 		} catch (ExMapExceedWordSize e) {
 			e.printStackTrace();
+			return;
 		}catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -130,9 +131,6 @@ public class Map{
 	}
 	public MapNode getDummy() {
 		return dummyNode;
-	}
-
-	public void enter() {
 	}
 
 	public void render(Graphics2D g) {
