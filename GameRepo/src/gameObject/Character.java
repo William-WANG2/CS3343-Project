@@ -47,7 +47,7 @@ public class Character{
 	private MapNode moveSurround() {
 		ArrayList<MapNode> adjacency=node.getAdjacency();
 		int n=0;
-		while(true) {
+		for(int i=0; i<6; i++) {
 			if(!adjacency.get(n).getNodeInformation().blocked) {
 				return adjacency.get(n);
 			}
