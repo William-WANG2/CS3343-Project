@@ -33,10 +33,10 @@ public class Map{
 		try {
 			wordList = rdapp.getList(vocabularyPath, rowCount, columnCount);
 		} catch (ExMapExceedWordSize e) {
-			e.printStackTrace();
+			
 			return;
 		}catch (FileNotFoundException e) {
-			e.printStackTrace();
+			
 		}
 		
 		float radius = width / columnCount; //radius for node

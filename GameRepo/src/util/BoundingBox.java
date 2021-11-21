@@ -14,11 +14,7 @@ public class BoundingBox extends Geometry{
 	}
 	@Override
 	public Boolean isInGeo(Vector2f pos) {
-		if(pos.x < leftUp.x || pos.x > leftUp.x + widthHeight.x)
-			return false;
-		if(pos.y < leftUp.y || pos.y > leftUp.y + widthHeight.y)
-			return false;
-		return true;
+		return null;
 	}
 	
 	public Boolean isInGeo(Vector2d pos) {
