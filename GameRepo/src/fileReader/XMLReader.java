@@ -49,11 +49,11 @@ public class XMLReader{
 	
 	public static NodeList getFile(String path) {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		NodeList nl = null;
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document document = db.parse(path);
-			NodeList nl= document.getElementsByTagName("word");
-			return nl;
+			nl= document.getElementsByTagName("word");
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -61,7 +61,7 @@ public class XMLReader{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return nl;
 	}
 
 }

@@ -21,14 +21,14 @@ public class ReaderApp_getList_test {
 //unit test
 	//ReaderFactory.getFileType
 	@Test
-	public void test_01() {
+	public void test01() {
 		ReaderFactory rf = new ReaderFactory();		
 		String res = rf.getFileType("./res/words/word.txt");
 		assertEquals("txt",res);
 	}
 	//TxtReader.convert
 	@Test
-	public void test_02() throws FileNotFoundException {	
+	public void test02() throws FileNotFoundException {	
 		ArrayList<WordInfo> wl = TxtReader.convert("./res/words/test.txt");
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
 		boolean res = true;
@@ -45,7 +45,7 @@ public class ReaderApp_getList_test {
 	}
 	//XMLReader.convert
 	@Test
-	public void test_03() {	
+	public void test03() {	
 		ArrayList<WordInfo> wl = XMLReader.convert("./res/words/test.xml");
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
 		boolean res = true;
@@ -63,7 +63,7 @@ public class ReaderApp_getList_test {
 //integration test
 	//ReaderFactory.convert
 	@Test
-	public void test_04() throws FileNotFoundException, ExMapExceedWordSize{	
+	public void test04() throws FileNotFoundException, ExMapExceedWordSize{	
 		ReaderFactory rf = new ReaderFactory();
 		ArrayList<WordInfo> wl = rf.convert("./res/words/test.xml", 1, 1);
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
@@ -80,7 +80,7 @@ public class ReaderApp_getList_test {
 		assertEquals(true,res);
 	}
 	@Test
-	public void test_05(){	
+	public void test05(){	
 		try {
 			ReaderFactory rf = new ReaderFactory();
 			ArrayList<WordInfo> wl = rf.convert("./res/words/test.txt", 10, 1);
@@ -94,7 +94,7 @@ public class ReaderApp_getList_test {
 		
 	}
 	@Test
-	public void test_06(){	
+	public void test06(){	
 		try {
 			ReaderFactory rf = new ReaderFactory();
 			ArrayList<WordInfo> wl = rf.convert("./res/words/test.rbs", 1, 1);
@@ -108,7 +108,7 @@ public class ReaderApp_getList_test {
 	}
 	//ReaderApp.getList
 	@Test
-	public void test_07() throws FileNotFoundException, ExMapExceedWordSize{	
+	public void test07() throws FileNotFoundException, ExMapExceedWordSize{	
 		ReaderApp ra = new ReaderFactory();
 		ArrayList<WordInfo> wl = ra.getList("./res/words/test.xml", 1, 1);
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
