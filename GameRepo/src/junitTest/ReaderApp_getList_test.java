@@ -29,7 +29,7 @@ public class ReaderApp_getList_test {
 	//TxtReader.convert
 	@Test
 	public void test02() throws FileNotFoundException {	
-		ArrayList<WordInfo> wl = TxtReader.convert("./res/words/test.txt");
+		ArrayList<WordInfo> wl = TxtReader.convert("./res/words/test_read.txt");
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
 		boolean res = true;
 		WordInfo e1 = new WordInfo("test1def", "test1ans");
@@ -46,7 +46,7 @@ public class ReaderApp_getList_test {
 	//XMLReader.convert
 	@Test
 	public void test03() {	
-		ArrayList<WordInfo> wl = XMLReader.convert("./res/words/test.xml");
+		ArrayList<WordInfo> wl = XMLReader.convert("./res/words/test_read.xml");
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
 		boolean res = true;
 		WordInfo e1 = new WordInfo("test1def", "test1ans");
@@ -65,7 +65,7 @@ public class ReaderApp_getList_test {
 	@Test
 	public void test04() throws FileNotFoundException, ExMapExceedWordSize{	
 		ReaderFactory rf = new ReaderFactory();
-		ArrayList<WordInfo> wl = rf.convert("./res/words/test.xml", 1, 1);
+		ArrayList<WordInfo> wl = rf.convert("./res/words/test_read.xml", 1, 1);
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
 		boolean res = true;
 		WordInfo e1 = new WordInfo("test1def", "test1ans");
@@ -83,7 +83,7 @@ public class ReaderApp_getList_test {
 	public void test05(){	
 		try {
 			ReaderFactory rf = new ReaderFactory();
-			ArrayList<WordInfo> wl = rf.convert("./res/words/test.txt", 10, 1);
+			ArrayList<WordInfo> wl = rf.convert("./res/words/test_read.txt", 10, 1);
 		}
 		catch(ExMapExceedWordSize e) {
 			assertEquals(true,true);
@@ -97,7 +97,7 @@ public class ReaderApp_getList_test {
 	public void test06(){	
 		try {
 			ReaderFactory rf = new ReaderFactory();
-			ArrayList<WordInfo> wl = rf.convert("./res/words/test.rbs", 1, 1);
+			ArrayList<WordInfo> wl = rf.convert("./res/words/test_read.rbs", 1, 1);
 		}
 		catch(FileNotFoundException e) {
 			assertEquals(true,true);
@@ -110,7 +110,7 @@ public class ReaderApp_getList_test {
 	@Test
 	public void test07() throws FileNotFoundException, ExMapExceedWordSize{	
 		ReaderApp ra = new ReaderFactory();
-		ArrayList<WordInfo> wl = ra.getList("./res/words/test.xml", 1, 1);
+		ArrayList<WordInfo> wl = ra.getList("./res/words/test_read.xml", 1, 1);
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
 		boolean res = true;
 		WordInfo e1 = new WordInfo("test1def", "test1ans");

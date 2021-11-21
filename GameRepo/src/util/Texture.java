@@ -47,7 +47,7 @@ public class Texture {
 	}
 	
 	public float getWidth() {
-		width = (int)(image.getWidth() * transform.scale.x);
+		width = (int)(image.getWidth() * transform.scale.x); 
 		return width;
 	}
 	static public Texture loadImage(String filePath, int x, int y, int width, int height) {
@@ -55,9 +55,11 @@ public class Texture {
 		InputStream stream = ResourceLoader.load(Texture.class, filePath, null);
 		BufferedImage image = null;
 		try {
+			
 			image = ImageIO.read(stream);
-		} catch (IOException e) {
+		} catch (IOException |IllegalArgumentException  e) {
 			e.printStackTrace();
+			return null;
 		}
 		
 		Vector2f position = new Vector2f(x, y);
