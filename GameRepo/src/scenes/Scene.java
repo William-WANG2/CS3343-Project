@@ -9,8 +9,8 @@ import util.Mouse;
 public abstract class Scene {
 	
 	public GREGame mApp;
-	public Mouse mouse;
-	public Key key;
+	protected Mouse mouse;
+	protected Key key;
 	protected Boolean toNextScene;
 	private static boolean next;
 	protected boolean resHasLoaded = false; //indicate whether the resources have been loaded, if yes, skip the loading process

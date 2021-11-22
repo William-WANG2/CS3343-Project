@@ -135,7 +135,12 @@ public class Scene_enter_test {
 			GREGame g=new GREGame();
 			g.loadScene(r);
 			r.enter();
+			
 		}
+		
+		
+		
+		
 		
 	//PlayingScene.enter()
 		@Test	
