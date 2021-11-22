@@ -17,6 +17,7 @@ import util.ResourceLoader;
 import util.Texture;
 import util.Transform;
 import util.Mouse;
+import scenes.LoginScene;
 import scenes.PlayingScene;
 import scenes.ResultScene;
 import scenes.RuleScene;
@@ -24,7 +25,6 @@ import scenes.Scene;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.awt.Canvas;
 import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -294,20 +294,27 @@ public class Scene_render_test {
 			ruleScene.update();
 
 		}
-		//ResultScene.exit
+		
+		//PlayingScene.handleMouseClick()
 		@Test
 		public void test22() {
-			
-			Mouse m=new Mouse();
-			m.isClicked=true;
-			ResultScene ruleScene = new ResultScene();
-			GREGame gre = new GREGame();
-			gre.loadScene(ruleScene);
-			
-			GameResult r=new GameResult();
-			r.setIsWin(false);
-			gre.setGameResult(r);
-			ruleScene.enter();
+			PlayingScene r=new PlayingScene();
+			GREGame g=new GREGame();
+			g.setBookType(EnumVocabularyBook.IntToWordType(0));
+			g.loadScene(r);
+			g.mouse.isClicked=true;
+			r.enter();
+			r.update();
+			r.getNextScene();
+
+		}
+		
+		@Test
+		public void test23() {
+			LoginScene r=new LoginScene();
+			GREGame x=new GREGame();
+			x.loadScene(r);
+			r.enter();
 			JFrame f = new JFrame();
 			Canvas canvas = new Canvas();
 			f.getContentPane().add(canvas);
@@ -317,9 +324,14 @@ public class Scene_render_test {
 			canvas.createBufferStrategy(2);
 			BufferStrategy bs = canvas.getBufferStrategy();
 			Graphics g = bs.getDrawGraphics();
-			ruleScene.update();
+			r.render((Graphics2D)g);
 
 		}
+		
+		
+
+		
+		
 
 
 }
