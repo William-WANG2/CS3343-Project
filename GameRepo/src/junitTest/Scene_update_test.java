@@ -137,8 +137,6 @@ public class Scene_update_test {
 				res = false;
 			}
 		}
-		if (EnumVocabularyBook.IntToWordType(5) != null) 
-			res = false;
 		assertEquals(true, res);
 	}
 	
@@ -194,4 +192,6 @@ public class Scene_update_test {
 		Music good = new Music("res/music/good.wav", 0);
 		good.loop();
 	}
+	
+	// 
 }

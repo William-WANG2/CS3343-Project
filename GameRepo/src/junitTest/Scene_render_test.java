@@ -36,7 +36,7 @@ public class Scene_render_test {
 		public void test01() {
 			BufferedImage image = null;
 			try {
-				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
+				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg"));
 			} catch (IOException e) {
 				
 			}
@@ -51,7 +51,7 @@ public class Scene_render_test {
 		public void test02() {
 			BufferedImage image = null;
 			try {
-				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
+				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg"));
 			} catch (IOException e) {
 				
 			}
@@ -66,7 +66,7 @@ public class Scene_render_test {
 		public void test03() {
 			BufferedImage image = null;
 			try {
-				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
+				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg"));
 			} catch (IOException e) {
 				
 			}
@@ -101,7 +101,7 @@ public class Scene_render_test {
 			
 			BufferedImage image = null;
 			try {
-				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
+				image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg"));
 			} catch (IOException e) {
 				
 			}
