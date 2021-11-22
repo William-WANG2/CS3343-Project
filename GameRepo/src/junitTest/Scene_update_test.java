@@ -86,6 +86,19 @@ public class Scene_update_test {
 		board.handleInputDelete();
 	}
 	
+	//Board.handleInput
+	@Test
+	public void test24() {
+		Board board = Board.getInstance();
+		board.setWordInfo(new WordInfo("aaaaaaaa", "aaaaaaaa"));
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+	}
+	
 	// MusicController.soundEffectLose
 	@Test
 	public void test10() {
