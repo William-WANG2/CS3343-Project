@@ -11,7 +11,7 @@ public class Music {
 	
     private Clip clip;
     
-	public Music(String musicLocation, int volumn)
+	public Music(String musicLocation, int volumn) throws IllegalArgumentException
 	{
 		try
 		{

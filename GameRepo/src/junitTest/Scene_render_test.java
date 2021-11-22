@@ -16,7 +16,10 @@ import gameObject.GameResult;
 import util.ResourceLoader;
 import util.Texture;
 import util.Transform;
+import util.Vector2f;
+import util.BoundingBox;
 import util.Mouse;
+import util.Music;
 import scenes.LoginScene;
 import scenes.PlayingScene;
 import scenes.ResultScene;
@@ -308,6 +311,27 @@ public class Scene_render_test {
 			r.render((Graphics2D)g);
 
 		}
+		
+		@Test
+		public void test24() {
+			ResourceLoader r=new ResourceLoader();
+		}
+		
+		@Test
+		public void test25() {
+			String filepath = null;
+			Music t = new Music(filepath, 0);
+		}
+		
+		@Test
+		public void test26() {
+			BoundingBox b=new BoundingBox(0, 0, 0, 0);
+			b.isInGeo(new Vector2f(0,0));
+		}
+		
+		
+		
+		
 		
 		
 
