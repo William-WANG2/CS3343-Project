@@ -3,13 +3,15 @@ package scenes;
 import java.awt.Graphics2D;
 
 import game.GREGame;
+import util.Key;
 import util.Mouse;
 
 public abstract class Scene {
 	
 	public GREGame mApp;
+	public Mouse mouse;
+	public Key key;
 	protected Boolean toNextScene;
-	protected Mouse mouse;
 	private static boolean next;
 	protected boolean resHasLoaded = false; //indicate whether the resources have been loaded, if yes, skip the loading process
 	

@@ -144,6 +144,7 @@ public class LoginScene extends Scene {
 	@Override
 	public void exit() {
 		if(toNextScene) {
+			mouse.isClicked = false;
 			((GREGame)mApp).setBookType(modeIndex);
 			mApp.loadScene(new PlayingScene());
 		}

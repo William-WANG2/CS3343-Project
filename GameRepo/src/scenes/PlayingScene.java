@@ -18,8 +18,7 @@ import util.*;
 public class PlayingScene extends Scene{
 
 	/*All resources used in this scene*/
-	private Key key;
-	private Mouse mouse;
+
 	private Map map;
 	private Board board;
 	private Character dio;
@@ -125,7 +124,7 @@ public class PlayingScene extends Scene{
 	@Override
 	public void exit() {
 		if(toNextScene) {
-			
+			mouse.isClicked = false;
 			mApp.setGameResult(gameResult);
 			mApp.loadScene(new ResultScene());
 		}

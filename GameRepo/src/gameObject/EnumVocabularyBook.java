@@ -4,7 +4,8 @@ public enum EnumVocabularyBook {
 	PRIMARY,
 	IELTS,
 	TOFEL,
-	GRE;
+	GRE,
+	NULL;
 	
 	public static EnumVocabularyBook IntToWordType(int i) {
 		switch(i) {
@@ -17,7 +18,7 @@ public enum EnumVocabularyBook {
 		case 3:
 			return GRE;
 		default:
-			return null;
+			return NULL;
 		}
 	}
 	

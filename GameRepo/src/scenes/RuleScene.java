@@ -55,6 +55,7 @@ public class RuleScene extends Scene {
 	@Override
 	public void exit() {
 		if(toNextScene) {
+			mouse.isClicked = false;
 			mApp.loadScene(new LoginScene());
 		}
 	}

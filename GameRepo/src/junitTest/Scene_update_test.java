@@ -15,6 +15,8 @@ import gameObject.Map;
 import gameObject.MapNode;
 import gameObject.MusicController;
 import gameObject.WordInfo;
+import scenes.PlayingScene;
+import scenes.Scene;
 import util.GameTimer;
 import util.Music;
 import util.Vector2d;
@@ -191,7 +193,21 @@ public class Scene_update_test {
 	public void test22() {
 		Music good = new Music("res/music/good.wav", 0);
 		good.loop();
+		good.close();
 	}
 	
-	// 
+	//Integration Testing Begin
+	//PlayingScene.handleMouseClick
+	@Test
+	public void test23() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.setBookType(EnumVocabularyBook.GRE);
+		Scene s = new PlayingScene();
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MusicController music = MusicController.getInstance();
+		s.enter();
+		s.update();
+	}
 }

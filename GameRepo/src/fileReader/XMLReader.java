@@ -54,13 +54,7 @@ public class XMLReader{
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document document = db.parse(path);
 			nl= document.getElementsByTagName("word");
-		} catch (ParserConfigurationException e) {
-			
-		} catch (SAXException e) {
-			
-		} catch (IOException e) {
-			
-		}
+		} catch (Exception e) {}
 		return nl;
 	}
 
