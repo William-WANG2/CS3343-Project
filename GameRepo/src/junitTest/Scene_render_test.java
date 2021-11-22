@@ -12,11 +12,13 @@ import gameObject.Map;
 import gameObject.MapNode;
 import gameObject.WordInfo;
 import gameObject.GameButton;
+import gameObject.GameResult;
 import util.ResourceLoader;
 import util.Texture;
 import util.Transform;
 import util.Mouse;
 import scenes.PlayingScene;
+import scenes.ResultScene;
 import scenes.RuleScene;
 import scenes.Scene;
 
@@ -202,5 +204,103 @@ public class Scene_render_test {
 			Graphics g = bs.getDrawGraphics();
 			scene.render((Graphics2D)g);
 		}
+		
+		//ResultScene.render
+		@Test
+		public void test19() {
+			ResultScene ruleScene = new ResultScene();
+			GREGame gre = new GREGame();
+			gre.loadScene(ruleScene);
+			
+			GameResult r=new GameResult();
+			r.setIsWin(true);
+			gre.setGameResult(r);
+			ruleScene.enter();
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			ruleScene.render((Graphics2D)g);
+
+		}
+		
+		@Test
+		public void test20() {
+			ResultScene ruleScene = new ResultScene();
+			GREGame gre = new GREGame();
+			gre.loadScene(ruleScene);
+			
+			GameResult r=new GameResult();
+			r.setIsWin(false);
+			gre.setGameResult(r);
+			ruleScene.enter();
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			ruleScene.render((Graphics2D)g);
+
+		}
+		
+		//ResultScene.update
+		@Test
+		public void test21() {
+			ResultScene ruleScene = new ResultScene();
+			GREGame gre = new GREGame();
+			gre.loadScene(ruleScene);
+			
+			GameResult r=new GameResult();
+			r.setIsWin(false);
+			gre.setGameResult(r);
+			ruleScene.enter();
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			ruleScene.update();
+
+		}
+		//ResultScene.exit
+		@Test
+		public void test22() {
+			
+			Mouse m=new Mouse();
+			m.isClicked=true;
+			ResultScene ruleScene = new ResultScene();
+			GREGame gre = new GREGame();
+			gre.loadScene(ruleScene);
+			
+			GameResult r=new GameResult();
+			r.setIsWin(false);
+			gre.setGameResult(r);
+			ruleScene.enter();
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			ruleScene.update();
+
+		}
+
 
 }

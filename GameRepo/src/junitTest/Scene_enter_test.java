@@ -2,7 +2,15 @@ package junitTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 import org.junit.Test;
 
@@ -23,7 +31,9 @@ import scenes.ResultScene;
 import scenes.RuleScene;
 import scenes.Scene;
 import util.Music;
+import util.ResourceLoader;
 import util.Texture;
+import util.Transform;
 
 public class Scene_enter_test {
 	//Unit test begin
@@ -75,6 +85,8 @@ public class Scene_enter_test {
 		MapNode m=new MapNode(0, 0, 0, 0, 0, null);
 		m.enter();
 	}
+	
+	
 	
 	//Character.enter()
 	@Test
@@ -176,6 +188,55 @@ public class Scene_enter_test {
 			MapNode m=new MapNode(0, 0, 0, 0, 0, null);
 			m.setViewNodeNull();
 		}
-	
-
-}
+		
+		
+		//MapNode.Render()
+		@Test
+		public void test20() {
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			MapNode m=new MapNode(5, 5, 0, 0, 0, null);
+			m.getNodeInformation().blocked=true;
+			m.render((Graphics2D)g);
+			}
+		@Test
+		public void test21() {
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			MapNode m=new MapNode(5, 5, 0, 0, 0, null);
+			m.getNodeInformation().blocked=false;
+			m.render((Graphics2D)g);
+			}
+		
+		@Test
+		public void test22() {
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			MapNode m=new MapNode(5, 5, 5, 0, 0, null);
+			m.getNodeInformation().blocked=false;
+			m.handleClickEvent(10, 10);
+			m.render((Graphics2D)g);
+			}
+		}
+	 
