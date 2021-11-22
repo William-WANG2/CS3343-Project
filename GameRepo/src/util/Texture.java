@@ -48,7 +48,7 @@ public class Texture {
 	
 	static public Texture loadImage(String filePath, int x, int y, int width, int height) {
 		
-		InputStream stream = ResourceLoader.load(Texture.class, filePath, null);
+		InputStream stream = ResourceLoader.load(Texture.class, filePath);
 		BufferedImage image = null;
 		try {
 			

@@ -191,9 +191,8 @@ public class Dio_recomputeShorlestPath_test {
 		
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
+			image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg"));
 		} catch (IOException e) {
-			
 		}
 		cxk.render((Graphics2D)g);
 	}
@@ -218,7 +217,7 @@ public class Dio_recomputeShorlestPath_test {
 		
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg", null));
+			image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg"));
 		} catch (IOException e) {
 			
 		}

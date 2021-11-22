@@ -16,8 +16,9 @@ public enum EnumVocabularyBook {
 			return TOFEL;
 		case 3:
 			return GRE;
+		default:
+			return null;
 		}
-		return null;
 	}
 	
 	//obtain the path for the words resources
@@ -31,8 +32,8 @@ public enum EnumVocabularyBook {
 				return "res/words/TOFEL.xml";
 			case GRE:
 				return "res/words/GRE.xml";
-				
+			default:
+				return null;
 		}
-		return null;
 	}
 }
