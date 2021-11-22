@@ -203,11 +203,23 @@ public class Scene_update_test {
 		GREGame g=new GREGame();
 		g.setBookType(EnumVocabularyBook.GRE);
 		g.setBookType(EnumVocabularyBook.GRE);
+		g.mouse.isClicked=true;
 		Scene s = new PlayingScene();
 		Map map = Map.getInstance();
 		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
-		MusicController music = MusicController.getInstance();
-		s.enter();
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test24() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.mouse.isClicked=false;
+		Scene s = new PlayingScene();
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		g.loadScene(s);
 		s.update();
 	}
 }
