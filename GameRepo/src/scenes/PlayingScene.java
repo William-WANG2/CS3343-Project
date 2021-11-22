@@ -58,12 +58,10 @@ public class PlayingScene extends Scene{
 			else if(keyEvent == KeyEvent.VK_ENTER) {
 				if(board.isCorrectAnswer()) {
 					MapNode.setViewNodeBlock();
-					gameResult.increaseCorrectCount();
 					MusicController.getInstance().soundEffectWin();
 				}
 				else {
 					MapNode.setViewNodeNull();
-					gameResult.increaseErrorCount();
 					MusicController.getInstance().soundEffectLose();
 				}
 				board.handleInputFinish();

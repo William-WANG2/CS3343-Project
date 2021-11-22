@@ -22,7 +22,6 @@ import gameObject.MapNodeInfo;
 import gameObject.WordInfo;
 import util.ResourceLoader;
 import util.Texture;
-import util.Transform;
 import util.Vector2d;
 import gameObject.Board;
 import gameObject.Character;
@@ -145,7 +144,7 @@ public class Dio_recomputeShorlestPath_test {
 		cxk.upadateAnimationSequencePerFrame();
 	}
 	
-	//Character.render()
+	//Character.render() (angry cxk)
 	@Test
 	public void test09(){
 		Map map = Map.getInstance();
@@ -169,11 +168,15 @@ public class Dio_recomputeShorlestPath_test {
 		MapNode.setViewNodeBlock();
 		map2d[3][2].handleClickEvent(46, 74);
 		MapNode.setViewNodeBlock();
+		//not surrounded, leave a node
 		Character.getInstance().recomputeShortestPath(false);
 		Character.getInstance().recomputeShortestPath(false);
+		//move
 		Character.getInstance().recomputeShortestPath(true);
+		//surrounded
 		map2d[1][2].handleClickEvent(46, -22);
 		MapNode.setViewNodeBlock();
+		//dead
 		map2d[2][2].handleClickEvent(26, 26);
 		MapNode.setViewNodeBlock();
 		JFrame f = new JFrame();
@@ -194,7 +197,7 @@ public class Dio_recomputeShorlestPath_test {
 		}
 		cxk.render((Graphics2D)g);
 	}
-	
+	//Character.render() (normal cxk)
 	@Test
 	public void test10(){
 		Map map = Map.getInstance();

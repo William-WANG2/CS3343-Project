@@ -4,21 +4,8 @@ public class BoundingCircle extends Geometry{
 	
 	Vector2f center;
 	float radius;
-	
-	public BoundingCircle(Vector2f center, float radius) {
-		this.center = center;
-		this.radius = radius;
-	}
 	public BoundingCircle(float left, float top, float radius) {
 		this.center = new Vector2f(left, top);
-		this.radius = radius;
-	}
-	public BoundingCircle(int left, int top, float radius) {
-		this.center = new Vector2f(left, top);
-		this.radius = radius;
-	}
-	public BoundingCircle(Vector2d center, float radius) {
-		this.center = new Vector2f(center.x, center.y);
 		this.radius = radius;
 	}
 	@Override

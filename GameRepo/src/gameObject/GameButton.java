@@ -15,8 +15,6 @@ public class GameButton {
 	private BoundingBox btnRegion;
 	private Boolean isClicked;
 
-	public GameButton() { 
-	}
 	
 	public GameButton(String texturePath1, String texturePath2, int left, int top, int width, int height) { //One is origin image, one is clicked image
 		

@@ -84,13 +84,6 @@ public class Scene_update_test {
 		board.handleInputDelete();
 	}
 	
-	// GameResult.increaseCorrectCount
-	@Test
-	public void test09() {
-		GameResult gr = new GameResult();
-		gr.increaseCorrectCount();
-	}
-	
 	// MusicController.soundEffectLose
 	@Test
 	public void test10() {

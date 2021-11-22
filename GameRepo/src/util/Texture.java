@@ -46,10 +46,6 @@ public class Texture {
 		return height;
 	}
 	
-	public float getWidth() {
-		width = (int)(image.getWidth() * transform.scale.x); 
-		return width;
-	}
 	static public Texture loadImage(String filePath, int x, int y, int width, int height) {
 		
 		InputStream stream = ResourceLoader.load(Texture.class, filePath, null);
