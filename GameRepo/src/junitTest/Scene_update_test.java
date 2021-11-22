@@ -2,6 +2,8 @@ package junitTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.event.KeyEvent;
+
 import org.junit.Test;
 
 import game.GREGame;
@@ -241,11 +243,129 @@ public class Scene_update_test {
 	public void test27() {
 		GREGame g=new GREGame();
 		g.setBookType(EnumVocabularyBook.GRE);
-		g.setBookType(EnumVocabularyBook.GRE);
 		g.mouse.isClicked=false;
 		Scene s = new PlayingScene();
 		Map map = Map.getInstance();
 		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test28() {
+		Map.getInstance().initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txx");
+	}
+	@Test
+	public void test29() {
+		Map.getInstance().initialize(5, 5, 100, 100, 50, 50, "res/words/test_read.txt");
+	}
+	//playingscene.handleKeyboardInput
+	@Test
+	public void test30() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.key.queuingEvent.add(KeyEvent.VK_ENTER);
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		Character cxk = Character.getInstance();
+		cxk.enter(map2d[2][2]);
+		MapNode.setViewNodeNull();
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test31() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.key.queuingEvent=null;
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		Character cxk = Character.getInstance();
+		cxk.enter(map2d[2][2]);		
+		MapNode.setViewNodeNull();
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test32() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		map2d[0][3].handleClickEvent(74, -70);
+		g.key.queuingEvent.add(KeyEvent.VK_BACK_SPACE);
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test33() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		map2d[0][3].handleClickEvent(74, -70);
+		g.key.queuingEvent.add(KeyEvent.VK_A);
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test34() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		map2d[0][3].handleClickEvent(74, -70);
+		g.key.queuingEvent.add(1+KeyEvent.VK_Z);
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test35() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		map2d[0][3].handleClickEvent(74, -70);
+		g.key.queuingEvent.add(KeyEvent.VK_A-1);
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test36() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		map2d[0][3].handleClickEvent(74, -70);
+		g.key.queuingEvent.add(KeyEvent.VK_ENTER);
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
+	@Test
+	public void test37() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		Map map = Map.getInstance();
+		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
+		MapNode[][] map2d = map.getMap();
+		map2d[0][3].handleClickEvent(74, -70);
+		g.key.queuingEvent.add(KeyEvent.VK_ENTER);
+		Board.getInstance().setWordInfo(new WordInfo("a","a"));
+		Board.getInstance().handleInputLetter('a');
+		Scene s = new PlayingScene();
 		g.loadScene(s);
 		s.update();
 	}
