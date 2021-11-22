@@ -152,7 +152,7 @@ public class Scene_render_test {
 		}
 
 		@Test
-		public void test23() {
+		public void test24() {
 			JFrame f = new JFrame();
 			Canvas canvas = new Canvas();
 			f.getContentPane().add(canvas);
