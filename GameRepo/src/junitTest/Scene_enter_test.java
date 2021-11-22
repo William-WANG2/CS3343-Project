@@ -169,6 +169,13 @@ public class Scene_enter_test {
 			g.loadScene(r);
 			r.enter();
 		}
+		
+		//MapNode.setViewNodeNull()
+		@Test
+		public void test19() {
+			MapNode m=new MapNode(0, 0, 0, 0, 0, null);
+			m.setViewNodeNull();
+		}
 	
 
 }

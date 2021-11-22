@@ -20,9 +20,7 @@ public class MapNode{
 	private static Texture hole = null;
 	private static MapNode updateNode = null; // the node user is currently typing the answer for
 
-	public static MapNode getUpdateNode() {
-		return updateNode;
-	}
+
 
 	private static MapNode viewNode = null; //the node user is currently viewing the definition 
 	

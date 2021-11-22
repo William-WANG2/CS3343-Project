@@ -1,12 +1,17 @@
 package junitTest;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import game.EntryPoint;
 import game.GREGame;
+import gameObject.EnumVocabularyBook;
+import gameObject.Map;
 import scenes.ResultScene;
 import util.GameApplication;
 import util.GameTimer;
+import util.Vector2d;
 
 public class Main_test {
 	//Unit test begin
@@ -57,5 +62,26 @@ public class Main_test {
 
 		} 
 	
+	//11.22
+	//Map.handleMouseClickEvent()
+		
+		@Test
+		public void test06() {
+			Map m=Map.getInstance();
+			m.initialize(5, 5, 0, 0, 0, 0, "res/words/PRIMARY.xml");
+			Vector2d v=new Vector2d(1,2);
+			m.handleMouseClickEvent(v);
+
+		
+
+		} 
+		
+		//EnumVocabularyBook
+		@Test
+		public void test07() {
+			
+			
+
+		} 
 
 }
