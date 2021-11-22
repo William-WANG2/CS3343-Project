@@ -238,7 +238,7 @@ public class Scene_update_test {
 		s.update();
 	}
 	@Test
-	public void test24() {
+	public void test251() {
 		GREGame g=new GREGame();
 		g.setBookType(EnumVocabularyBook.GRE);
 		g.setBookType(EnumVocabularyBook.GRE);
