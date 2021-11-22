@@ -86,33 +86,6 @@ public class Scene_update_test {
 		board.handleInputDelete();
 	}
 	
-	// Board.handleInput
-	@Test
-	public void test24() {
-		Board board = Board.getInstance();
-		board.setWordInfo(new WordInfo("aaaaaaaa", "aaaaaaaa"));
-		board.handleInputLetter('a');
-		board.handleInputLetter('a');
-		board.handleInputLetter('a');
-		board.handleInputLetter('a');
-		board.handleInputLetter('a');
-	}
-	
-	// Board.reset
-	@Test
-	public void test25() {
-		Board board = Board.getInstance();
-		board.reset("res/Button/Rule.png", 0, 0, 0, 0);
-	}
-	
-	// Board.isCorrectAnswer
-	@Test
-	public void test26() {
-		Board board = Board.getInstance();
-		boolean res = board.isCorrectAnswer();
-		assertEquals(true, res);
-	}
-	
 	// MusicController.soundEffectLose
 	@Test
 	public void test10() {
@@ -237,8 +210,35 @@ public class Scene_update_test {
 		g.loadScene(s);
 		s.update();
 	}
+	// Board.handleInput
 	@Test
-	public void test251() {
+	public void test24() {
+		Board board = Board.getInstance();
+		board.setWordInfo(new WordInfo("aaaaaaaa", "aaaaaaaa"));
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+		board.handleInputLetter('a');
+	}
+	
+	// Board.reset
+	@Test
+	public void test25() {
+		Board board = Board.getInstance();
+		board.reset("res/Button/Rule.png", 0, 0, 0, 0);
+	}
+	
+	// Board.isCorrectAnswer
+	@Test
+	public void test26() {
+		Board board = Board.getInstance();
+		boolean res = board.isCorrectAnswer();
+		assertEquals(true, res);
+	}
+	
+	@Test
+	public void test27() {
 		GREGame g=new GREGame();
 		g.setBookType(EnumVocabularyBook.GRE);
 		g.setBookType(EnumVocabularyBook.GRE);
