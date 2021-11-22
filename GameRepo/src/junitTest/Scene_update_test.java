@@ -2,11 +2,8 @@ package junitTest;
 
 import static org.junit.Assert.assertEquals;
 
-<<<<<<< HEAD
 import java.awt.event.KeyEvent;
-=======
 import java.util.LinkedList;
->>>>>>> refs/remotes/origin/main
 
 import org.junit.Test;
 
@@ -255,7 +252,6 @@ public class Scene_update_test {
 		g.loadScene(s);
 		s.update();
 	}
-<<<<<<< HEAD
 	@Test
 	public void test28() {
 		Map.getInstance().initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txx");
@@ -376,41 +372,3 @@ public class Scene_update_test {
 		s.update();
 	}
 }
-=======
-	
-	// PlayingScene.handleKeyboardInput
-	@Test
-	public void test28() {
-		GREGame g=new GREGame();
-		g.setBookType(EnumVocabularyBook.GRE);
-		g.setBookType(EnumVocabularyBook.GRE);
-		g.mouse.isClicked=false;
-		g.key.queuingEvent.add(8);
-		g.key.queuingEvent.add(65);
-		g.key.queuingEvent.add(10);
-		g.key.queuingEvent.add(100);
-		g.key.queuingEvent.add(13);
-		Scene s = new PlayingScene();
-		g.loadScene(s);
-		s.update();
-		g.key.queuingEvent = null;
-		s.update();
-	}
-	@Test
-	public void test29() {
-		GREGame g = new GREGame();
-		g.setBookType(EnumVocabularyBook.GRE);
-		g.setBookType(EnumVocabularyBook.GRE);
-		g.mouse.isClicked=false;
-		g.key.queuingEvent = new LinkedList<Integer>();
-		g.key.queuingEvent.add(8);
-		g.key.queuingEvent.add(66);
-		g.key.queuingEvent.add(66);
-		g.key.queuingEvent.add(10);
-		Scene s = new PlayingScene();
-		g.loadScene(s);
-		s.update();
-	}
-
-}
->>>>>>> refs/remotes/origin/main
