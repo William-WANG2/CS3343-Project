@@ -86,7 +86,7 @@ public class Scene_update_test {
 		board.handleInputDelete();
 	}
 	
-	//Board.handleInput
+	// Board.handleInput
 	@Test
 	public void test24() {
 		Board board = Board.getInstance();
@@ -96,7 +96,21 @@ public class Scene_update_test {
 		board.handleInputLetter('a');
 		board.handleInputLetter('a');
 		board.handleInputLetter('a');
-		board.handleInputLetter('a');
+	}
+	
+	// Board.reset
+	@Test
+	public void test25() {
+		Board board = Board.getInstance();
+		board.reset("res/Button/Rule.png", 0, 0, 0, 0);
+	}
+	
+	// Board.isCorrectAnswer
+	@Test
+	public void test26() {
+		Board board = Board.getInstance();
+		boolean res = board.isCorrectAnswer();
+		assertEquals(true, res);
 	}
 	
 	// MusicController.soundEffectLose
