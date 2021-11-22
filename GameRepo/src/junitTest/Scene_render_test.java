@@ -146,6 +146,25 @@ public class Scene_render_test {
 			Board board = Board.getInstance();
 			WordInfo wordInformation = new WordInfo("abcd", "efgh");
 			board.setWordInfo(wordInformation);
+			board.handleInputLetter('a');
+			board.reset("res/animation/caixukun1.jpg", 0, 0, 0, 0);
+			board.render((Graphics2D)g);
+		}
+
+		@Test
+		public void test24() {
+			JFrame f = new JFrame();
+			Canvas canvas = new Canvas();
+			f.getContentPane().add(canvas);
+			f.setSize(100, 100);
+			f.setTitle("Ji ni tai mei");
+			f.setVisible(true);
+			canvas.createBufferStrategy(2);
+			BufferStrategy bs = canvas.getBufferStrategy();
+			Graphics g = bs.getDrawGraphics();
+			
+			Board board = Board.getInstance();
+			board.setWordInfo(null);
 			board.reset("res/animation/caixukun1.jpg", 0, 0, 0, 0);
 			board.render((Graphics2D)g);
 		}
