@@ -18,6 +18,7 @@ import gameObject.WordInfo;
 import scenes.PlayingScene;
 import scenes.Scene;
 import util.GameTimer;
+import util.Key;
 import util.Music;
 import util.Vector2d;
 
@@ -249,4 +250,23 @@ public class Scene_update_test {
 		g.loadScene(s);
 		s.update();
 	}
+	
+	// PlayingScene.handleKeyboardInput
+	@Test
+	public void test28() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.mouse.isClicked=false;
+		g.key.queuingEvent.add(8);
+		g.key.queuingEvent.add(65);
+		g.key.queuingEvent.add(10);
+		g.key.queuingEvent.add(100);
+		g.key.queuingEvent.add(13);
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
+	
+
 }
