@@ -36,7 +36,7 @@ public class Map{
 			
 			return;
 		}catch (FileNotFoundException e) {
-			
+			return;
 		}
 		
 		float radius = width / columnCount; //radius for node

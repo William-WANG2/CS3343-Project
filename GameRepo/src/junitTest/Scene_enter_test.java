@@ -242,6 +242,7 @@ public class Scene_enter_test {
 			m.getNodeInformation().blocked=false;
 			m.handleClickEvent(10, 10);
 			m.render((Graphics2D)g);
-			}
 		}
+		}
+
 	 
