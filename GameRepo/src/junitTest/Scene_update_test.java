@@ -2,6 +2,8 @@ package junitTest;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.LinkedList;
+
 import org.junit.Test;
 
 import game.GREGame;
@@ -266,7 +268,23 @@ public class Scene_update_test {
 		Scene s = new PlayingScene();
 		g.loadScene(s);
 		s.update();
+		g.key.queuingEvent = null;
+		s.update();
 	}
-	
+	@Test
+	public void test29() {
+		GREGame g = new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.setBookType(EnumVocabularyBook.GRE);
+		g.mouse.isClicked=false;
+		g.key.queuingEvent = new LinkedList<Integer>();
+		g.key.queuingEvent.add(8);
+		g.key.queuingEvent.add(66);
+		g.key.queuingEvent.add(66);
+		g.key.queuingEvent.add(10);
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		s.update();
+	}
 
 }
