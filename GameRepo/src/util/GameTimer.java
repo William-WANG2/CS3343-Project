@@ -61,9 +61,6 @@ public class GameTimer {
 		currTime = (System.currentTimeMillis());
 		deltaTime = currTime - prevTime;
 		prevTime = currTime;
-		if(deltaTime < 0.0)
-		{
-			deltaTime = 0;
-		}
+		
 	}
 }

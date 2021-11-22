@@ -4,18 +4,23 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import fileReader.TxtReader;
+import fileReader.XMLReader;
 import game.GREGame;
+import game.GameSettingConstants;
 import gameObject.Board;
 import gameObject.Character;
 import gameObject.EnumVocabularyBook;
 import gameObject.Map;
 import gameObject.MapNode;
+import gameObject.MusicController;
 import gameObject.WordInfo;
 import gameObject.GameButton;
 import gameObject.GameResult;
 import util.ResourceLoader;
 import util.Texture;
 import util.Transform;
+import util.Vector2d;
 import util.Vector2f;
 import util.BoundingBox;
 import util.Mouse;
@@ -155,7 +160,7 @@ public class Scene_render_test {
 		}
 
 		@Test
-		public void test24() {
+		public void test10() {
 			JFrame f = new JFrame();
 			Canvas canvas = new Canvas();
 			f.getContentPane().add(canvas);
@@ -348,12 +353,49 @@ public class Scene_render_test {
 			b.isInGeo(new Vector2f(0,0));
 		}
 		
+		@Test
+		public void test27() {
+			GameSettingConstants g=new GameSettingConstants();
+		}
 		
+		@Test
+		public void test28() {
+			TxtReader t=new TxtReader();
+		}
 		
+		@Test
+		public void test29() {
+			XMLReader t=new XMLReader();
+		}
 		
+		@Test
+		public void test30() {
+			EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.IntToWordType(4));
+			}
 		
-		
+		@Test
+		public void test31() {
+			MusicController.getInstance().handleClickEvent(new Vector2d(10, GameSettingConstants.APP_HEIGHT/13));
+			MusicController.getInstance().handleClickEvent(new Vector2d(10, GameSettingConstants.APP_HEIGHT/13));
 
+			}
+		
+		@Test
+		public void test32() {
+			MusicController.getInstance().handleClickEvent(new Vector2d(10, GameSettingConstants.APP_HEIGHT/13));
+			MusicController.getInstance().startBackground();
+			}
+		
+		
+		@Test
+		public void test33() {
+			
+			
+			
+			}
+		
+		
+		
 		
 		
 
