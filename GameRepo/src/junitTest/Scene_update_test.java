@@ -143,6 +143,8 @@ public class Scene_update_test {
 				res = false;
 			}
 		}
+		EnumVocabularyBook.IntToWordType(4);
+		EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.NULL);
 		assertEquals(true, res);
 	}
 	
