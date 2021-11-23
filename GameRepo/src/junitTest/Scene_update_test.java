@@ -387,4 +387,18 @@ public class Scene_update_test {
 	public void test39() {
 		Music good = new Music("fakepath", 0);
 	}
+	
+	@Test
+	public void test40() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		MapNode mn = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		Character c = Character.getInstance();
+		mn.addAdj(Map.getInstance().getDummy());
+		c.enter(mn);
+		s.update();
+		assertEquals(c.isEscape(), true);
+	}
 }
