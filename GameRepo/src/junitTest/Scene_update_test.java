@@ -371,4 +371,12 @@ public class Scene_update_test {
 		g.loadScene(s);
 		s.update();
 	}
+	// MusicController.updateBackgroundMusic(mousePosition)
+	@Test
+	public void test38() {
+		MusicController mc = MusicController.getInstance();
+		Vector2d mouse = new Vector2d(11, GameSettingConstants.APP_HEIGHT/13 + 1);
+		mc.handleClickEvent(mouse);
+		mc.handleClickEvent(mouse);
+	}
 }
