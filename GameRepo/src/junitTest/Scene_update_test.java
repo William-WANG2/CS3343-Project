@@ -377,6 +377,8 @@ public class Scene_update_test {
 		MusicController mc = MusicController.getInstance();
 		Vector2d mouse = new Vector2d(11, GameSettingConstants.APP_HEIGHT/13 + 1);
 		mc.handleClickEvent(mouse);
+		mc.startBackground();
 		mc.handleClickEvent(mouse);
+		mc.startBackground();
 	}
 }
