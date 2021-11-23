@@ -381,4 +381,10 @@ public class Scene_update_test {
 		mc.handleClickEvent(mouse);
 		mc.startBackground();
 	}
+	
+	// Music.Music catch clause
+	@Test
+	public void test39() {
+		Music good = new Music("fakepath", 0);
+	}
 }

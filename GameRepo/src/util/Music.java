@@ -17,14 +17,14 @@ public class Music {
 		{
 			File musicPath = new File(musicLocation);
 			
-			if(musicPath.exists())
-			{
+//			if(musicPath.exists())
+//			{
 				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
 				clip = AudioSystem.getClip();
 				clip.open(audioInput);
 				FloatControl gainControl=(FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
 				gainControl.setValue(volumn);
-			}
+//			}
 		}
 		catch(Exception ex)
 		{ 
