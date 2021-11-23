@@ -388,6 +388,7 @@ public class Scene_update_test {
 		Music good = new Music("fakepath", 0);
 	}
 	
+	// PlayingScene.update()
 	@Test
 	public void test40() {
 		GREGame g=new GREGame();
