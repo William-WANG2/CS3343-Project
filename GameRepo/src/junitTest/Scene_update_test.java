@@ -405,3 +405,4 @@ public class Scene_update_test {
 		assertEquals(c.isEscape(), true);
 	}
 }
+

@@ -11,20 +11,20 @@ public class Music {
 	
     private Clip clip;
     
-	public Music(String musicLocation, int volumn)
+	public Music(String musicLocation, int volumn) throws IllegalArgumentException
 	{
 		try
 		{
 			File musicPath = new File(musicLocation);
 			
-//			if(musicPath.exists())
-//			{
+			if(musicPath.exists())
+			{
 				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
 				clip = AudioSystem.getClip();
 				clip.open(audioInput);
 				FloatControl gainControl=(FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
 				gainControl.setValue(volumn);
-//			}
+			}
 		}
 		catch(Exception ex)
 		{ 

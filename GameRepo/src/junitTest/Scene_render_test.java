@@ -4,19 +4,27 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import fileReader.TxtReader;
+import fileReader.XMLReader;
 import game.GREGame;
+import game.GameSettingConstants;
 import gameObject.Board;
 import gameObject.Character;
 import gameObject.EnumVocabularyBook;
 import gameObject.Map;
 import gameObject.MapNode;
+import gameObject.MusicController;
 import gameObject.WordInfo;
 import gameObject.GameButton;
 import gameObject.GameResult;
 import util.ResourceLoader;
 import util.Texture;
 import util.Transform;
+import util.Vector2d;
+import util.Vector2f;
+import util.BoundingBox;
 import util.Mouse;
+import util.Music;
 import scenes.LoginScene;
 import scenes.PlayingScene;
 import scenes.ResultScene;
@@ -63,7 +71,7 @@ public class Scene_render_test {
 			assertEquals(0, 0.0f, res);
 		}
 		
-		// Texture.getScaleY
+		// Texture.getScaleX
 		@Test
 		public void test03() {
 			BufferedImage image = null;
@@ -132,7 +140,7 @@ public class Scene_render_test {
 		// Integration test begin
 		// Board.render
 		@Test
-		public void test09() {
+		public void test08() {
 			JFrame f = new JFrame();
 			Canvas canvas = new Canvas();
 			f.getContentPane().add(canvas);
@@ -152,7 +160,7 @@ public class Scene_render_test {
 		}
 
 		@Test
-		public void test24() {
+		public void test9() {
 			JFrame f = new JFrame();
 			Canvas canvas = new Canvas();
 			f.getContentPane().add(canvas);
@@ -165,13 +173,13 @@ public class Scene_render_test {
 			
 			Board board = Board.getInstance();
 			board.setWordInfo(null);
-			board.reset("res/animation/caixukun1.jpg", 0, 0, 0, 0);
+			board.reset("res/animation/caixukun3.jpg", 0, 0, 0, 0);
 			board.render((Graphics2D)g);
 		}
 		
 		// GameButton.render
 		@Test
-		public void test11() {
+		public void test10() {
 			GameButton gameButton = new GameButton("res/animation/caixukun1.jpg", "res/animation/caixukun2.jpg",0,0,0,0);
 			JFrame f = new JFrame();
 			Canvas canvas = new Canvas();
@@ -187,7 +195,7 @@ public class Scene_render_test {
 		
 		// RuleScene.render
 		@Test
-		public void test17() {
+		public void test11() {
 			RuleScene ruleScene = new RuleScene();
 			GREGame gre = new GREGame();
 			gre.loadScene(ruleScene);
@@ -206,7 +214,7 @@ public class Scene_render_test {
 		
 		// Scene.render
 		@Test
-		public void test18() {
+		public void test12() {
 			Scene scene = new PlayingScene();
 			scene.setNextScene(false);
 			GREGame gre = new GREGame();
@@ -226,7 +234,7 @@ public class Scene_render_test {
 		
 		//ResultScene.render
 		@Test
-		public void test19() {
+		public void test13() {
 			ResultScene ruleScene = new ResultScene();
 			GREGame gre = new GREGame();
 			gre.loadScene(ruleScene);
@@ -249,7 +257,7 @@ public class Scene_render_test {
 		}
 		
 		@Test
-		public void test20() {
+		public void test14() {
 			ResultScene ruleScene = new ResultScene();
 			GREGame gre = new GREGame();
 			gre.loadScene(ruleScene);
@@ -273,7 +281,7 @@ public class Scene_render_test {
 		
 		//ResultScene.update
 		@Test
-		public void test21() {
+		public void test15() {
 			ResultScene ruleScene = new ResultScene();
 			GREGame gre = new GREGame();
 			gre.loadScene(ruleScene);
@@ -297,7 +305,7 @@ public class Scene_render_test {
 		
 		//PlayingScene.handleMouseClick()
 		@Test
-		public void test22() {
+		public void test16() {
 			PlayingScene r=new PlayingScene();
 			GREGame g=new GREGame();
 			g.setBookType(EnumVocabularyBook.IntToWordType(0));
@@ -308,9 +316,9 @@ public class Scene_render_test {
 			r.getNextScene();
 
 		}
-		
+		//LoginScene.render
 		@Test
-		public void test23() {
+		public void test17() {
 			LoginScene r=new LoginScene();
 			GREGame x=new GREGame();
 			x.loadScene(r);
@@ -328,8 +336,60 @@ public class Scene_render_test {
 
 		}
 		
+		@Test
+		public void test18() {
+			ResourceLoader r=new ResourceLoader();
+		}
 		
+		@Test
+		public void test19() {
+			String filepath = null;
+			Music t = new Music(filepath, 0);
+		}
+		//BoundingBox.isInGeo
+		@Test
+		public void test20() {
+			BoundingBox b=new BoundingBox(0, 0, 0, 0);
+			b.isInGeo(new Vector2f(0,0));
+		}
+		
+		@Test
+		public void test21() {
+			GameSettingConstants g=new GameSettingConstants();
+		}
+		
+		@Test
+		public void test22() {
+			TxtReader t=new TxtReader();
+		}
+		
+		@Test
+		public void test23() {
+			XMLReader t=new XMLReader();
+		}
+		
+		@Test
+		public void test24() {
+			EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.IntToWordType(4));
+			}
+		
+		@Test
+		public void test25() {
+			MusicController.getInstance().handleClickEvent(new Vector2d(10, GameSettingConstants.APP_HEIGHT/13));
+			MusicController.getInstance().handleClickEvent(new Vector2d(10, GameSettingConstants.APP_HEIGHT/13));
 
+			}
+		
+		@Test
+		public void test26() {
+			MusicController.getInstance().handleClickEvent(new Vector2d(10, GameSettingConstants.APP_HEIGHT/13));
+			MusicController.getInstance().startBackground();
+			}
+		
+		
+		
+		
+		
 		
 		
 
