@@ -66,9 +66,9 @@ public class Board{
 			}
 			showString+=currentWordInformation.getWord().substring(currentWordInformation.getWordLength()-existNum,currentWordInformation.getWordLength());
 			g.drawString(showString, 400, 150);
-			if(currentWordInformation != null) {
+//			if(currentWordInformation != null) {
 				g.drawString(currentWordInformation.getDefinition(), 400, 100);
-			}
+//			}
 		} 
 	}
 }
