@@ -404,5 +404,16 @@ public class Scene_update_test {
 		s.update();
 		assertEquals(c.isEscape(), true);
 	}
+	
+	@Test
+	public void test41() {
+		MapNode mn = new MapNode(0, 0, 2, 2, 2, new WordInfo("",""));
+		mn.getNodeInformation().blocked = true;
+		mn.handleClickEvent(1, 1);
+		boolean res = MapNode.isViewExist();
+		assertEquals(false, res);
+	}
 }
+
+
 
