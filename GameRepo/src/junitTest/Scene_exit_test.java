@@ -155,6 +155,7 @@ public class Scene_exit_test {
 		Scene s = new RuleScene();
 		g.loadScene(s);
 		s.update();
+		s.update();
 		s.exit();
 	}
 	@Test
