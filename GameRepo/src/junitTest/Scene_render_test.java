@@ -344,17 +344,7 @@ public class Scene_render_test {
 	public void test21() {
 		GameSettingConstants g = new GameSettingConstants();
 	}
-
-	@Test
-	public void test22() {
-		TxtReader t = new TxtReader();
-	}
-
-	@Test
-	public void test23() {
-		XMLReader t = new XMLReader();
-	}
-
+	
 	@Test
 	public void test24() {
 		EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.IntToWordType(4));

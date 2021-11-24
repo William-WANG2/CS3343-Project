@@ -29,7 +29,7 @@ public class Map{
 		dummyNode = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
 		colRowCount = new Vector2d(rowCount, columnCount);
 		ArrayList<WordInfo> wordList = new ArrayList<WordInfo>(rowCount * columnCount);
-		ReaderApp rdapp = new ReaderFactory();
+		ReaderApp rdapp = new ReaderApp();
 		try {
 			wordList = rdapp.getList(vocabularyPath, rowCount, columnCount);
 		} catch (ExMapExceedWordSize e) {

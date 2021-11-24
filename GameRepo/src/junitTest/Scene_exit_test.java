@@ -56,7 +56,8 @@ public class Scene_exit_test {
 		Thread.sleep(400); //enter the timeElapsed branch
 		GameTimer.getInstance().Tick();
 		s.update();
-		//assertEquals(true, );
+		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new RuleScene()).getClass());
 	}
 	@Test
 	public void test05() {
@@ -66,7 +67,8 @@ public class Scene_exit_test {
 		Scene s = new LoginScene();
 		g.loadScene(s);
 		s.update();
-		//assertEquals();
+		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new PlayingScene()).getClass());
 	}
 	@Test
 	public void test06() {
@@ -76,7 +78,8 @@ public class Scene_exit_test {
 		Scene s = new LoginScene();
 		g.loadScene(s);
 		s.update();
-		//assertEquals();
+		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new LoginScene()).getClass());
 	}
 	//LoginScene.exit
 	@Test
@@ -88,7 +91,7 @@ public class Scene_exit_test {
 		g.loadScene(s);
 		s.update();
 		s.exit();
-		//assertEquals();
+		assertEquals(GREGame.currScene.getClass(),(new RuleScene()).getClass());
 	}
 	@Test
 	public void test08() {
@@ -99,6 +102,7 @@ public class Scene_exit_test {
 		g.loadScene(s);
 		s.update();
 		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new PlayingScene()).getClass());
 	}
 	//PlayingScene.exit
 	@Test
@@ -139,6 +143,7 @@ public class Scene_exit_test {
 		
 		s.update();
 		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new ResultScene()).getClass());
 	}
 	@Test
 	public void test10() {
@@ -148,6 +153,7 @@ public class Scene_exit_test {
 		g.loadScene(s);
 		s.update();
 		s.exit();
+		assertEquals(EnumVocabularyBook.GRE, g.getBookType());
 	}
 	//RuleScene.exit
 	@Test
@@ -160,6 +166,7 @@ public class Scene_exit_test {
 		s.update();
 		s.update();
 		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new LoginScene()).getClass());
 	}
 	@Test
 	public void test12() {
@@ -170,6 +177,7 @@ public class Scene_exit_test {
 		g.loadScene(s);
 		s.update();
 		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new RuleScene()).getClass());
 	}
 	//ResultScene.exit
 	@Test
@@ -181,6 +189,7 @@ public class Scene_exit_test {
 		g.loadScene(s);
 		s.update();
 		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new LoginScene()).getClass());
 	}
 	@Test
 	public void test14() {
@@ -191,5 +200,6 @@ public class Scene_exit_test {
 		g.loadScene(s);
 		s.update();
 		s.exit();
+		assertEquals(GREGame.currScene.getClass(),(new ResultScene()).getClass());
 	}
 }

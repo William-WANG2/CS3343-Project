@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 
 import gameObject.WordInfo;
 
-public class XMLReader{
+public class XMLReader implements Reader{
 	/**
 	 * read the XML file and store the information in an ArrayList, m and n are the
 	 * row number and column number of the map. The function will randomly select
@@ -20,7 +20,7 @@ public class XMLReader{
 	 * 
 	 * @throws ExMapExceedWordSize
 	 **/
-	public static ArrayList<WordInfo> convert(String path){
+	public ArrayList<WordInfo> convert(String path){
 		ArrayList<WordInfo> wordlist = new ArrayList<WordInfo>();
 		NodeList wl = getFile(path);
 		for(int i=0;i<wl.getLength();i++) {

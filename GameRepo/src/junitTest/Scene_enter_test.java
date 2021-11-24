@@ -40,12 +40,11 @@ public class Scene_enter_test {
 	//Texture.loadImage
 	@Test
 	public void test01() {
-		Texture.loadImage("res/sprite/kunkun1.pn", 0, 0, 0, 0);
+		assertEquals(null, Texture.loadImage("res/sprite/kunkun1.pn", 0, 0, 0, 0));
 	} 
 	@Test
 	public void test02() {
-		Texture.loadImage("res/sprite/kunkun1.png", 0, 0, 0, 0);
-
+		assertEquals(new Texture(null, null).getClass(), Texture.loadImage("res/sprite/kunkun1.png", 0, 0, 0, 0).getClass());
 	}
 	
 	//Music.loop

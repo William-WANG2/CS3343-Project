@@ -5,9 +5,9 @@ import gameObject.WordInfo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-public class TxtReader {
+public class TxtReader implements Reader{
 
-	public static ArrayList<WordInfo> convert(String path) throws FileNotFoundException {
+	public ArrayList<WordInfo> convert(String path) throws FileNotFoundException {
 		ArrayList<WordInfo> wordlist = new ArrayList<WordInfo>();
 		File file = new File(path);
 		Scanner sc = new Scanner(file);
