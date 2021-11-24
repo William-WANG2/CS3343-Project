@@ -137,15 +137,12 @@ public class Scene_update_test {
 		arr[1] = "res/words/IELTS.xml";
 		arr[2] = "res/words/TOFEL.xml";
 		arr[3] = "res/words/GRE.xml";
-		boolean res = true;
-		for(int i=0; i < 4; i++) {
-			if (!EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.IntToWordType(i)).equals(arr[i])) {
-				res = false;
-			}
-		}
+		assertEquals(EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.IntToWordType(0)), arr[0]);
+		assertEquals(EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.IntToWordType(1)), arr[1]);
+		assertEquals(EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.IntToWordType(2)), arr[2]);
+		assertEquals(EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.IntToWordType(3)), arr[3]);
 		EnumVocabularyBook.IntToWordType(4);
 		EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.NULL);
-		assertEquals(true, res);
 	}
 	
 	// WordInfo.getWord

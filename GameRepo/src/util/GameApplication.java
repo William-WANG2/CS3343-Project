@@ -11,47 +11,48 @@ import java.awt.image.BufferStrategy;
 import javax.swing.*;
 
 import game.GameSettingConstants;
+
 /*
  * The common settings of a game
 */
-public abstract class GameApplication extends JFrame implements Runnable{
-	
+public abstract class GameApplication extends JFrame implements Runnable {
+
 	private static final long serialVersionUID = 1L;
-	
-	//Window context
+
+	// Window context
 	public Canvas canvas;
 	Color backgroundColor = Color.WHITE;
 	int clientWidth = GameSettingConstants.APP_WIDTH;
 	int clientHeight = GameSettingConstants.APP_HEIGHT;
-	
+
 	String winTitle = GameSettingConstants.APP_TITLE;
 	BufferStrategy bs;
 	Graphics g;
-	
-	//GameApplication.java
+
+	// GameApplication.java
 	private volatile boolean running;
 	protected Thread gameThread;
 	public static Scene currScene;
-	
-	//Time context
-	//dubug purpose
-	//private int frameCount = 0;
-	//private float timeElapsed = 0;
+
+	// Time context
+	// dubug purpose
+	// private int frameCount = 0;
+	// private float timeElapsed = 0;
 	GameTimer timer = GameTimer.getInstance();
-	
-	//Event context
+
+	// Event context
 	public Mouse mouse = new Mouse();
 	public Key key = new Key();
-	
+
 	public GameApplication() {
 	}
-	
+
 	public void initialize() {
-		
-		//initialize window context
+
+		// initialize window context
 		canvas = new Canvas();
 		canvas.setBackground(backgroundColor);
-		canvas.setIgnoreRepaint(true); 
+		canvas.setIgnoreRepaint(true);
 		getContentPane().add(canvas);
 		setLocationByPlatform(true);
 		setSize(clientWidth, clientHeight);
@@ -69,17 +70,17 @@ public abstract class GameApplication extends JFrame implements Runnable{
 		render();
 		exit();
 	}
-	
-	private void update(){
+
+	private void update() {
 		currScene.update();
 	}
-	
-	private void renderFrame(Graphics g){
+
+	private void renderFrame(Graphics g) {
 		g.clearRect(0, 0, GameSettingConstants.APP_WIDTH, GameSettingConstants.APP_HEIGHT);
-		currScene.render((Graphics2D)g);
+		currScene.render((Graphics2D) g);
 	}
-	
-	private void render(){	
+
+	private void render() {
 		do {
 			do {
 				Graphics g = null;
@@ -87,10 +88,10 @@ public abstract class GameApplication extends JFrame implements Runnable{
 					g = bs.getDrawGraphics();
 					renderFrame(g);
 					Thread.sleep(100);
-					//calculateFrameRate(g);
-				} catch (Exception e) {
-					
-				} finally {
+					// calculateFrameRate(g); debug purpose
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}  finally {
 					if (g != null) {
 						g.dispose();
 					}
@@ -99,6 +100,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 			bs.show();
 		} while (bs.contentsLost());
 	}
+
 	private void exit() {
 		currScene.exit();
 	}
@@ -121,7 +123,7 @@ public abstract class GameApplication extends JFrame implements Runnable{
 //			timeElapsed -= 1000;
 //		}	
 //	}
-	
+
 	public void run() {
 		running = true;
 		timer.Reset();
@@ -130,9 +132,9 @@ public abstract class GameApplication extends JFrame implements Runnable{
 			gameloop(timer);
 		}
 	}
-	
+
 	public abstract void loadScene(Scene next);
-	
+
 	private void setupInput() {
 		canvas.addMouseListener(new MouseAdapter() {
 			@Override
@@ -148,7 +150,8 @@ public abstract class GameApplication extends JFrame implements Runnable{
 			}
 
 			@Override
-			public void keyPressed(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
+			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {

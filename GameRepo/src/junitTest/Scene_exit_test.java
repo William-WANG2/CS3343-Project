@@ -15,6 +15,7 @@ import scenes.PlayingScene;
 import scenes.ResultScene;
 import scenes.RuleScene;
 import scenes.Scene;
+import util.GameTimer;
 import util.Vector2d;
 
 public class Scene_exit_test {
@@ -46,12 +47,14 @@ public class Scene_exit_test {
 	}
 	//LoginScene.handleMouseClick
 	@Test
-	public void test04() {
+	public void test04() throws InterruptedException {
 		GREGame g=new GREGame();
 		g.mouse.isClicked=true;
 		g.mouse.mousePos = new Vector2d(477, 285);//click rule
 		Scene s = new LoginScene();
 		g.loadScene(s);
+		Thread.sleep(400); //enter the timeElapsed branch
+		GameTimer.getInstance().Tick();
 		s.update();
 		//assertEquals(true, );
 	}

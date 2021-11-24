@@ -20,6 +20,7 @@ import gameObject.Map;
 import gameObject.MapNode;
 import gameObject.MapNodeInfo;
 import gameObject.WordInfo;
+import util.GameTimer;
 import util.ResourceLoader;
 import util.Texture;
 import util.Vector2d;
@@ -135,12 +136,14 @@ public class Dio_recomputeShorlestPath_test {
 	}
 	//Character.upadateAnimationSequencePerFrame
 	@Test
-	public void test08() {
+	public void test08() throws InterruptedException {
 		Map map = Map.getInstance();
 		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
 		MapNode[][] map2d = map.getMap();
 		Character cxk = Character.getInstance();
 		cxk.enter(map2d[2][2]);
+		Thread.sleep(200);
+		GameTimer.getInstance().Tick();
 		cxk.upadateAnimationSequencePerFrame();
 	}
 	
@@ -198,7 +201,7 @@ public class Dio_recomputeShorlestPath_test {
 	}
 	//Character.render() (normal cxk)
 	@Test
-	public void test10(){
+	public void test10() throws IOException{
 		Map map = Map.getInstance();
 		map.initialize(5, 5, 100, 100, 50, 50, "res/words/test_alg.txt");
 		MapNode[][] map2d = map.getMap();
@@ -214,13 +217,8 @@ public class Dio_recomputeShorlestPath_test {
 		canvas.createBufferStrategy(2);
 		BufferStrategy bs = canvas.getBufferStrategy();
 		Graphics g = bs.getDrawGraphics();
-		
 		BufferedImage image = null;
-		try {
-			image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg"));
-		} catch (IOException e) {
-			
-		}
+		image = ImageIO.read(ResourceLoader.load(Texture.class, "res/animation/caixukun1.jpg"));
 		cxk.render((Graphics2D)g);
 	}
 }

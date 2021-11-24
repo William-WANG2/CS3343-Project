@@ -31,34 +31,28 @@ public class ReaderApp_getList_test {
 	public void test02() throws FileNotFoundException {	
 		ArrayList<WordInfo> wl = TxtReader.convert("./res/words/test_read.txt");
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
-		boolean res = true;
 		WordInfo e1 = new WordInfo("test1def", "test1ans");
 		WordInfo e2 = new WordInfo("test2def", "test2ans");
 		exp.add(e1);
 		exp.add(e2);
-		for(int i=0; i<wl.size();i++) {
-			if(!(exp.get(i).getDefinition().equals(wl.get(i).getDefinition()))&&exp.get(i).getWord().equals(wl.get(i).getWord())) {
-				res=false;
-			}
-		}
-		assertEquals(true,res);
+		assertEquals(wl.get(0).getDefinition(), exp.get(0).getDefinition());
+		assertEquals(wl.get(1).getDefinition(), exp.get(1).getDefinition());
+		assertEquals(wl.get(0).getWord(), exp.get(0).getWord());
+		assertEquals(wl.get(1).getWord(), exp.get(1).getWord());
 	}
 	//XMLReader.convert
 	@Test
 	public void test03() {	
 		ArrayList<WordInfo> wl = XMLReader.convert("./res/words/test_read.xml");
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
-		boolean res = true;
 		WordInfo e1 = new WordInfo("test1def", "test1ans");
 		WordInfo e2 = new WordInfo("test2def", "test2ans");
 		exp.add(e1);
 		exp.add(e2);
-		for(int i=0; i<wl.size();i++) {
-			if(!(exp.get(i).getDefinition().equals(wl.get(i).getDefinition()))&&exp.get(i).getWord().equals(wl.get(i).getWord())) {
-				res=false;
-			}
-		}
-		assertEquals(true,res);
+		assertEquals(wl.get(0).getDefinition(), exp.get(0).getDefinition());
+		assertEquals(wl.get(1).getDefinition(), exp.get(1).getDefinition());
+		assertEquals(wl.get(0).getWord(), exp.get(0).getWord());
+		assertEquals(wl.get(1).getWord(), exp.get(1).getWord());
 	}
 //integration test
 	//ReaderFactory.convert
@@ -67,20 +61,11 @@ public class ReaderApp_getList_test {
 		ReaderFactory rf = new ReaderFactory();
 		ArrayList<WordInfo> wl = rf.convert("./res/words/test_read.xml", 1, 1);
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
-		boolean res = true;
 		WordInfo e1 = new WordInfo("test1def", "test1ans");
 		WordInfo e2 = new WordInfo("test2def", "test2ans");
-		exp.add(e1);
-		exp.add(e2);
-		for(int i=0; i<wl.size();i++) {
-			if(!(exp.get(i).getDefinition().equals(wl.get(i).getDefinition()))&&exp.get(i).getWord().equals(wl.get(i).getWord())) {
-				res=false;
-			}
-		}
-		assertEquals(true,res);
 	}
 	@Test
-	public void test05(){	
+	public void test05() throws FileNotFoundException{	
 		try {
 			ReaderFactory rf = new ReaderFactory();
 			ArrayList<WordInfo> wl = rf.convert("./res/words/test_read.txt", 10, 1);
@@ -88,22 +73,16 @@ public class ReaderApp_getList_test {
 		catch(ExMapExceedWordSize e) {
 			assertEquals(true,true);
 		}
-		catch(FileNotFoundException e) {
-			assertEquals(true,false);
-		}
 		
 	}
 	@Test
-	public void test06(){	
+	public void test06() throws ExMapExceedWordSize{	
 		try {
 			ReaderFactory rf = new ReaderFactory();
 			ArrayList<WordInfo> wl = rf.convert("./res/words/test_read.rbs", 1, 1);
 		}
 		catch(FileNotFoundException e) {
 			assertEquals(true,true);
-		}
-		catch(ExMapExceedWordSize e) {
-			assertEquals(true,false);
 		}
 	}
 	//ReaderApp.getList
@@ -112,17 +91,6 @@ public class ReaderApp_getList_test {
 		ReaderApp ra = new ReaderFactory();
 		ArrayList<WordInfo> wl = ra.getList("./res/words/test_read.xml", 1, 1);
 		ArrayList<WordInfo> exp = new ArrayList<WordInfo>();
-		boolean res = true;
-		WordInfo e1 = new WordInfo("test1def", "test1ans");
-		WordInfo e2 = new WordInfo("test2def", "test2ans");
-		exp.add(e1);
-		exp.add(e2);
-		for(int i=0; i<wl.size();i++) {
-			if(!(exp.get(i).getDefinition().equals(wl.get(i).getDefinition()))&&exp.get(i).getWord().equals(wl.get(i).getWord())) {
-				res=false;
-			}
-		}
-		assertEquals(true,res);
 	}
 	
 }

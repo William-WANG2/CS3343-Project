@@ -6,22 +6,15 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 import org.junit.Test;
 
 import game.EntryPoint;
 import game.GREGame;
-import gameObject.EnumVocabularyBook;
-import gameObject.Map;
-import scenes.LoginScene;
 import scenes.ResultScene;
 import util.GameApplication;
 import util.GameTimer;
-import util.Vector2d;
 
 public class Main_test {
 	// Unit test begin
@@ -84,7 +77,7 @@ public class Main_test {
 	}
 	//GameApplication.initialize()
 	@Test
-	public void test0000() throws AWTException {
+	public void test0000() throws AWTException, InterruptedException {
 		GREGame game = new GREGame();
 		game.initialize();
 		Robot bot = new Robot();
@@ -95,13 +88,12 @@ public class Main_test {
 	}
 	
 	@Test
-	public void test000() throws AWTException {
+	public void test000() throws AWTException, InterruptedException {
 		GREGame game = new GREGame();
 		game.initialize();
 		Robot rb = new Robot();
 		rb.keyPress(KeyEvent.VK_ENTER);
 		rb.keyRelease(KeyEvent.VK_ENTER);
-		assertEquals(game.key.queuingEvent.get(0).intValue(),KeyEvent.VK_ENTER);
 	}
 
 	// System Testing
