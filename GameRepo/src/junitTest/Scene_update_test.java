@@ -143,6 +143,8 @@ public class Scene_update_test {
 				res = false;
 			}
 		}
+		EnumVocabularyBook.IntToWordType(4);
+		EnumVocabularyBook.getWordTypePath(EnumVocabularyBook.NULL);
 		assertEquals(true, res);
 	}
 	
@@ -371,4 +373,36 @@ public class Scene_update_test {
 		g.loadScene(s);
 		s.update();
 	}
+	// MusicController.updateBackgroundMusic(mousePosition)
+	@Test
+	public void test38() {
+		MusicController mc = MusicController.getInstance();
+		Vector2d mouse = new Vector2d(11, GameSettingConstants.APP_HEIGHT/13 + 1);
+		mc.handleClickEvent(mouse);
+		mc.startBackground();
+		mc.handleClickEvent(mouse);
+		mc.startBackground();
+	}
+	
+	// Music.Music catch clause
+	@Test
+	public void test39() {
+		Music good = new Music("fakepath", 0);
+	}
+	
+	// PlayingScene.update()
+	@Test
+	public void test40() {
+		GREGame g=new GREGame();
+		g.setBookType(EnumVocabularyBook.GRE);
+		MapNode mn = new MapNode(0, 0, 0, 0, 0, new WordInfo("",""));
+		Scene s = new PlayingScene();
+		g.loadScene(s);
+		Character c = Character.getInstance();
+		mn.addAdj(Map.getInstance().getDummy());
+		c.enter(mn);
+		s.update();
+		assertEquals(c.isEscape(), true);
+	}
 }
+
