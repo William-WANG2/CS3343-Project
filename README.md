@@ -98,7 +98,7 @@ Git
 │   │   └── GREGame.java<br>
 │   ├── gameObject<br>
 │   │   ├── Board.java<br>
-│   │   ├── Dio.java<br>
+│   │   ├── Character.java<br>
 │   │   ├── GameButtton.java<br>
 │   │   ├── GameResult.java<br>
 │   │   ├── Map.java<br>
