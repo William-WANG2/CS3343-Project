@@ -3,10 +3,10 @@
 This is an innovative game designed by a group of CS3343 students.  
 
 ## Role assignment
-
-1. Code review & refactor: [WANG Xuezhen](https://github.com/William-WANG2), [ZHANG Yuyang](https://github.com/1319992808)
-2. Develope Programmer: [LI Ruixin](https://github.com/Ruixin-LI), [LIU Mingyang](https://github.com/konolmyda)
-3. Qulity Assurance Engineer: [HE Ruozhen](https://github.com/Catherine-R-He), [GUO Shangping](https://github.com/shangpguo2)
+1. Tech leader: [ZHANG Yuyang](https://github.com/1319992808)
+2. Code review & refactor: [WANG Xuezhen](https://github.com/William-WANG2)
+3. Develope Programmer: [LI Ruixin](https://github.com/Ruixin-LI), [LIU Mingyang](https://github.com/konolmyda)
+4. Qulity Assurance Engineer: [HE Ruozhen](https://github.com/Catherine-R-He), [GUO Shangping](https://github.com/shangpguo2)
 
 ## Description
 
