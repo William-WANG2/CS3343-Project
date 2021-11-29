@@ -74,11 +74,12 @@ For Windows users, double click build.bat file to compile and generate jar file.
 Git
 
 ## Version History
-
-* 0.2
+* 3.0
+    * UI design and Scene design
+* 2.0
     * Various bug fixes and optimizations
     * See [commit change](https://github.com/William-WANG2/CS3343-Project/graphs/commit-activity)
-* 0.1
+* 1.0
     * Initial Release
 
 ## Project Structure
