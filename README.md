@@ -1,6 +1,6 @@
 # GRE GAME
 
-This is an innovative game designed by a group of CS3343 students aiming to facilitate people with fun English study experience.  
+This is an innovative game designed by a group of CS3343 students.  
 
 ## Role assignment
 1. Tech leader: [ZHANG Yuyang](https://github.com/1319992808)
