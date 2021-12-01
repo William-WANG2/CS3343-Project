@@ -1,4 +1,4 @@
-# GRE GAME
+# Kunkun Loves English
 
 This is an innovative game designed by a group of CS3343 students.  
 
@@ -10,7 +10,7 @@ This is an innovative game designed by a group of CS3343 students.
 
 ## Description
 
-This is a funny game to practice your GRE vocabulary.
+This is a funny game to practice your vocabulary.
 
 ## Getting Started
 
